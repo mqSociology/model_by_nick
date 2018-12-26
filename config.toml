@@ -53,10 +53,10 @@ enableGitInfo = false
   # ORGANIZATION SETUP
 
   # Project name.
-  name = "Project Kickstart-R"
+  name = "Department of Sociology, University of Macquarie"
 
   # Project description.
-  role = "Project Kickstart-R for Academic"
+  role = ""
 
   # Organizations/Affiliations.
   #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
@@ -66,7 +66,7 @@ enableGitInfo = false
   #  avatar = "portrait.jpg"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
 
   # Details for the Contact Widget
-  email = "test@example.org"
+  email = "nicholas.harrigan@mq.edu.au"
   #  address = "Building 1 Room 1, Stanford University, California, 90210, USA"
   #  office_hours = """
   #  Monday 10:00 to 13:00\\
@@ -82,8 +82,8 @@ enableGitInfo = false
   appointment_url = ""
 
   # Discussion link (e.g. link to a forum, mailing list, or chat).
-  #   Uncomment line below to use.
-  discussion = { name = "Ask a question", url = "https://discourse.gohugo.io" }
+  # Uncomment line below to use.
+  # discussion = { name = "Ask a question", url = "https://discourse.gohugo.io" }
 
   # Enable/disable map in Contact widget.
   # To show your address on a map in the contact widget, you need to enter your latitude, longitude and choose
@@ -110,7 +110,7 @@ enableGitInfo = false
 
   # Color theme.
   #   Choose from `default`, `ocean`, `forest`, `dark`, `apogee`, `1950s`, `coffee`, `cupcake`.
-  color_theme = "ocean"
+  color_theme = "mqtheme"
   # Enable users to switch between day and night mode?
   day_night = true
 

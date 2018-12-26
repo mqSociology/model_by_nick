@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1545806305434.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1882980016",
+    "id" : "35A6D4CC",
+    "lastKnownWriteTime" : 1545798122,
+    "last_content_update" : 1545798122,
+    "path" : "~/model_by_nick/themes/hugo-academic/data/themes/ocean.toml",
+    "project_path" : "themes/hugo-academic/data/themes/ocean.toml",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "toml"
+}
