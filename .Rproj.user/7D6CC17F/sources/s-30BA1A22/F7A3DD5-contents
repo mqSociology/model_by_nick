@@ -1,0 +1,21 @@
+# Theme metadata
+name = "mqpurple"
+
+# Is theme light or dark?
+light = true
+
+# Primary
+primary = "#80225F"
+primary_light = "#C6007E"
+primary_dark = "#76232F"
+
+# Menu
+menu_primary = "#80225F" # 500
+menu_text = "#D6D2C4"
+menu_text_active = "#C6007E" # A100
+menu_title = "#D6D2C4"
+
+# Home sections
+home_section_odd = "rgb(255, 255, 255)"
+home_section_even = "rgb(214, 210, 196)"
+
