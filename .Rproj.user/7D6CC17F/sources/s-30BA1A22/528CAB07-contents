@@ -12,7 +12,7 @@ primary_dark = "#76232F"
 # Menu
 menu_primary = "#A6192E" # 500
 menu_text = "#fff"
-menu_text_active = "#D6001C" # A100
+menu_text_active = "#76232F" # A100
 menu_title = "#fff"
 
 # Home sections
