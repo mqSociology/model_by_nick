@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1545830553410.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2762011017",
+    "id" : "83C281BD",
+    "lastKnownWriteTime" : 1545830856,
+    "last_content_update" : 1545830856742,
+    "path" : "~/model_by_nick/content/docs/example.md",
+    "project_path" : "content/docs/example.md",
+    "properties" : {
+        "cursorPosition" : "18,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "markdown"
+}

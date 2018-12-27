@@ -304,26 +304,9 @@ enableGitInfo = false
   weight = 10
 
 [[menu.main]]
-  name = "Blog"
-  url = "/#posts"
-  weight = 20
-
-[[menu.main]]
-  name = "Documentation"
+  name = "Lessons"
   url = "docs/"
   weight = 30
-
-[[menu.main]]
-  name = "Contact"
-  url = "/#contact"
-  weight = 40
-
-[[menu.main_right]]
-  name = "<i class=\"fab fa-github-alt\" style=\"font-size: 1rem; line-height: 1.25\"></i>"
-  post = ""
-  url = "https://github.com/sourcethemes/project-kickstart-r"
-  weight = 50
-
 
 # Search.
 [params.search]
