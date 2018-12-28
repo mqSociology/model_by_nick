@@ -14,17 +14,13 @@ linktitle = "2.1 Univariate analysis"
   parent = "SOCI832"
   weight = 30
 +++
-
-This unit provides training in advanced quantitative analysis with an emphasis on social science applications using existing survey data. Lectures will cover the underlying theory and laboratory sessions the application and interpretation of models. This course will cover the following topics: variance analysis, correlation and alternative correlation coefficients, linear and logistic regression, multilevel modelling, factor analysis, and path analysis.
-
-# Summary
-This week's class two main objectives: first we simply want to review the fundamentals of quantitative and statistical analysis – the key points that should have been covered in any previous statistics and social science courses you've done before. This will help ensure we are all on the same page, and give us a common language to conduct the rest of the course in. Second, we want to install and start running analysis with the statistical package R. R is one of the most popular and powerful statistical packages available today, and one of the objectives of this course is to help you become proficient user of R.
-
-Last updated: 19 Dec 2018
+Last updated: 27 Dec 2018
 
 *_Author_: Nicholas Harrigan*
 
-## Summary
+# Overview
+
+This week's class two main objectives: first we simply want to review the fundamentals of quantitative and statistical analysis – the key points that should have been covered in any previous statistics and social science courses you've done before. This will help ensure we are all on the same page, and give us a common language to conduct the rest of the course in. Second, we want to install and start running analysis with the statistical package R. R is one of the most popular and powerful statistical packages available today, and one of the objectives of this course is to help you become proficient user of R.
 
 ### What does this lesson deal with?
 * Introduces methods for making univariate statistics in R
@@ -45,7 +41,7 @@ Last updated: 19 Dec 2018
 
 
 ```r
-    setwd("C:/G/2018, SOCI832/Datasets/AES 2013/")
+setwd("C:/G/2018, SOCI832/Datasets/AES 2013/")
 ```
 
 2) Put the file "elect_2013.csv" into that folder. This file can be found here: 
@@ -54,14 +50,12 @@ Last updated: 19 Dec 2018
 3) Keep the codebook openned in a browser so you can refer to it when you need it. The codebook is here:
 <https://mqsociology.github.io/learn-r/soci832/codebook%20aes%202013.html>
 
-## 1. Import the data
-
-### 1.1 Import the data
+4) Import the data
 
 
 ```r
-    library(readr)
-    elect_2013 <- read_csv("elect_2013.csv") # loads dataset
+library(readr)
+elect_2013 <- read_csv("elect_2013.csv") # loads dataset
 ```
 
 ```
@@ -80,26 +74,26 @@ Last updated: 19 Dec 2018
 ## See spec(...) for full column specifications.
 ```
 
-This command gets rid of the first column which is not needed.
+5) Remove the first column which is not needed.
 
 FYI the command works by saying "copy all columns except the first".
 
-NOTE: Only run this command once after you run the 'read.csv' command. Each time you run it, it deletes the first variable. 
+_NOTE: Only run this command once after you run the 'read.csv' command. Each time you run it, it deletes the first variable._ 
 
 
 ```r
-    elect_2013 <- elect_2013[,2:ncol(elect_2013)]
+elect_2013 <- elect_2013[,2:ncol(elect_2013)]
 ```
 
-### LESSON 1: BASIC UNIVARIATE FUNCTIONS
+# Lesson 1: Basic Univariate Functions
 This section introduces the basic functions for running univariate statistics. In most cases there are are easier commands to run, but we will learn about those later.
 
-#### MEAN
+## 1.1 Mean
 Mean is just the sum of a variable/number of cases. There is a built in function that calcuates the mean
 
 
 ```r
-    mean(elect_2013$likelihood_vote)
+mean(elect_2013$likelihood_vote)
 ```
 
 ```
@@ -114,7 +108,7 @@ There is an easy way to deal with this. We add one more argument* to the functio
 
 
 ```r
-    mean(elect_2013$likelihood_vote, na.rm = TRUE)
+mean(elect_2013$likelihood_vote, na.rm = TRUE)
 ```
 
 ```
@@ -125,7 +119,7 @@ We can get the median with:
 
 
 ```r
-    median(elect_2013$likelihood_vote, na.rm = TRUE)
+median(elect_2013$likelihood_vote, na.rm = TRUE)
 ```
 
 ```
@@ -136,7 +130,7 @@ We can also extract various quartiles and quintiles. The default setting gives u
 
 
 ```r
-    quantile(elect_2013$likelihood_vote, na.rm = TRUE)
+quantile(elect_2013$likelihood_vote, na.rm = TRUE)
 ```
 
 ```
@@ -148,7 +142,8 @@ We can also specify particular probablities with the argument 'probs ='
 
 
 ```r
-    quantile(elect_2013$likelihood_vote, na.rm = TRUE, probs = c(0,0.2,0.4,0.6,0.8,1))
+quantile(elect_2013$likelihood_vote, 
+         na.rm = TRUE, probs = c(0,0.2,0.4,0.6,0.8,1))
 ```
 
 ```
@@ -164,13 +159,13 @@ Vectors are particular data type, but in essence they are set of numbers, like r
 
 The thing to note is just that some functions and some arguments in R will need numbers passed to them is special ways. Some will need them passed in 'c()', others will need them passed in double inverted commas "", and some other formats. The main thing at this stage is to know to look out for this, as they are the sort of typo that will cause bugs in your code, and frustrate you for hours as you try to work out why your code isn't working.
 
-#### VARIANCE AND STANDARD DEVIATION
+## 1.2 Variance and standard deviation
 
 Variance and standard deviation are calculated with very simple commands: var() and sd()
 
 
 ```r
-    var(elect_2013$likelihood_vote, na.rm = TRUE)
+var(elect_2013$likelihood_vote, na.rm = TRUE)
 ```
 
 ```
@@ -179,7 +174,7 @@ Variance and standard deviation are calculated with very simple commands: var() 
 
 
 ```r
-    sd(elect_2013$likelihood_vote, na.rm = TRUE)
+sd(elect_2013$likelihood_vote, na.rm = TRUE)
 ```
 
 ```
@@ -214,11 +209,18 @@ For mean, there is a special command 'weighted.mean'. Note that we use three arg
 * the command to remove cases with missing values.
 
 
-        weighted.mean(elect_2013$likelihood_vote, elect_2013$weight, na.rm =  TRUE)
+```r
+weighted.mean(elect_2013$likelihood_vote, 
+              x = elect_2013$weight, na.rm =  TRUE)
+```
+
+```
+## [1] NA
+```
 
 What weighted mean do you get? Is it similar to that reported in McAllister, Appendix 1 (he reports 4.20)?
 
-### LESSON 2: BASIC UNIVARIATE VISUALISATION
+# Lesson 2: Basic Univariate Visualisation
 
 This section we are going to learn one simple univariate visualisation:  the histogram.
 
@@ -230,40 +232,63 @@ R has a built in histogram command (called 'hist()'), but when I have been testi
 
 We are going to use two commands: 'table()' and 'barplot()'.
 
-#### Histogram Example 1: Likelihood of voting
+## Histogram Example 1: Likelihood of voting
 
 First, let's see what table() does
 
-    table(elect_2013$likelihood_vote)
 
-You should get this result in the console:
+```r
+table(elect_2013$likelihood_vote)
+```
 
-    1    2    3    4    5   
-    126  269  236  721 2574 
+```
+## 
+##    1    2    3    4    5 
+##  126  269  236  721 2574
+```
 
 So of the 3955 respondents to our survey, 126 said that they would definitely not vote if voting was voluntary, while 2574 said they definitely would vote.
 
 We can visualise this with the the 'barplot()' function:
 
-    barplot(table(elect_2013$likelihood_vote))
+
+```r
+barplot(table(elect_2013$likelihood_vote))
+```
+
+<img src="/docs/lesson2_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 in the 'Plots' windown on the bottom right corner of  RStudio, you will see these five numbers graphed as a histogram.
 
 Often we want to graph a histogram as a probability density graph, where the y-axis is the proportion of  cases in each bin. To do this we need to confirm the number of cases (removing those that are missing) The number of cases can be calculated with the following code: 
 
-    cases <- length(elect_2013$likelihood_vote
-                [!is.na(elect_2013$likelihood_vote)])
+
+```r
+cases <- length(elect_2013$likelihood_vote
+            [!is.na(elect_2013$likelihood_vote)])
+```
 
 To see how many cases there are, just type 'cases' and view the contents of the cases variable.
 
-    cases
+
+```r
+cases
+```
+
+```
+## [1] 3926
+```
 
 There are 3926 cases (from a total of 3955 people who did the survey).
 
 To display the histogram as a probablity density, we just run:
 
-    barplot(table(elect_2013$likelihood_vote)/cases)
 
+```r
+barplot(table(elect_2013$likelihood_vote)/cases)
+```
+
+<img src="/docs/lesson2_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 #### Histogram Example 2: Political knowledge
 
@@ -271,7 +296,12 @@ We are now going to move on to a few slighly more complex examples.
 
 Let's start by visualising the histogram for the 'political knowledge' variable (from 0 to 10), which represents the number of Australian politics quiz questions the survey respondent got right.
 
-    barplot(table(elect_2013$pol_knowledge))
+
+```r
+barplot(table(elect_2013$pol_knowledge))
+```
+
+<img src="/docs/lesson2_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 We can see that there is pretty even distribution of respondents across the levels of answers, but only a very small number (around 130) got 10/10 for the quiz.
 
@@ -283,56 +313,82 @@ First we create a variable called 'bins', using one of two commands: either 'seq
 
 seq() allows us to specify the min and max, and then the width of bins. The following commands creates bins between 0 and 10, with a width of 2:
 
-    bins <- seq(0, 10, by=2)
 
-You can look at the variable bins by calling it.
-
-    bins
-    [1] 0 2 4 6 8 10
+```r
+bins <- seq(0, 10, by=2)
+```
 
 You could also make the bins with c(). With c() you just specify the exact bins
 
-    bins <- c(0,2,4,6,8,10)
+
+```r
+bins <- c(0,2,4,6,8,10)
+```
 
 We then go through two steps to make a histogram based on these bins. We first use 'cut()' to create a new variable called 'x'. This creates a variable, x, which the values are simply the bins (so a person who had got one quiz question right, and had a 1 for 'political knowledge' would have that '1' replaced with the name of the 'bin', in this case "(0,2]")
 
 We then plot x as done previously with barplot() and table()
 
-    x <- cut(elect_2013$pol_knowledge, breaks=bins)
-    barplot(table(x))
 
+```r
+x <- cut(elect_2013$pol_knowledge, breaks=bins)
+barplot(table(x))
+```
+
+<img src="/docs/lesson2_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+    
 #### Histogram Example 3: Age
 
 We will do one quick last example with age. 
 
 Let's look at the age histogram, with bins just one year wide:
 
-    barplot(table(elect_2013$age))
+
+```r
+barplot(table(elect_2013$age))
+```
+
+<img src="/docs/lesson2_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 Let's now look at it, with the variable divided into bins of width 5 years.
 
-    bins <- seq(0, 110, by=5)
-    x <- cut(elect_2013$age, breaks=bins)
-    barplot(table(x))
 
+```r
+bins <- seq(0, 110, by=5)
+x <- cut(elect_2013$age, breaks=bins)
+barplot(table(x))
+```
+
+<img src="/docs/lesson2_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+    
 And as a probablity density graph:
 
-    cases <- length(elect_2013$age
-                [!is.na(elect_2013$age)])
-    barplot(table(x)/cases)
 
+```r
+cases <- length(elect_2013$age
+            [!is.na(elect_2013$age)])
+barplot(table(x)/cases)
+```
+
+<img src="/docs/lesson2_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+    
 There is lots more you can do with 'barplot()'. A simple extension is to give the graph colour. 
 
-    barplot(table(x)/cases, col="Red")
+
+```r
+barplot(table(x)/cases, col="Red")
+```
+
+<img src="/docs/lesson2_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 There are also lots of more powerful and beautiful graphs that can be made in R. Later in semester Young will teach you some of these techniques. If you want to teach yourself one place to start for graphing univariate statistics with the package ggplot2 is here:
 <http://www.sthda.com/english/articles/32-r-graphics-essentials/133-plot-one-variable-frequency-graph-density-distribution-and-more/#density-plots>
 
-#### LESSON 3: UNIVARIATE STATISTICS WITH SUMMARYTOOLS
+# LESSON 3: UNIVARIATE STATISTICS WITH SUMMARYTOOLS
 
 summarytools is a powerful package that allows users to quickly and easily generate tables that can be cut and pasted directly into papers, presentations, and/or codebooks. 
 
-#### RESOURCES
+### RESOURCES
 
 Excellent introduction by the author:
 <https://cran.r-project.org/web/packages/summarytools/vignettes/Introduction.html>
@@ -340,89 +396,502 @@ Excellent introduction by the author:
 The full manual:
 <https://cran.r-project.org/web/packages/summarytools/summarytools.pdf>
 
-#### WHY USE IT? 
+### WHY USE IT? 
+
 Because it quickly and easily generates beautiful tables that you will need for almost every paper, presentation, or codebook that you write.
 
-#### CORE FUNCTIONS: freq(), ctable(), descr(), dfSummary().
+### CORE FUNCTIONS: freq(), ctable(), descr(), dfSummary().
 
-#### TIPS:
+### TIPS:
 
 * for beginners it is almost always easier to use html output, rather than rmarkdown;
 * when writing code, send files to browser so you can see your output immediately;
 * when you are ready to publish, you can (1) screenshot; (2) cut and paste the tables into excel or word; or (3) save as a html file, using the 'file=' argument in the print() function.
 
-        install.packages("summarytools") # install the package (once, and then # it out)
-        library(summarytools) # load the library
 
-### LESSON 3.1: freq() function
+```r
+install.packages("summarytools", 
+                 repos = 'http://cran.rstudio.com') 
+```
+
+```
+## Installing package into 'C:/Users/nickh/Documents/R/win-library/3.5'
+## (as 'lib' is unspecified)
+```
+
+```
+## package 'summarytools' successfully unpacked and MD5 sums checked
+## 
+## The downloaded binary packages are in
+## 	C:\Users\nickh\AppData\Local\Temp\RtmpWU4mJ5\downloaded_packages
+```
+
+```r
+# install the package (once, and then # it out)
+        library(summarytools) # load the library(package)ry(package)
+```
+
+# LESSON 3.1: freq() function
 
 This function gives the count and proportions of each value of a variable. Note that it only takes a single variable as input (not a whole dataframe).
 
 
-#### 1. DON'T DO THIS
+## 3.1.1 Don't do this
+
 You almost NEVER want to run 'summarytools' functions WITHOUT putting them inside the 'print()' function and sending them to the browser. To understand why, run the next line and look at the ugly output sent to the console.
 
-    freq(elect_2013$pol_knowledge)
+
+```r
+freq(elect_2013$pol_knowledge)
+```
+
+```
+## Frequencies   
+## elect_2013$pol_knowledge     
+## Type: Numeric   
+## 
+##               Freq   % Valid   % Valid Cum.   % Total   % Total Cum.
+## ----------- ------ --------- -------------- --------- --------------
+##           0    410     10.37          10.37     10.37          10.37
+##           1    303      7.66          18.03      7.66          18.03
+##           2    380      9.61          27.64      9.61          27.64
+##           3    382      9.66          37.29      9.66          37.29
+##           4    403     10.19          47.48     10.19          47.48
+##           5    425     10.75          58.23     10.75          58.23
+##           6    376      9.51          67.74      9.51          67.74
+##           7    435     11.00          78.74     11.00          78.74
+##           8    387      9.79          88.52      9.79          88.52
+##           9    318      8.04          96.56      8.04          96.56
+##          10    136      3.44         100.00      3.44         100.00
+##        <NA>      0                               0.00         100.00
+##       Total   3955    100.00         100.00    100.00         100.00
+```
 
 OK, it's not terrible, but you wouldn't want to paste that straight into an article or presentation.
 
-#### 2. BASIC COMMAND
+## 3.1.2 Basic command
+
 Now let's run the same command, but we will put it inside a print() function, and send it to browser.
 
-    print(freq(elect_2013$pol_knowledge), method = "browser")
 
-A table should have openned in your browser (such as Chrome Safari, Internet Explorer, Firefox, or Edge.
+```r
+print(freq(elect_2013$pol_knowledge), 
+      method = 'browser')
+```
+
+A table should have openned in your browser (such as Chrome Safari, Internet Explorer, Firefox, or Edge) and look like the one below.
+
+<!--html_preserve--><div class="container st-container">
+<h3>Frequencies  </h3>
+<strong>Variable</strong>: pol_knowledge
+  <br><strong>Type</strong>: Numeric
+<br/>
+<table class="table table-striped table-bordered st-table st-table-striped st-table-bordered st-freq-table ">
+  <thead>
+    <tr>
+      <th colspan="2"></th>
+      <th colspan="2">Valid</th>
+      <th colspan="2">Total</th>
+    </tr>
+    <tr>
+      <th>pol_knowledge</th>
+      <th>Freq</th>
+      <th>%</th>
+      <th>% Cumul</th>
+      <th>%</th>
+      <th>% Cumul</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td align="center">410</td>
+      <td align="center">10.37</td>
+      <td align="center">10.37</td>
+      <td align="center">10.37</td>
+      <td align="center">10.37</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td align="center">303</td>
+      <td align="center">7.66</td>
+      <td align="center">18.03</td>
+      <td align="center">7.66</td>
+      <td align="center">18.03</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td align="center">380</td>
+      <td align="center">9.61</td>
+      <td align="center">27.64</td>
+      <td align="center">9.61</td>
+      <td align="center">27.64</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td align="center">382</td>
+      <td align="center">9.66</td>
+      <td align="center">37.29</td>
+      <td align="center">9.66</td>
+      <td align="center">37.29</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td align="center">403</td>
+      <td align="center">10.19</td>
+      <td align="center">47.48</td>
+      <td align="center">10.19</td>
+      <td align="center">47.48</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td align="center">425</td>
+      <td align="center">10.75</td>
+      <td align="center">58.23</td>
+      <td align="center">10.75</td>
+      <td align="center">58.23</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td align="center">376</td>
+      <td align="center">9.51</td>
+      <td align="center">67.74</td>
+      <td align="center">9.51</td>
+      <td align="center">67.74</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td align="center">435</td>
+      <td align="center">11.00</td>
+      <td align="center">78.74</td>
+      <td align="center">11.00</td>
+      <td align="center">78.74</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td align="center">387</td>
+      <td align="center">9.79</td>
+      <td align="center">88.52</td>
+      <td align="center">9.79</td>
+      <td align="center">88.52</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td align="center">318</td>
+      <td align="center">8.04</td>
+      <td align="center">96.56</td>
+      <td align="center">8.04</td>
+      <td align="center">96.56</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td align="center">136</td>
+      <td align="center">3.44</td>
+      <td align="center">100.00</td>
+      <td align="center">3.44</td>
+      <td align="center">100.00</td>
+    </tr>
+    <tr>
+      <th>&lt;NA&gt;</th>
+      <td align="center">0</td>
+      <td align="center"></td>
+      <td align="center"></td>
+      <td align="center">0.00</td>
+      <td align="center">100.00</td>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <td align="center">3955</td>
+      <td align="center">100.00</td>
+      <td align="center">100.00</td>
+      <td align="center">100.00</td>
+      <td align="center">100.00</td>
+    </tr>
+  </tbody>
+</table>
+<p>Generated by <a href='https://github.com/dcomtois/summarytools'>summarytools</a> 0.8.8 (<a href='https://www.r-project.org/'>R</a> version 3.5.1)<br/>2018-12-27</p>
+</div><!--/html_preserve-->
 
 Notice how it has a much more attractive layout.
 
-#### 3. SETTINGS
+## 3.1.3 Settings
+
 There are a few different settings we can use to make this table prettier.
 
 We can omit the headings
 
-    print(freq(elect_2013$pol_knowledge, 
-           omit.headings = TRUE), 
-           method = "browser")
+print(freq(elect_2013$pol_knowledge, 
+       omit.headings = TRUE), 
+       method = "browser")
+           
+
+```r
+print(freq(elect_2013$pol_knowledge,
+      omit.headings = TRUE), 
+      method = 'browser')
+```
+
+<!--html_preserve--><div class="container st-container">
+<table class="table table-striped table-bordered st-table st-table-striped st-table-bordered st-freq-table ">
+  <thead>
+    <tr>
+      <th colspan="2"></th>
+      <th colspan="2">Valid</th>
+      <th colspan="2">Total</th>
+    </tr>
+    <tr>
+      <th>pol_knowledge</th>
+      <th>Freq</th>
+      <th>%</th>
+      <th>% Cumul</th>
+      <th>%</th>
+      <th>% Cumul</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td align="center">410</td>
+      <td align="center">10.37</td>
+      <td align="center">10.37</td>
+      <td align="center">10.37</td>
+      <td align="center">10.37</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td align="center">303</td>
+      <td align="center">7.66</td>
+      <td align="center">18.03</td>
+      <td align="center">7.66</td>
+      <td align="center">18.03</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td align="center">380</td>
+      <td align="center">9.61</td>
+      <td align="center">27.64</td>
+      <td align="center">9.61</td>
+      <td align="center">27.64</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td align="center">382</td>
+      <td align="center">9.66</td>
+      <td align="center">37.29</td>
+      <td align="center">9.66</td>
+      <td align="center">37.29</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td align="center">403</td>
+      <td align="center">10.19</td>
+      <td align="center">47.48</td>
+      <td align="center">10.19</td>
+      <td align="center">47.48</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td align="center">425</td>
+      <td align="center">10.75</td>
+      <td align="center">58.23</td>
+      <td align="center">10.75</td>
+      <td align="center">58.23</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td align="center">376</td>
+      <td align="center">9.51</td>
+      <td align="center">67.74</td>
+      <td align="center">9.51</td>
+      <td align="center">67.74</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td align="center">435</td>
+      <td align="center">11.00</td>
+      <td align="center">78.74</td>
+      <td align="center">11.00</td>
+      <td align="center">78.74</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td align="center">387</td>
+      <td align="center">9.79</td>
+      <td align="center">88.52</td>
+      <td align="center">9.79</td>
+      <td align="center">88.52</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td align="center">318</td>
+      <td align="center">8.04</td>
+      <td align="center">96.56</td>
+      <td align="center">8.04</td>
+      <td align="center">96.56</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td align="center">136</td>
+      <td align="center">3.44</td>
+      <td align="center">100.00</td>
+      <td align="center">3.44</td>
+      <td align="center">100.00</td>
+    </tr>
+    <tr>
+      <th>&lt;NA&gt;</th>
+      <td align="center">0</td>
+      <td align="center"></td>
+      <td align="center"></td>
+      <td align="center">0.00</td>
+      <td align="center">100.00</td>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <td align="center">3955</td>
+      <td align="center">100.00</td>
+      <td align="center">100.00</td>
+      <td align="center">100.00</td>
+      <td align="center">100.00</td>
+    </tr>
+  </tbody>
+</table>
+<p>Generated by <a href='https://github.com/dcomtois/summarytools'>summarytools</a> 0.8.8 (<a href='https://www.r-project.org/'>R</a> version 3.5.1)<br/>2018-12-27</p>
+</div><!--/html_preserve-->
 
 We can omit the totals
 
-    print(freq(elect_2013$pol_knowledge, 
-            totals = FALSE), 
-            method = "browser")
+
+```r
+print(freq(elect_2013$pol_knowledge, 
+        totals = FALSE), 
+        method = 'browser')
+```
 
 We can omit the reporting of NAs (missing)
 
-    print(freq(elect_2013$pol_knowledge, 
-           report.nas = FALSE), 
-           method = "browser")
+
+```r
+print(freq(elect_2013$pol_knowledge, 
+       report.nas = FALSE), 
+       method = 'browser')
+```
 
 We can remove the footnote
 
-    print(freq(elect_2013$pol_knowledge, 
-           report.nas = FALSE), 
-           method = "browser", footnote = NA)
+
+```r
+print(freq(elect_2013$pol_knowledge, 
+       report.nas = FALSE), 
+       method = 'browser', footnote = NA)
+```
 
 #### 4. PUTTING IT ALL TOGETHER
 And we can put all that together
 
-    print(freq(elect_2013$pol_knowledge, 
-           omit.headings = TRUE, 
-           totals = FALSE, 
-           report.nas = FALSE), 
-           method = "browser", footnote = NA)
+
+```r
+print(freq(elect_2013$pol_knowledge, 
+       omit.headings = TRUE, 
+       totals = FALSE, 
+       report.nas = FALSE), 
+       method = 'browser', footnote = NA)
+```
+
+
+<!--html_preserve--><div class="container st-container"><table class="table table-striped table-bordered st-table st-table-striped st-table-bordered st-freq-table-nomiss ">
+  <thead>
+    <tr>
+      <th>pol_knowledge</th>
+      <th>Freq</th>
+      <th>%</th>
+      <th>% Cumul</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td align="center">410</td>
+      <td align="center">10.37</td>
+      <td align="center">10.37</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td align="center">303</td>
+      <td align="center">7.66</td>
+      <td align="center">18.03</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td align="center">380</td>
+      <td align="center">9.61</td>
+      <td align="center">27.64</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td align="center">382</td>
+      <td align="center">9.66</td>
+      <td align="center">37.29</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td align="center">403</td>
+      <td align="center">10.19</td>
+      <td align="center">47.48</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td align="center">425</td>
+      <td align="center">10.75</td>
+      <td align="center">58.23</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td align="center">376</td>
+      <td align="center">9.51</td>
+      <td align="center">67.74</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td align="center">435</td>
+      <td align="center">11.00</td>
+      <td align="center">78.74</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td align="center">387</td>
+      <td align="center">9.79</td>
+      <td align="center">88.52</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td align="center">318</td>
+      <td align="center">8.04</td>
+      <td align="center">96.56</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td align="center">136</td>
+      <td align="center">3.44</td>
+      <td align="center">100.00</td>
+    </tr>
+  </tbody>
+</table></div><!--/html_preserve-->
 
 #### 5. SAVE TO FILE
 If we want to save this to a file, then we use the same command, but replace the 'method =' argument with a 'file =' argument, as below:
 
-    print(freq(elect_2013$pol_knowledge, 
-           omit.headings = TRUE, 
-           totals = FALSE, 
-           report.nas = FALSE), 
-           file = "pol_know_freq.html", footnote = NA)
 
-In the console window you will see
+```r
+print(freq(elect_2013$pol_knowledge, 
+       omit.headings = TRUE, 
+       totals = FALSE, 
+       report.nas = FALSE), 
+       file = "pol_know_freq.html", footnote = NA)
+```
 
-    > Output file written: pol_know_freq.html
+```
+## Output file written: pol_know_freq.html
+```
 
 and if you go to your default folder (set at the beginning of this session), then you will find the file 'pol_know_freq.html'. If you double click on it then it will open in a browser.
 

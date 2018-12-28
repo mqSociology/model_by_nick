@@ -14,17 +14,13 @@ linktitle = "2.1 Univariate analysis"
   parent = "SOCI832"
   weight = 30
 +++
-
-This unit provides training in advanced quantitative analysis with an emphasis on social science applications using existing survey data. Lectures will cover the underlying theory and laboratory sessions the application and interpretation of models. This course will cover the following topics: variance analysis, correlation and alternative correlation coefficients, linear and logistic regression, multilevel modelling, factor analysis, and path analysis.
-
-# Summary
-This week's class two main objectives: first we simply want to review the fundamentals of quantitative and statistical analysis – the key points that should have been covered in any previous statistics and social science courses you've done before. This will help ensure we are all on the same page, and give us a common language to conduct the rest of the course in. Second, we want to install and start running analysis with the statistical package R. R is one of the most popular and powerful statistical packages available today, and one of the objectives of this course is to help you become proficient user of R.
-
-Last updated: 19 Dec 2018
+Last updated: 27 Dec 2018
 
 *_Author_: Nicholas Harrigan*
 
-## Summary
+# Overview
+
+This week's class two main objectives: first we simply want to review the fundamentals of quantitative and statistical analysis – the key points that should have been covered in any previous statistics and social science courses you've done before. This will help ensure we are all on the same page, and give us a common language to conduct the rest of the course in. Second, we want to install and start running analysis with the statistical package R. R is one of the most popular and powerful statistical packages available today, and one of the objectives of this course is to help you become proficient user of R.
 
 ### What does this lesson deal with?
 * Introduces methods for making univariate statistics in R
@@ -44,7 +40,7 @@ Last updated: 19 Dec 2018
 1) Change this to your working directory
 
 ```{r eval = FALSE}
-    setwd("C:/G/2018, SOCI832/Datasets/AES 2013/")
+setwd("C:/G/2018, SOCI832/Datasets/AES 2013/")
 ```
 
 2) Put the file "elect_2013.csv" into that folder. This file can be found here: 
@@ -53,33 +49,31 @@ Last updated: 19 Dec 2018
 3) Keep the codebook openned in a browser so you can refer to it when you need it. The codebook is here:
 <https://mqsociology.github.io/learn-r/soci832/codebook%20aes%202013.html>
 
-## 1. Import the data
-
-### 1.1 Import the data
+4) Import the data
 
 ```{r}
-    library(readr)
-    elect_2013 <- read_csv("elect_2013.csv") # loads dataset
+library(readr)
+elect_2013 <- read_csv("elect_2013.csv") # loads dataset
 ```
 
-This command gets rid of the first column which is not needed.
+5) Remove the first column which is not needed.
 
 FYI the command works by saying "copy all columns except the first".
 
-NOTE: Only run this command once after you run the 'read.csv' command. Each time you run it, it deletes the first variable. 
+_NOTE: Only run this command once after you run the 'read.csv' command. Each time you run it, it deletes the first variable._ 
 
 ```{r}
-    elect_2013 <- elect_2013[,2:ncol(elect_2013)]
+elect_2013 <- elect_2013[,2:ncol(elect_2013)]
 ```
 
-### LESSON 1: BASIC UNIVARIATE FUNCTIONS
+# Lesson 1: Basic Univariate Functions
 This section introduces the basic functions for running univariate statistics. In most cases there are are easier commands to run, but we will learn about those later.
 
-#### MEAN
+## 1.1 Mean
 Mean is just the sum of a variable/number of cases. There is a built in function that calcuates the mean
 
 ```{r}
-    mean(elect_2013$likelihood_vote)
+mean(elect_2013$likelihood_vote)
 ```
 
 Oh damn! We got ```[1] NA```
@@ -89,25 +83,26 @@ This happens because there are missing values in the variable 'likelihood_vote'.
 There is an easy way to deal with this. We add one more argument* to the function** 'mean()'. The argument is 'na.rm = TRUE'
 
 ```{r}
-    mean(elect_2013$likelihood_vote, na.rm = TRUE)
+mean(elect_2013$likelihood_vote, na.rm = TRUE)
 ```
 
 We can get the median with:
 
 ```{r}
-    median(elect_2013$likelihood_vote, na.rm = TRUE)
+median(elect_2013$likelihood_vote, na.rm = TRUE)
 ```
 
 We can also extract various quartiles and quintiles. The default setting gives us min, max, 25%, 50%, and 75%
 
 ```{r}
-    quantile(elect_2013$likelihood_vote, na.rm = TRUE)
+quantile(elect_2013$likelihood_vote, na.rm = TRUE)
 ```
 
 We can also specify particular probablities with the argument 'probs ='
 
-```{r}
-    quantile(elect_2013$likelihood_vote, na.rm = TRUE, probs = c(0,0.2,0.4,0.6,0.8,1))
+```{r tidy=TRUE}
+quantile(elect_2013$likelihood_vote, 
+         na.rm = TRUE, probs = c(0,0.2,0.4,0.6,0.8,1))
 ```
 
 NOTE: when we provide the 'probs' argument, we need specify the set of numbers inside the function 'c()'.
@@ -118,16 +113,16 @@ Vectors are particular data type, but in essence they are set of numbers, like r
 
 The thing to note is just that some functions and some arguments in R will need numbers passed to them is special ways. Some will need them passed in 'c()', others will need them passed in double inverted commas "", and some other formats. The main thing at this stage is to know to look out for this, as they are the sort of typo that will cause bugs in your code, and frustrate you for hours as you try to work out why your code isn't working.
 
-#### VARIANCE AND STANDARD DEVIATION
+## 1.2 Variance and standard deviation
 
 Variance and standard deviation are calculated with very simple commands: var() and sd()
 
 ```{r}
-    var(elect_2013$likelihood_vote, na.rm = TRUE)
+var(elect_2013$likelihood_vote, na.rm = TRUE)
 ```
 
 ```{r}
-    sd(elect_2013$likelihood_vote, na.rm = TRUE)
+sd(elect_2013$likelihood_vote, na.rm = TRUE)
 ```
 
 Let's now compare out results with those of McAllister 2016. If you haven't already, download the article from here: <https://doi.org/10.1080/13676261.2016.1154936>
@@ -157,12 +152,14 @@ For mean, there is a special command 'weighted.mean'. Note that we use three arg
 * the weighting variable 
 * the command to remove cases with missing values.
 
-
-        weighted.mean(elect_2013$likelihood_vote, elect_2013$weight, na.rm =  TRUE)
+```{r}
+weighted.mean(elect_2013$likelihood_vote, 
+              x = elect_2013$weight, na.rm =  TRUE)
+```
 
 What weighted mean do you get? Is it similar to that reported in McAllister, Appendix 1 (he reports 4.20)?
 
-### LESSON 2: BASIC UNIVARIATE VISUALISATION
+# Lesson 2: Basic Univariate Visualisation
 
 This section we are going to learn one simple univariate visualisation:  the histogram.
 
@@ -174,40 +171,44 @@ R has a built in histogram command (called 'hist()'), but when I have been testi
 
 We are going to use two commands: 'table()' and 'barplot()'.
 
-#### Histogram Example 1: Likelihood of voting
+## Histogram Example 1: Likelihood of voting
 
 First, let's see what table() does
 
-    table(elect_2013$likelihood_vote)
-
-You should get this result in the console:
-
-    1    2    3    4    5   
-    126  269  236  721 2574 
+```{r}
+table(elect_2013$likelihood_vote)
+```
 
 So of the 3955 respondents to our survey, 126 said that they would definitely not vote if voting was voluntary, while 2574 said they definitely would vote.
 
 We can visualise this with the the 'barplot()' function:
 
-    barplot(table(elect_2013$likelihood_vote))
+```{r}
+barplot(table(elect_2013$likelihood_vote))
+```
 
 in the 'Plots' windown on the bottom right corner of  RStudio, you will see these five numbers graphed as a histogram.
 
 Often we want to graph a histogram as a probability density graph, where the y-axis is the proportion of  cases in each bin. To do this we need to confirm the number of cases (removing those that are missing) The number of cases can be calculated with the following code: 
 
-    cases <- length(elect_2013$likelihood_vote
-                [!is.na(elect_2013$likelihood_vote)])
+```{r}
+cases <- length(elect_2013$likelihood_vote
+            [!is.na(elect_2013$likelihood_vote)])
+```
 
 To see how many cases there are, just type 'cases' and view the contents of the cases variable.
 
-    cases
+```{r}
+cases
+```
 
 There are 3926 cases (from a total of 3955 people who did the survey).
 
 To display the histogram as a probablity density, we just run:
 
-    barplot(table(elect_2013$likelihood_vote)/cases)
-
+```{r}
+barplot(table(elect_2013$likelihood_vote)/cases)
+```
 
 #### Histogram Example 2: Political knowledge
 
@@ -215,7 +216,9 @@ We are now going to move on to a few slighly more complex examples.
 
 Let's start by visualising the histogram for the 'political knowledge' variable (from 0 to 10), which represents the number of Australian politics quiz questions the survey respondent got right.
 
-    barplot(table(elect_2013$pol_knowledge))
+```{r}
+barplot(table(elect_2013$pol_knowledge))
+```
 
 We can see that there is pretty even distribution of respondents across the levels of answers, but only a very small number (around 130) got 10/10 for the quiz.
 
@@ -227,56 +230,65 @@ First we create a variable called 'bins', using one of two commands: either 'seq
 
 seq() allows us to specify the min and max, and then the width of bins. The following commands creates bins between 0 and 10, with a width of 2:
 
-    bins <- seq(0, 10, by=2)
-
-You can look at the variable bins by calling it.
-
-    bins
-    [1] 0 2 4 6 8 10
+```{r}
+bins <- seq(0, 10, by=2)
+```
 
 You could also make the bins with c(). With c() you just specify the exact bins
 
-    bins <- c(0,2,4,6,8,10)
+```{r}
+bins <- c(0,2,4,6,8,10)
+```
 
 We then go through two steps to make a histogram based on these bins. We first use 'cut()' to create a new variable called 'x'. This creates a variable, x, which the values are simply the bins (so a person who had got one quiz question right, and had a 1 for 'political knowledge' would have that '1' replaced with the name of the 'bin', in this case "(0,2]")
 
 We then plot x as done previously with barplot() and table()
 
-    x <- cut(elect_2013$pol_knowledge, breaks=bins)
-    barplot(table(x))
-
+```{r}
+x <- cut(elect_2013$pol_knowledge, breaks=bins)
+barplot(table(x))
+```
+    
 #### Histogram Example 3: Age
 
 We will do one quick last example with age. 
 
 Let's look at the age histogram, with bins just one year wide:
 
-    barplot(table(elect_2013$age))
+```{r}
+barplot(table(elect_2013$age))
+```
 
 Let's now look at it, with the variable divided into bins of width 5 years.
 
-    bins <- seq(0, 110, by=5)
-    x <- cut(elect_2013$age, breaks=bins)
-    barplot(table(x))
-
+```{r}
+bins <- seq(0, 110, by=5)
+x <- cut(elect_2013$age, breaks=bins)
+barplot(table(x))
+```
+    
 And as a probablity density graph:
 
-    cases <- length(elect_2013$age
-                [!is.na(elect_2013$age)])
-    barplot(table(x)/cases)
-
+```{r}
+cases <- length(elect_2013$age
+            [!is.na(elect_2013$age)])
+barplot(table(x)/cases)
+```
+    
 There is lots more you can do with 'barplot()'. A simple extension is to give the graph colour. 
 
-    barplot(table(x)/cases, col="Red")
+```{r}
+barplot(table(x)/cases, col="Red")
+```
 
 There are also lots of more powerful and beautiful graphs that can be made in R. Later in semester Young will teach you some of these techniques. If you want to teach yourself one place to start for graphing univariate statistics with the package ggplot2 is here:
 <http://www.sthda.com/english/articles/32-r-graphics-essentials/133-plot-one-variable-frequency-graph-density-distribution-and-more/#density-plots>
 
-#### LESSON 3: UNIVARIATE STATISTICS WITH SUMMARYTOOLS
+# LESSON 3: UNIVARIATE STATISTICS WITH SUMMARYTOOLS
 
 summarytools is a powerful package that allows users to quickly and easily generate tables that can be cut and pasted directly into papers, presentations, and/or codebooks. 
 
-#### RESOURCES
+### RESOURCES
 
 Excellent introduction by the author:
 <https://cran.r-project.org/web/packages/summarytools/vignettes/Introduction.html>
@@ -284,89 +296,134 @@ Excellent introduction by the author:
 The full manual:
 <https://cran.r-project.org/web/packages/summarytools/summarytools.pdf>
 
-#### WHY USE IT? 
+### WHY USE IT? 
+
 Because it quickly and easily generates beautiful tables that you will need for almost every paper, presentation, or codebook that you write.
 
-#### CORE FUNCTIONS: freq(), ctable(), descr(), dfSummary().
+### CORE FUNCTIONS: freq(), ctable(), descr(), dfSummary().
 
-#### TIPS:
+### TIPS:
 
 * for beginners it is almost always easier to use html output, rather than rmarkdown;
 * when writing code, send files to browser so you can see your output immediately;
 * when you are ready to publish, you can (1) screenshot; (2) cut and paste the tables into excel or word; or (3) save as a html file, using the 'file=' argument in the print() function.
 
-        install.packages("summarytools") # install the package (once, and then # it out)
-        library(summarytools) # load the library
+```{r}
+install.packages("summarytools", 
+                 repos = 'http://cran.rstudio.com') 
+# install the package (once, and then # it out)
+        library(summarytools) # load the library(package)ry(package)
+```
 
-### LESSON 3.1: freq() function
+# LESSON 3.1: freq() function
 
 This function gives the count and proportions of each value of a variable. Note that it only takes a single variable as input (not a whole dataframe).
 
 
-#### 1. DON'T DO THIS
+## 3.1.1 Don't do this
+
 You almost NEVER want to run 'summarytools' functions WITHOUT putting them inside the 'print()' function and sending them to the browser. To understand why, run the next line and look at the ugly output sent to the console.
 
-    freq(elect_2013$pol_knowledge)
+```{r}
+freq(elect_2013$pol_knowledge)
+```
 
 OK, it's not terrible, but you wouldn't want to paste that straight into an article or presentation.
 
-#### 2. BASIC COMMAND
+## 3.1.2 Basic command
+
 Now let's run the same command, but we will put it inside a print() function, and send it to browser.
 
-    print(freq(elect_2013$pol_knowledge), method = "browser")
+```{r eval=FALSE}
+print(freq(elect_2013$pol_knowledge), 
+      method = 'browser')
+```
 
-A table should have openned in your browser (such as Chrome Safari, Internet Explorer, Firefox, or Edge.
+A table should have openned in your browser (such as Chrome Safari, Internet Explorer, Firefox, or Edge) and look like the one below.
+
+```{r echo=FALSE}
+print(freq(elect_2013$pol_knowledge), 
+      method = 'render')
+```
 
 Notice how it has a much more attractive layout.
 
-#### 3. SETTINGS
+## 3.1.3 Settings
+
 There are a few different settings we can use to make this table prettier.
 
 We can omit the headings
 
-    print(freq(elect_2013$pol_knowledge, 
-           omit.headings = TRUE), 
-           method = "browser")
+print(freq(elect_2013$pol_knowledge, 
+       omit.headings = TRUE), 
+       method = "browser")
+           
+```{r eval=FALSE}
+print(freq(elect_2013$pol_knowledge,
+      omit.headings = TRUE), 
+      method = 'browser')
+```
+
+```{r echo=FALSE}
+print(freq(elect_2013$pol_knowledge,
+      omit.headings = TRUE), 
+      method = 'render')
+```
 
 We can omit the totals
 
-    print(freq(elect_2013$pol_knowledge, 
-            totals = FALSE), 
-            method = "browser")
+```{r eval=FALSE}
+print(freq(elect_2013$pol_knowledge, 
+        totals = FALSE), 
+        method = 'browser')
+```
 
 We can omit the reporting of NAs (missing)
 
-    print(freq(elect_2013$pol_knowledge, 
-           report.nas = FALSE), 
-           method = "browser")
+```{r eval=FALSE}
+print(freq(elect_2013$pol_knowledge, 
+       report.nas = FALSE), 
+       method = 'browser')
+```
 
 We can remove the footnote
 
-    print(freq(elect_2013$pol_knowledge, 
-           report.nas = FALSE), 
-           method = "browser", footnote = NA)
+```{r eval=FALSE}
+print(freq(elect_2013$pol_knowledge, 
+       report.nas = FALSE), 
+       method = 'browser', footnote = NA)
+```
 
 #### 4. PUTTING IT ALL TOGETHER
 And we can put all that together
 
-    print(freq(elect_2013$pol_knowledge, 
-           omit.headings = TRUE, 
-           totals = FALSE, 
-           report.nas = FALSE), 
-           method = "browser", footnote = NA)
+```{r eval=FALSE}
+print(freq(elect_2013$pol_knowledge, 
+       omit.headings = TRUE, 
+       totals = FALSE, 
+       report.nas = FALSE), 
+       method = 'browser', footnote = NA)
+```
+
+
+```{r echo=FALSE}
+print(freq(elect_2013$pol_knowledge, 
+       omit.headings = TRUE, 
+       totals = FALSE, 
+       report.nas = FALSE), 
+       method = 'rmarkdown', footnote = NA)
+```
 
 #### 5. SAVE TO FILE
 If we want to save this to a file, then we use the same command, but replace the 'method =' argument with a 'file =' argument, as below:
 
-    print(freq(elect_2013$pol_knowledge, 
-           omit.headings = TRUE, 
-           totals = FALSE, 
-           report.nas = FALSE), 
-           file = "pol_know_freq.html", footnote = NA)
-
-In the console window you will see
-
-    > Output file written: pol_know_freq.html
+```{r}
+print(freq(elect_2013$pol_knowledge, 
+       omit.headings = TRUE, 
+       totals = FALSE, 
+       report.nas = FALSE), 
+       file = "pol_know_freq.html", footnote = NA)
+```
 
 and if you go to your default folder (set at the beginning of this session), then you will find the file 'pol_know_freq.html'. If you double click on it then it will open in a browser.
 
