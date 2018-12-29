@@ -146,8 +146,8 @@ We can also specify particular probablities with the argument 'probs ='
 
 
 ```r
-quantile(elect_2013$likelihood_vote, 
-         na.rm = TRUE, probs = c(0,0.2,0.4,0.6,0.8,1))
+quantile(elect_2013$likelihood_vote, na.rm = TRUE, probs = c(0, 0.2, 0.4, 0.6, 
+    0.8, 1))
 ```
 
 ```
@@ -260,7 +260,7 @@ We can visualise this with the the 'barplot()' function:
 barplot(table(elect_2013$likelihood_vote))
 ```
 
-<img src="/docs/lesson2_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="/docs/soci832_lesson_02-1_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 in the 'Plots' windown on the bottom right corner of  RStudio, you will see these five numbers graphed as a histogram.
 
@@ -292,7 +292,7 @@ To display the histogram as a probablity density, we just run:
 barplot(table(elect_2013$likelihood_vote)/cases)
 ```
 
-<img src="/docs/lesson2_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="/docs/soci832_lesson_02-1_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 #### Histogram Example 2: Political knowledge
 
@@ -305,7 +305,7 @@ Let's start by visualising the histogram for the 'political knowledge' variable 
 barplot(table(elect_2013$pol_knowledge))
 ```
 
-<img src="/docs/lesson2_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="/docs/soci832_lesson_02-1_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 We can see that there is pretty even distribution of respondents across the levels of answers, but only a very small number (around 130) got 10/10 for the quiz.
 
@@ -339,7 +339,7 @@ x <- cut(elect_2013$pol_knowledge, breaks=bins)
 barplot(table(x))
 ```
 
-<img src="/docs/lesson2_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="/docs/soci832_lesson_02-1_files/figure-html/unnamed-chunk-20-1.png" width="672" />
     
 #### Histogram Example 3: Age
 
@@ -352,7 +352,7 @@ Let's look at the age histogram, with bins just one year wide:
 barplot(table(elect_2013$age))
 ```
 
-<img src="/docs/lesson2_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="/docs/soci832_lesson_02-1_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 Let's now look at it, with the variable divided into bins of width 5 years.
 
@@ -363,7 +363,7 @@ x <- cut(elect_2013$age, breaks=bins)
 barplot(table(x))
 ```
 
-<img src="/docs/lesson2_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="/docs/soci832_lesson_02-1_files/figure-html/unnamed-chunk-22-1.png" width="672" />
     
 And as a probablity density graph:
 
@@ -374,7 +374,7 @@ cases <- length(elect_2013$age
 barplot(table(x)/cases)
 ```
 
-<img src="/docs/lesson2_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="/docs/soci832_lesson_02-1_files/figure-html/unnamed-chunk-23-1.png" width="672" />
     
 There is lots more you can do with 'barplot()'. A simple extension is to give the graph colour. 
 
@@ -383,7 +383,7 @@ There is lots more you can do with 'barplot()'. A simple extension is to give th
 barplot(table(x)/cases, col="Red")
 ```
 
-<img src="/docs/lesson2_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="/docs/soci832_lesson_02-1_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 There are also lots of more powerful and beautiful graphs that can be made in R. Later in semester Young will teach you some of these techniques. If you want to teach yourself one place to start for graphing univariate statistics with the package ggplot2 is here:
 <http://www.sthda.com/english/articles/32-r-graphics-essentials/133-plot-one-variable-frequency-graph-density-distribution-and-more/#density-plots>
@@ -427,7 +427,7 @@ install.packages("summarytools",
 ## package 'summarytools' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\nickh\AppData\Local\Temp\Rtmp0gQ3mN\downloaded_packages
+## 	C:\Users\nickh\AppData\Local\Temp\RtmpAprUKk\downloaded_packages
 ```
 
 ```r
