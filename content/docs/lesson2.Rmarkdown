@@ -14,6 +14,9 @@ linktitle = "2.1 Univariate analysis"
   parent = "SOCI832"
   weight = 30
 +++
+
+{{% toc %}}
+
 Last updated: 27 Dec 2018
 
 *_Author_: Nicholas Harrigan*
@@ -433,26 +436,26 @@ This function calculates a wide range basic univariate statistics such as mean, 
 This is the simplest form of the command
 
 ```{r eval=FALSE}
-    print(descr(elect_2013$pol_knowledge), 
-          method = "browser")
+print(descr(elect_2013$pol_knowledge), 
+      method = "browser")
 ```
 
 ```{r echo=FALSE}
-    print(descr(elect_2013$pol_knowledge), 
-          method = 'rmarkdown')
+print(descr(elect_2013$pol_knowledge), 
+      method = 'rmarkdown')
 ```
 
 
 However, when reporting variables, we often like them to be presented as the rows, not columns. To change this we used the argument 'transpose'
 
 ```{r eval=FALSE}
-    print(descr(elect_2013$pol_knowledge, transpose = TRUE),
-          method = "browser")
+print(descr(elect_2013$pol_knowledge, transpose = TRUE),
+      method = "browser")
 ```
 
 ```{r echo=FALSE}
-    print(descr(elect_2013$pol_knowledge, transpose = TRUE),
-          method = 'rmarkdown')
+print(descr(elect_2013$pol_knowledge, transpose = TRUE),
+      method = 'rmarkdown')
 ```
 
 Generally we don't want all these statistics, so we can limit the statistics reported with the argument 'stats'.
@@ -460,21 +463,21 @@ Generally we don't want all these statistics, so we can limit the statistics rep
 Note: I've also removed the headings and footnote.
 
 ```{r eval=FALSE}
-    print(descr(elect_2013$pol_knowledge, 
-          omit.headings = TRUE,
-          stats = c("mean", "sd", "min", "max"), 
-          transpose = TRUE),
-          method = "browser",
-          footnote = NA)
+print(descr(elect_2013$pol_knowledge, 
+      omit.headings = TRUE,
+      stats = c("mean", "sd", "min", "max"), 
+      transpose = TRUE),
+      method = "browser",
+      footnote = NA)
 ```
 
 ```{r echo=FALSE}
-    print(descr(elect_2013$pol_knowledge, 
-          omit.headings = TRUE,
-          stats = c("mean", "sd", "min", "max"), 
-          transpose = TRUE),
-          method = 'rmarkdown', 
-          footnote = NA)
+print(descr(elect_2013$pol_knowledge, 
+      omit.headings = TRUE,
+      stats = c("mean", "sd", "min", "max"), 
+      transpose = TRUE),
+      method = 'rmarkdown', 
+      footnote = NA)
 ```
 
 Note that when using the stats argument, we put the names of the stats we want using the "c()" function. If you want to know the commands for each of the different stats, then look at the help file (type ?descr)
@@ -503,6 +506,8 @@ print(descr(elect_2013$pol_knowledge,
 
 The real power of descr() is that it can calculate these statistics for all variables in a dataset. We can do this by just calling descr() on the data frame.
 
+**Note:** In this case, I've limited the output to this webpage to the first 10 variables, so that it doesn't take up too much space.
+
 ```{r eval=FALSE}
 print(descr(elect_2013, 
       omit.headings = TRUE, 
@@ -513,7 +518,7 @@ print(descr(elect_2013,
 ```
 
 ```{r echo=FALSE}
-print(descr(elect_2013, 
+print(descr(elect_2013[,1:10], 
       omit.headings = TRUE, 
       stats = c("mean", "sd", "min", "max"),
       transpose = TRUE, 
@@ -537,16 +542,16 @@ print(dfSummary(elect_2013$pol_knowledge),
       method='rmarkdown')
 ```
 
-The next command gives a summary of the entire dataset:
+The next command gives a summary of the entire dataset. For display purposes, I've just shown the first five variables:
 
 ```{r eval=FALSE}
-    print(dfSummary(elect_2013), 
-          method='browser')
+print(dfSummary(elect_2013), 
+      method='browser')
 ```
 
 ```{r echo=FALSE}
-    print(dfSummary(elect_2013), 
-          method='rmarkdown')
+print(dfSummary(elect_2013[,1:5]), 
+      method='rmarkdown')
 ```
 
 **This is the end of the Univariate statistics  R code/ R-script file. The class continues in the code "Week 2, Part 2, Bivariate statistics.R'**
