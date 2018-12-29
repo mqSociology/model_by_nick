@@ -427,12 +427,12 @@ install.packages("summarytools",
 ## package 'summarytools' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\nickh\AppData\Local\Temp\RtmpAprUKk\downloaded_packages
+## 	C:\Users\nickh\AppData\Local\Temp\RtmpmAh36o\downloaded_packages
 ```
 
 ```r
 # install the package (once, and then # it out)
-        library(summarytools) # load the library(package)ry(package)
+        library(summarytools) # load the library
 ```
 
 ```

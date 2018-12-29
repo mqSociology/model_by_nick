@@ -316,7 +316,7 @@ Because it quickly and easily generates beautiful tables that you will need for 
 install.packages("summarytools", 
                  repos = 'http://cran.rstudio.com') 
 # install the package (once, and then # it out)
-        library(summarytools) # load the library(package)ry(package)
+        library(summarytools) # load the library
 ```
 
 ## LESSON 3.1: freq() function
