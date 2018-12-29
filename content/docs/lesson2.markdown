@@ -1,19 +1,18 @@
-+++
-title = "SOCI832 Lesson 2.1: Univariate analysis"
+---
+title: "SOCI832 Lesson 2.1: Univariate analysis"
 
-date = 2018-09-09T00:00:00
-# lastmod = 2018-09-09T00:00:00
+lastmod: 2018-12-28T00:00:00.000Z
 
-draft = false  # Is this a draft? true/false
-toc = true  # Show table of contents? true/false
-type = "docs"  # Do not modify.
+draft: false
+toc: true
+type: docs
 
-# Add menu entry to sidebar.
-linktitle = "2.1 Univariate analysis"
-[menu.docs]
-  parent = "SOCI832"
-  weight = 30
-+++
+linktitle: "2.1 Univariate analysis"
+menu:
+  docs:
+    parent: SOCI832
+    weight: 30
+---
 
 {{% toc %}}
 
@@ -428,7 +427,7 @@ install.packages("summarytools",
 ## package 'summarytools' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\nickh\AppData\Local\Temp\Rtmp6vx9SE\downloaded_packages
+## 	C:\Users\nickh\AppData\Local\Temp\Rtmp0gQ3mN\downloaded_packages
 ```
 
 ```r
