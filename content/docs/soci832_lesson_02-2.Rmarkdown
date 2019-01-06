@@ -459,29 +459,9 @@ Feel free to run the following code:
     browseURL("output.html")
 ```
 
-# XXXXPROBLEMXXXX
-The command below (which use xtable with the corstarts function) basically can only produce tables in HTML and RMarkdown, and when it does, it does not format and just produces the code(because it is inside the ` ` ` code blocks).
-
-I was able to get HTML to print to RMarkdown in Lesson 2.1 when I used one of the summaryTools functions - I ended up using RMarkdown output, but actually HTML gave a very similar output. 
-
-## Next Actions:
-
-1. google xtable and blogdown and rmarkdown
-2. look at lesson 2.1 (832) and try to work out why the HTML will render properly in that, but not in this code
-
-## Research:
-
-* This website uses xtable and rmarkdown, but still puts the xtable output on another website!
-https://blogs.reed.edu/ed-tech/2015/10/creating-nice-tables-using-r-markdown/
-* That website uses kable() in knitr for tables.
-
-
 ```{r, echo=FALSE, results='asis'}
-    print(xtable(corstars(elect_2013)))
+    print(xtable(corstars(elect_2013)), type="html")
 ```
-
-## XXXXENDPROBLEMXXX
-
 
 The correlation matrix should open in your browser. Significance is indicated with stars:
 
