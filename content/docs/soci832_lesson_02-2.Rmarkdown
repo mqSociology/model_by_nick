@@ -476,7 +476,7 @@ https://blogs.reed.edu/ed-tech/2015/10/creating-nice-tables-using-r-markdown/
 * That website uses kable() in knitr for tables.
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, results='asis'}
     kable(print(xtable(corstars(elect_2013))))
 
 
