@@ -21,7 +21,7 @@ Last updated: 27 Dec 2018
 *_Author_: Nicholas Harrigan*
 
 
-### Stuff you need to do before starting 
+# Stuff you need to do before starting 
 
 1) Change this to your working directory
 
@@ -51,7 +51,7 @@ install.packages("summarytools",
 ## package 'summarytools' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\nickh\AppData\Local\Temp\RtmpAFjovg\downloaded_packages
+## 	C:\Users\nickh\AppData\Local\Temp\RtmpY7oTg5\downloaded_packages
 ```
 
 ```r
@@ -76,11 +76,11 @@ elect_2013 <- read.csv("elect_2013.csv")  # loads dataset
     elect_2013 <- elect_2013[,2:ncol(elect_2013)]
 ```
 
-### 1. Crosstabs 
+# 1. Crosstabs 
 
 This section shows how to cross- tabulate the levels of two variables. This is often one of the simplest ways to get a quick look at the relationship between two variables
 
-#### Crosstabs Example 1: Pol Know vs Likelihood voting 
+## Crosstabs Example 1: Pol Know vs Likelihood voting 
 
 This is how the command 'ctable()' presents a cross tabulation with default settings:
 
@@ -88,12 +88,350 @@ This is how the command 'ctable()' presents a cross tabulation with default sett
 ```r
 print(ctable(elect_2013$pol_knowledge, 
      elect_2013$likelihood_vote), 
-     method = "browser")
+     method = 'rmarkdown')
 ```
 
-```
-## Output file written: C:\Users\nickh\AppData\Local\Temp\RtmpAFjovg\file31603a9654f.html
-```
+<!--html_preserve--><div class="container st-container">
+<h3>Cross-Tabulation / Row Proportions</h3>
+<strong>Variables</strong>: pol_knowledge * likelihood_vote
+  <br><strong>Data Frame</strong>: elect_2013
+<table class="table table-bordered st-table st-table-bordered st-cross-table ">
+<thead>
+<tr>
+<th></th>
+<th colspan="6">likelihood_vote</th>
+<th></th>
+</tr>
+<tr>
+<td align="center">
+<strong>pol_knowledge</strong>
+</td>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">&lt;NA&gt;</th>
+<th align="center">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">
+<strong>0</strong>
+</td>
+<td>
+<span>&nbsp;51&nbsp;(12.44&#37;)</span>
+</td>
+<td>
+<span>&nbsp;78&nbsp;(19.02&#37;)</span>
+</td>
+<td>
+<span>&nbsp;48&nbsp;(11.71&#37;)</span>
+</td>
+<td>
+<span>&nbsp;99&nbsp;(24.15&#37;)</span>
+</td>
+<td>
+<span>&nbsp;130&nbsp;(31.71&#37;)</span>
+</td>
+<td>
+<span>&nbsp;4&nbsp;(0.98&#37;)</span>
+</td>
+<td>
+<span>&nbsp;410&nbsp;(100.00&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>1</strong>
+</td>
+<td>
+<span>&nbsp;18&nbsp;(5.94&#37;)</span>
+</td>
+<td>
+<span>&nbsp;48&nbsp;(15.84&#37;)</span>
+</td>
+<td>
+<span>&nbsp;38&nbsp;(12.54&#37;)</span>
+</td>
+<td>
+<span>&nbsp;68&nbsp;(22.44&#37;)</span>
+</td>
+<td>
+<span>&nbsp;128&nbsp;(42.24&#37;)</span>
+</td>
+<td>
+<span>&nbsp;3&nbsp;(0.99&#37;)</span>
+</td>
+<td>
+<span>&nbsp;303&nbsp;(100.00&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>2</strong>
+</td>
+<td>
+<span>&nbsp;13&nbsp;(3.42&#37;)</span>
+</td>
+<td>
+<span>&nbsp;41&nbsp;(10.79&#37;)</span>
+</td>
+<td>
+<span>&nbsp;36&nbsp;(9.47&#37;)</span>
+</td>
+<td>
+<span>106&nbsp;(27.89&#37;)</span>
+</td>
+<td>
+<span>&nbsp;182&nbsp;(47.89&#37;)</span>
+</td>
+<td>
+<span>&nbsp;2&nbsp;(0.53&#37;)</span>
+</td>
+<td>
+<span>&nbsp;380&nbsp;(100.00&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>3</strong>
+</td>
+<td>
+<span>&nbsp;13&nbsp;(3.40&#37;)</span>
+</td>
+<td>
+<span>&nbsp;27&nbsp;(7.07&#37;)</span>
+</td>
+<td>
+<span>&nbsp;22&nbsp;(5.76&#37;)</span>
+</td>
+<td>
+<span>&nbsp;75&nbsp;(19.63&#37;)</span>
+</td>
+<td>
+<span>&nbsp;243&nbsp;(63.61&#37;)</span>
+</td>
+<td>
+<span>&nbsp;2&nbsp;(0.52&#37;)</span>
+</td>
+<td>
+<span>&nbsp;382&nbsp;(100.00&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>4</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;9&nbsp;(2.23&#37;)</span>
+</td>
+<td>
+<span>&nbsp;25&nbsp;(6.20&#37;)</span>
+</td>
+<td>
+<span>&nbsp;29&nbsp;(7.20&#37;)</span>
+</td>
+<td>
+<span>&nbsp;79&nbsp;(19.60&#37;)</span>
+</td>
+<td>
+<span>&nbsp;258&nbsp;(64.02&#37;)</span>
+</td>
+<td>
+<span>&nbsp;3&nbsp;(0.74&#37;)</span>
+</td>
+<td>
+<span>&nbsp;403&nbsp;(100.00&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>5</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;9&nbsp;(2.12&#37;)</span>
+</td>
+<td>
+<span>&nbsp;13&nbsp;(3.06&#37;)</span>
+</td>
+<td>
+<span>&nbsp;18&nbsp;(4.24&#37;)</span>
+</td>
+<td>
+<span>&nbsp;88&nbsp;(20.71&#37;)</span>
+</td>
+<td>
+<span>&nbsp;296&nbsp;(69.65&#37;)</span>
+</td>
+<td>
+<span>&nbsp;1&nbsp;(0.24&#37;)</span>
+</td>
+<td>
+<span>&nbsp;425&nbsp;(100.00&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>6</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;4&nbsp;(1.06&#37;)</span>
+</td>
+<td>
+<span>&nbsp;16&nbsp;(4.26&#37;)</span>
+</td>
+<td>
+<span>&nbsp;15&nbsp;(3.99&#37;)</span>
+</td>
+<td>
+<span>&nbsp;60&nbsp;(15.96&#37;)</span>
+</td>
+<td>
+<span>&nbsp;279&nbsp;(74.20&#37;)</span>
+</td>
+<td>
+<span>&nbsp;2&nbsp;(0.53&#37;)</span>
+</td>
+<td>
+<span>&nbsp;376&nbsp;(100.00&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>7</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;2&nbsp;(0.46&#37;)</span>
+</td>
+<td>
+<span>&nbsp;10&nbsp;(2.30&#37;)</span>
+</td>
+<td>
+<span>&nbsp;12&nbsp;(2.76&#37;)</span>
+</td>
+<td>
+<span>&nbsp;56&nbsp;(12.87&#37;)</span>
+</td>
+<td>
+<span>&nbsp;352&nbsp;(80.92&#37;)</span>
+</td>
+<td>
+<span>&nbsp;3&nbsp;(0.69&#37;)</span>
+</td>
+<td>
+<span>&nbsp;435&nbsp;(100.00&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>8</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;6&nbsp;(1.55&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;7&nbsp;(1.81&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;9&nbsp;(2.33&#37;)</span>
+</td>
+<td>
+<span>&nbsp;46&nbsp;(11.89&#37;)</span>
+</td>
+<td>
+<span>&nbsp;315&nbsp;(81.40&#37;)</span>
+</td>
+<td>
+<span>&nbsp;4&nbsp;(1.03&#37;)</span>
+</td>
+<td>
+<span>&nbsp;387&nbsp;(100.00&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>9</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;0&nbsp;(0.00&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;3&nbsp;(0.94&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;6&nbsp;(1.89&#37;)</span>
+</td>
+<td>
+<span>&nbsp;30&nbsp;(9.43&#37;)</span>
+</td>
+<td>
+<span>&nbsp;274&nbsp;(86.16&#37;)</span>
+</td>
+<td>
+<span>&nbsp;5&nbsp;(1.57&#37;)</span>
+</td>
+<td>
+<span>&nbsp;318&nbsp;(100.00&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>10</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;1&nbsp;(0.74&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;1&nbsp;(0.74&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;3&nbsp;(2.21&#37;)</span>
+</td>
+<td>
+<span>&nbsp;14&nbsp;(10.29&#37;)</span>
+</td>
+<td>
+<span>&nbsp;117&nbsp;(86.03&#37;)</span>
+</td>
+<td>
+<span>&nbsp;0&nbsp;(0.00&#37;)</span>
+</td>
+<td>
+<span>&nbsp;136&nbsp;(100.00&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>Total</strong>
+</td>
+<td>
+<span>126&nbsp;(3.19&#37;)</span>
+</td>
+<td>
+<span>269&nbsp;(6.80&#37;)</span>
+</td>
+<td>
+<span>236&nbsp;(5.97&#37;)</span>
+</td>
+<td>
+<span>721&nbsp;(18.23&#37;)</span>
+</td>
+<td>
+<span>2574&nbsp;(65.08&#37;)</span>
+</td>
+<td>
+<span>29&nbsp;(0.73&#37;)</span>
+</td>
+<td>
+<span>3955&nbsp;(100.00&#37;)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Generated by <a href='https://github.com/dcomtois/summarytools'>summarytools</a> 0.8.8 (<a href='https://www.r-project.org/'>R</a> version 3.5.1)<br/>2018-12-30</p>
+</div><!--/html_preserve-->
 
 Notice that each cell in the table has two numbers the first number is the number of survey respondents who had those two values of the two variables.  For exampke, there are 51 people who got zero on the political knowledge quiz, and who also said their likelihood of voting if voting was not compulsory was 'definitely not' (i.e. a 1 on a 5 point scale). The second number in each cell (contained in brakets)  is a percentage. In this default setting, this is the row percentage - the percentage of people with a political knowledge score of zero, who have a '1' on the 'likelihood_vote' variable. You can see that this is 12.44%. 
 
@@ -108,52 +446,1343 @@ So this command displays column totals
 print(ctable(elect_2013$pol_knowledge, 
       elect_2013$likelihood_vote, 
       prop = "c"),
-      method = "browser", footnote = NA)
+      method = 'rmarkdown', footnote = NA)
 ```
 
-```
-## Output file written: C:\Users\nickh\AppData\Local\Temp\RtmpAFjovg\file316011708a3.html
-```
+<!--html_preserve--><div class="container st-container">
+<h3>Cross-Tabulation / Column Proportions</h3>
+<strong>Variables</strong>: pol_knowledge * likelihood_vote
+  <br><strong>Data Frame</strong>: elect_2013
+<table class="table table-bordered st-table st-table-bordered st-cross-table ">
+<thead>
+<tr>
+<th></th>
+<th colspan="6">likelihood_vote</th>
+<th></th>
+</tr>
+<tr>
+<td align="center">
+<strong>pol_knowledge</strong>
+</td>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">&lt;NA&gt;</th>
+<th align="center">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">
+<strong>0</strong>
+</td>
+<td>
+<span>&nbsp;51&nbsp;(40.48&#37;)</span>
+</td>
+<td>
+<span>&nbsp;78&nbsp;(29.00&#37;)</span>
+</td>
+<td>
+<span>&nbsp;48&nbsp;(20.34&#37;)</span>
+</td>
+<td>
+<span>&nbsp;99&nbsp;(13.73&#37;)</span>
+</td>
+<td>
+<span>&nbsp;130&nbsp;(5.05&#37;)</span>
+</td>
+<td>
+<span>&nbsp;4&nbsp;(13.79&#37;)</span>
+</td>
+<td>
+<span>&nbsp;410&nbsp;(10.37&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>1</strong>
+</td>
+<td>
+<span>&nbsp;18&nbsp;(14.29&#37;)</span>
+</td>
+<td>
+<span>&nbsp;48&nbsp;(17.84&#37;)</span>
+</td>
+<td>
+<span>&nbsp;38&nbsp;(16.10&#37;)</span>
+</td>
+<td>
+<span>&nbsp;68&nbsp;(9.43&#37;)</span>
+</td>
+<td>
+<span>&nbsp;128&nbsp;(4.97&#37;)</span>
+</td>
+<td>
+<span>&nbsp;3&nbsp;(10.34&#37;)</span>
+</td>
+<td>
+<span>&nbsp;303&nbsp;(7.66&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>2</strong>
+</td>
+<td>
+<span>&nbsp;13&nbsp;(10.32&#37;)</span>
+</td>
+<td>
+<span>&nbsp;41&nbsp;(15.24&#37;)</span>
+</td>
+<td>
+<span>&nbsp;36&nbsp;(15.25&#37;)</span>
+</td>
+<td>
+<span>106&nbsp;(14.70&#37;)</span>
+</td>
+<td>
+<span>&nbsp;182&nbsp;(7.07&#37;)</span>
+</td>
+<td>
+<span>&nbsp;2&nbsp;(6.90&#37;)</span>
+</td>
+<td>
+<span>&nbsp;380&nbsp;(9.61&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>3</strong>
+</td>
+<td>
+<span>&nbsp;13&nbsp;(10.32&#37;)</span>
+</td>
+<td>
+<span>&nbsp;27&nbsp;(10.04&#37;)</span>
+</td>
+<td>
+<span>&nbsp;22&nbsp;(9.32&#37;)</span>
+</td>
+<td>
+<span>&nbsp;75&nbsp;(10.40&#37;)</span>
+</td>
+<td>
+<span>&nbsp;243&nbsp;(9.44&#37;)</span>
+</td>
+<td>
+<span>&nbsp;2&nbsp;(6.90&#37;)</span>
+</td>
+<td>
+<span>&nbsp;382&nbsp;(9.66&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>4</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;9&nbsp;(7.14&#37;)</span>
+</td>
+<td>
+<span>&nbsp;25&nbsp;(9.29&#37;)</span>
+</td>
+<td>
+<span>&nbsp;29&nbsp;(12.29&#37;)</span>
+</td>
+<td>
+<span>&nbsp;79&nbsp;(10.96&#37;)</span>
+</td>
+<td>
+<span>&nbsp;258&nbsp;(10.02&#37;)</span>
+</td>
+<td>
+<span>&nbsp;3&nbsp;(10.34&#37;)</span>
+</td>
+<td>
+<span>&nbsp;403&nbsp;(10.19&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>5</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;9&nbsp;(7.14&#37;)</span>
+</td>
+<td>
+<span>&nbsp;13&nbsp;(4.83&#37;)</span>
+</td>
+<td>
+<span>&nbsp;18&nbsp;(7.63&#37;)</span>
+</td>
+<td>
+<span>&nbsp;88&nbsp;(12.21&#37;)</span>
+</td>
+<td>
+<span>&nbsp;296&nbsp;(11.50&#37;)</span>
+</td>
+<td>
+<span>&nbsp;1&nbsp;(3.45&#37;)</span>
+</td>
+<td>
+<span>&nbsp;425&nbsp;(10.75&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>6</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;4&nbsp;(3.17&#37;)</span>
+</td>
+<td>
+<span>&nbsp;16&nbsp;(5.95&#37;)</span>
+</td>
+<td>
+<span>&nbsp;15&nbsp;(6.36&#37;)</span>
+</td>
+<td>
+<span>&nbsp;60&nbsp;(8.32&#37;)</span>
+</td>
+<td>
+<span>&nbsp;279&nbsp;(10.84&#37;)</span>
+</td>
+<td>
+<span>&nbsp;2&nbsp;(6.90&#37;)</span>
+</td>
+<td>
+<span>&nbsp;376&nbsp;(9.51&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>7</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;2&nbsp;(1.59&#37;)</span>
+</td>
+<td>
+<span>&nbsp;10&nbsp;(3.72&#37;)</span>
+</td>
+<td>
+<span>&nbsp;12&nbsp;(5.08&#37;)</span>
+</td>
+<td>
+<span>&nbsp;56&nbsp;(7.77&#37;)</span>
+</td>
+<td>
+<span>&nbsp;352&nbsp;(13.68&#37;)</span>
+</td>
+<td>
+<span>&nbsp;3&nbsp;(10.34&#37;)</span>
+</td>
+<td>
+<span>&nbsp;435&nbsp;(11.00&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>8</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;6&nbsp;(4.76&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;7&nbsp;(2.60&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;9&nbsp;(3.81&#37;)</span>
+</td>
+<td>
+<span>&nbsp;46&nbsp;(6.38&#37;)</span>
+</td>
+<td>
+<span>&nbsp;315&nbsp;(12.24&#37;)</span>
+</td>
+<td>
+<span>&nbsp;4&nbsp;(13.79&#37;)</span>
+</td>
+<td>
+<span>&nbsp;387&nbsp;(9.79&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>9</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;0&nbsp;(0.00&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;3&nbsp;(1.12&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;6&nbsp;(2.54&#37;)</span>
+</td>
+<td>
+<span>&nbsp;30&nbsp;(4.16&#37;)</span>
+</td>
+<td>
+<span>&nbsp;274&nbsp;(10.64&#37;)</span>
+</td>
+<td>
+<span>&nbsp;5&nbsp;(17.24&#37;)</span>
+</td>
+<td>
+<span>&nbsp;318&nbsp;(8.04&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>10</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;1&nbsp;(0.79&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;1&nbsp;(0.37&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;3&nbsp;(1.27&#37;)</span>
+</td>
+<td>
+<span>&nbsp;14&nbsp;(1.94&#37;)</span>
+</td>
+<td>
+<span>&nbsp;117&nbsp;(4.55&#37;)</span>
+</td>
+<td>
+<span>&nbsp;0&nbsp;(0.00&#37;)</span>
+</td>
+<td>
+<span>&nbsp;136&nbsp;(3.44&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>Total</strong>
+</td>
+<td>
+<span>126&nbsp;(100.00&#37;)</span>
+</td>
+<td>
+<span>269&nbsp;(100.00&#37;)</span>
+</td>
+<td>
+<span>236&nbsp;(100.00&#37;)</span>
+</td>
+<td>
+<span>721&nbsp;(100.00&#37;)</span>
+</td>
+<td>
+<span>2574&nbsp;(100.00&#37;)</span>
+</td>
+<td>
+<span>29&nbsp;(100.00&#37;)</span>
+</td>
+<td>
+<span>3955&nbsp;(100.00&#37;)</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div><!--/html_preserve-->
 
 Percentages of the total number of participants/cases
 
+
+```r
     print(ctable(elect_2013$pol_knowledge, 
           elect_2013$likelihood_vote, 
           prop = "t"),
-          method = "browser", footnote = NA)
+          method = 'rmarkdown', footnote = NA)
+```
+
+<!--html_preserve--><div class="container st-container">
+<h3>Cross-Tabulation / Total Proportions</h3>
+<strong>Variables</strong>: pol_knowledge * likelihood_vote
+  <br><strong>Data Frame</strong>: elect_2013
+<table class="table table-bordered st-table st-table-bordered st-cross-table ">
+<thead>
+<tr>
+<th></th>
+<th colspan="6">likelihood_vote</th>
+<th></th>
+</tr>
+<tr>
+<td align="center">
+<strong>pol_knowledge</strong>
+</td>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">&lt;NA&gt;</th>
+<th align="center">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">
+<strong>0</strong>
+</td>
+<td>
+<span>&nbsp;51&nbsp;(1.29&#37;)</span>
+</td>
+<td>
+<span>&nbsp;78&nbsp;(1.97&#37;)</span>
+</td>
+<td>
+<span>&nbsp;48&nbsp;(1.21&#37;)</span>
+</td>
+<td>
+<span>&nbsp;99&nbsp;(2.50&#37;)</span>
+</td>
+<td>
+<span>&nbsp;130&nbsp;(3.29&#37;)</span>
+</td>
+<td>
+<span>&nbsp;4&nbsp;(0.10&#37;)</span>
+</td>
+<td>
+<span>&nbsp;410&nbsp;(10.37&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>1</strong>
+</td>
+<td>
+<span>&nbsp;18&nbsp;(0.46&#37;)</span>
+</td>
+<td>
+<span>&nbsp;48&nbsp;(1.21&#37;)</span>
+</td>
+<td>
+<span>&nbsp;38&nbsp;(0.96&#37;)</span>
+</td>
+<td>
+<span>&nbsp;68&nbsp;(1.72&#37;)</span>
+</td>
+<td>
+<span>&nbsp;128&nbsp;(3.24&#37;)</span>
+</td>
+<td>
+<span>&nbsp;3&nbsp;(0.08&#37;)</span>
+</td>
+<td>
+<span>&nbsp;303&nbsp;(7.66&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>2</strong>
+</td>
+<td>
+<span>&nbsp;13&nbsp;(0.33&#37;)</span>
+</td>
+<td>
+<span>&nbsp;41&nbsp;(1.04&#37;)</span>
+</td>
+<td>
+<span>&nbsp;36&nbsp;(0.91&#37;)</span>
+</td>
+<td>
+<span>106&nbsp;(2.68&#37;)</span>
+</td>
+<td>
+<span>&nbsp;182&nbsp;(4.60&#37;)</span>
+</td>
+<td>
+<span>&nbsp;2&nbsp;(0.05&#37;)</span>
+</td>
+<td>
+<span>&nbsp;380&nbsp;(9.61&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>3</strong>
+</td>
+<td>
+<span>&nbsp;13&nbsp;(0.33&#37;)</span>
+</td>
+<td>
+<span>&nbsp;27&nbsp;(0.68&#37;)</span>
+</td>
+<td>
+<span>&nbsp;22&nbsp;(0.56&#37;)</span>
+</td>
+<td>
+<span>&nbsp;75&nbsp;(1.90&#37;)</span>
+</td>
+<td>
+<span>&nbsp;243&nbsp;(6.14&#37;)</span>
+</td>
+<td>
+<span>&nbsp;2&nbsp;(0.05&#37;)</span>
+</td>
+<td>
+<span>&nbsp;382&nbsp;(9.66&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>4</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;9&nbsp;(0.23&#37;)</span>
+</td>
+<td>
+<span>&nbsp;25&nbsp;(0.63&#37;)</span>
+</td>
+<td>
+<span>&nbsp;29&nbsp;(0.73&#37;)</span>
+</td>
+<td>
+<span>&nbsp;79&nbsp;(2.00&#37;)</span>
+</td>
+<td>
+<span>&nbsp;258&nbsp;(6.52&#37;)</span>
+</td>
+<td>
+<span>&nbsp;3&nbsp;(0.08&#37;)</span>
+</td>
+<td>
+<span>&nbsp;403&nbsp;(10.19&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>5</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;9&nbsp;(0.23&#37;)</span>
+</td>
+<td>
+<span>&nbsp;13&nbsp;(0.33&#37;)</span>
+</td>
+<td>
+<span>&nbsp;18&nbsp;(0.46&#37;)</span>
+</td>
+<td>
+<span>&nbsp;88&nbsp;(2.23&#37;)</span>
+</td>
+<td>
+<span>&nbsp;296&nbsp;(7.48&#37;)</span>
+</td>
+<td>
+<span>&nbsp;1&nbsp;(0.03&#37;)</span>
+</td>
+<td>
+<span>&nbsp;425&nbsp;(10.75&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>6</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;4&nbsp;(0.10&#37;)</span>
+</td>
+<td>
+<span>&nbsp;16&nbsp;(0.40&#37;)</span>
+</td>
+<td>
+<span>&nbsp;15&nbsp;(0.38&#37;)</span>
+</td>
+<td>
+<span>&nbsp;60&nbsp;(1.52&#37;)</span>
+</td>
+<td>
+<span>&nbsp;279&nbsp;(7.05&#37;)</span>
+</td>
+<td>
+<span>&nbsp;2&nbsp;(0.05&#37;)</span>
+</td>
+<td>
+<span>&nbsp;376&nbsp;(9.51&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>7</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;2&nbsp;(0.05&#37;)</span>
+</td>
+<td>
+<span>&nbsp;10&nbsp;(0.25&#37;)</span>
+</td>
+<td>
+<span>&nbsp;12&nbsp;(0.30&#37;)</span>
+</td>
+<td>
+<span>&nbsp;56&nbsp;(1.42&#37;)</span>
+</td>
+<td>
+<span>&nbsp;352&nbsp;(8.90&#37;)</span>
+</td>
+<td>
+<span>&nbsp;3&nbsp;(0.08&#37;)</span>
+</td>
+<td>
+<span>&nbsp;435&nbsp;(11.00&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>8</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;6&nbsp;(0.15&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;7&nbsp;(0.18&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;9&nbsp;(0.23&#37;)</span>
+</td>
+<td>
+<span>&nbsp;46&nbsp;(1.16&#37;)</span>
+</td>
+<td>
+<span>&nbsp;315&nbsp;(7.96&#37;)</span>
+</td>
+<td>
+<span>&nbsp;4&nbsp;(0.10&#37;)</span>
+</td>
+<td>
+<span>&nbsp;387&nbsp;(9.79&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>9</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;0&nbsp;(0.00&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;3&nbsp;(0.08&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;6&nbsp;(0.15&#37;)</span>
+</td>
+<td>
+<span>&nbsp;30&nbsp;(0.76&#37;)</span>
+</td>
+<td>
+<span>&nbsp;274&nbsp;(6.93&#37;)</span>
+</td>
+<td>
+<span>&nbsp;5&nbsp;(0.13&#37;)</span>
+</td>
+<td>
+<span>&nbsp;318&nbsp;(8.04&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>10</strong>
+</td>
+<td>
+<span>&nbsp;&nbsp;1&nbsp;(0.03&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;1&nbsp;(0.03&#37;)</span>
+</td>
+<td>
+<span>&nbsp;&nbsp;3&nbsp;(0.08&#37;)</span>
+</td>
+<td>
+<span>&nbsp;14&nbsp;(0.35&#37;)</span>
+</td>
+<td>
+<span>&nbsp;117&nbsp;(2.96&#37;)</span>
+</td>
+<td>
+<span>&nbsp;0&nbsp;(0.00&#37;)</span>
+</td>
+<td>
+<span>&nbsp;136&nbsp;(3.44&#37;)</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>Total</strong>
+</td>
+<td>
+<span>126&nbsp;(3.19&#37;)</span>
+</td>
+<td>
+<span>269&nbsp;(6.80&#37;)</span>
+</td>
+<td>
+<span>236&nbsp;(5.97&#37;)</span>
+</td>
+<td>
+<span>721&nbsp;(18.23&#37;)</span>
+</td>
+<td>
+<span>2574&nbsp;(65.08&#37;)</span>
+</td>
+<td>
+<span>29&nbsp;(0.73&#37;)</span>
+</td>
+<td>
+<span>3955&nbsp;(100.00&#37;)</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div><!--/html_preserve-->
 
 No percentages
 
+
+```r
     print(ctable(elect_2013$pol_knowledge, 
           elect_2013$likelihood_vote, 
           prop = "n"),
-          method = "browser", footnote = NA)
+          method = 'rmarkdown', footnote = NA)
+```
+
+<!--html_preserve--><div class="container st-container">
+<h3>Cross-Tabulation</h3>
+<strong>Variables</strong>: pol_knowledge * likelihood_vote
+  <br><strong>Data Frame</strong>: elect_2013
+<table class="table table-bordered st-table st-table-bordered st-cross-table ">
+<thead>
+<tr>
+<th></th>
+<th colspan="6">likelihood_vote</th>
+<th></th>
+</tr>
+<tr>
+<td align="center">
+<strong>pol_knowledge</strong>
+</td>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">&lt;NA&gt;</th>
+<th align="center">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">
+<strong>0</strong>
+</td>
+<td>
+<span>51</span>
+</td>
+<td>
+<span>78</span>
+</td>
+<td>
+<span>48</span>
+</td>
+<td>
+<span>99</span>
+</td>
+<td>
+<span>130</span>
+</td>
+<td>
+<span>4</span>
+</td>
+<td>
+<span>410</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>1</strong>
+</td>
+<td>
+<span>18</span>
+</td>
+<td>
+<span>48</span>
+</td>
+<td>
+<span>38</span>
+</td>
+<td>
+<span>68</span>
+</td>
+<td>
+<span>128</span>
+</td>
+<td>
+<span>3</span>
+</td>
+<td>
+<span>303</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>2</strong>
+</td>
+<td>
+<span>13</span>
+</td>
+<td>
+<span>41</span>
+</td>
+<td>
+<span>36</span>
+</td>
+<td>
+<span>106</span>
+</td>
+<td>
+<span>182</span>
+</td>
+<td>
+<span>2</span>
+</td>
+<td>
+<span>380</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>3</strong>
+</td>
+<td>
+<span>13</span>
+</td>
+<td>
+<span>27</span>
+</td>
+<td>
+<span>22</span>
+</td>
+<td>
+<span>75</span>
+</td>
+<td>
+<span>243</span>
+</td>
+<td>
+<span>2</span>
+</td>
+<td>
+<span>382</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>4</strong>
+</td>
+<td>
+<span>9</span>
+</td>
+<td>
+<span>25</span>
+</td>
+<td>
+<span>29</span>
+</td>
+<td>
+<span>79</span>
+</td>
+<td>
+<span>258</span>
+</td>
+<td>
+<span>3</span>
+</td>
+<td>
+<span>403</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>5</strong>
+</td>
+<td>
+<span>9</span>
+</td>
+<td>
+<span>13</span>
+</td>
+<td>
+<span>18</span>
+</td>
+<td>
+<span>88</span>
+</td>
+<td>
+<span>296</span>
+</td>
+<td>
+<span>1</span>
+</td>
+<td>
+<span>425</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>6</strong>
+</td>
+<td>
+<span>4</span>
+</td>
+<td>
+<span>16</span>
+</td>
+<td>
+<span>15</span>
+</td>
+<td>
+<span>60</span>
+</td>
+<td>
+<span>279</span>
+</td>
+<td>
+<span>2</span>
+</td>
+<td>
+<span>376</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>7</strong>
+</td>
+<td>
+<span>2</span>
+</td>
+<td>
+<span>10</span>
+</td>
+<td>
+<span>12</span>
+</td>
+<td>
+<span>56</span>
+</td>
+<td>
+<span>352</span>
+</td>
+<td>
+<span>3</span>
+</td>
+<td>
+<span>435</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>8</strong>
+</td>
+<td>
+<span>6</span>
+</td>
+<td>
+<span>7</span>
+</td>
+<td>
+<span>9</span>
+</td>
+<td>
+<span>46</span>
+</td>
+<td>
+<span>315</span>
+</td>
+<td>
+<span>4</span>
+</td>
+<td>
+<span>387</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>9</strong>
+</td>
+<td>
+<span>0</span>
+</td>
+<td>
+<span>3</span>
+</td>
+<td>
+<span>6</span>
+</td>
+<td>
+<span>30</span>
+</td>
+<td>
+<span>274</span>
+</td>
+<td>
+<span>5</span>
+</td>
+<td>
+<span>318</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>10</strong>
+</td>
+<td>
+<span>1</span>
+</td>
+<td>
+<span>1</span>
+</td>
+<td>
+<span>3</span>
+</td>
+<td>
+<span>14</span>
+</td>
+<td>
+<span>117</span>
+</td>
+<td>
+<span>0</span>
+</td>
+<td>
+<span>136</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>Total</strong>
+</td>
+<td>
+<span>126</span>
+</td>
+<td>
+<span>269</span>
+</td>
+<td>
+<span>236</span>
+</td>
+<td>
+<span>721</span>
+</td>
+<td>
+<span>2574</span>
+</td>
+<td>
+<span>29</span>
+</td>
+<td>
+<span>3955</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div><!--/html_preserve-->
 
 As with the other summarytools functions, you can use various arguments to clean up the display of your table. Note that for some reason we use the argument 'useNA' rather than 'report.nas' to remove NAs from our table.
 
+
+```r
     print(ctable(elect_2013$pol_knowledge, 
           elect_2013$likelihood_vote, 
           omit.headings = TRUE, 
           totals = FALSE, 
           useNA = "no",
           prop = "n"),
-          method = "browser", footnote = NA)
+          method = 'rmarkdown', footnote = NA)
+```
 
-#### 2. Comparison of means
+<!--html_preserve--><div class="container st-container">
+<table class="table table-bordered st-table st-table-bordered st-cross-table ">
+<thead>
+<tr>
+<th></th>
+<th colspan="5">likelihood_vote</th>
+</tr>
+<tr>
+<td align="center">
+<strong>pol_knowledge</strong>
+</td>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">
+<strong>0</strong>
+</td>
+<td>
+<span>51</span>
+</td>
+<td>
+<span>78</span>
+</td>
+<td>
+<span>48</span>
+</td>
+<td>
+<span>99</span>
+</td>
+<td>
+<span>130</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>1</strong>
+</td>
+<td>
+<span>18</span>
+</td>
+<td>
+<span>48</span>
+</td>
+<td>
+<span>38</span>
+</td>
+<td>
+<span>68</span>
+</td>
+<td>
+<span>128</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>2</strong>
+</td>
+<td>
+<span>13</span>
+</td>
+<td>
+<span>41</span>
+</td>
+<td>
+<span>36</span>
+</td>
+<td>
+<span>106</span>
+</td>
+<td>
+<span>182</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>3</strong>
+</td>
+<td>
+<span>13</span>
+</td>
+<td>
+<span>27</span>
+</td>
+<td>
+<span>22</span>
+</td>
+<td>
+<span>75</span>
+</td>
+<td>
+<span>243</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>4</strong>
+</td>
+<td>
+<span>9</span>
+</td>
+<td>
+<span>25</span>
+</td>
+<td>
+<span>29</span>
+</td>
+<td>
+<span>79</span>
+</td>
+<td>
+<span>258</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>5</strong>
+</td>
+<td>
+<span>9</span>
+</td>
+<td>
+<span>13</span>
+</td>
+<td>
+<span>18</span>
+</td>
+<td>
+<span>88</span>
+</td>
+<td>
+<span>296</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>6</strong>
+</td>
+<td>
+<span>4</span>
+</td>
+<td>
+<span>16</span>
+</td>
+<td>
+<span>15</span>
+</td>
+<td>
+<span>60</span>
+</td>
+<td>
+<span>279</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>7</strong>
+</td>
+<td>
+<span>2</span>
+</td>
+<td>
+<span>10</span>
+</td>
+<td>
+<span>12</span>
+</td>
+<td>
+<span>56</span>
+</td>
+<td>
+<span>352</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>8</strong>
+</td>
+<td>
+<span>6</span>
+</td>
+<td>
+<span>7</span>
+</td>
+<td>
+<span>9</span>
+</td>
+<td>
+<span>46</span>
+</td>
+<td>
+<span>315</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>9</strong>
+</td>
+<td>
+<span>0</span>
+</td>
+<td>
+<span>3</span>
+</td>
+<td>
+<span>6</span>
+</td>
+<td>
+<span>30</span>
+</td>
+<td>
+<span>274</span>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>10</strong>
+</td>
+<td>
+<span>1</span>
+</td>
+<td>
+<span>1</span>
+</td>
+<td>
+<span>3</span>
+</td>
+<td>
+<span>14</span>
+</td>
+<td>
+<span>117</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div><!--/html_preserve-->
+
+# 2. Comparison of means
 
 We will learn about the basic ways to compare the difference in means of two groups - one where the groups are independent (e.g. height of men and women), and one where they are paired (e.g. height of the same people at age 15 and age 15.5 years).
 
 Let's say we want to compare the political knowledge of men and women in our dataset. We want to ask if the mean for men, and the mean for women is different the command to test this is 't.test'.
 
+
+```r
     t.test(elect_2013$pol_knowledge ~ elect_2013$female)
+```
+
+```
+## 
+## 	Welch Two Sample t-test
+## 
+## data:  elect_2013$pol_knowledge by elect_2013$female
+## t = 11.64, df = 3838.6, p-value < 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  0.8891745 1.2493867
+## sample estimates:
+## mean in group 0 mean in group 1 
+##        5.328302        4.259021
+```
 
 In the console window you should see:
 
-    Welch Two Sample t-test  data:  elect_2013$pol_knowledge by elect_2013$female t = 11.64, df = 3838.6, p-value < 2.2e-16 alternative hypothesis: true difference in means is not equal to 0 95 percent confidence interval: 0.8891745 1.2493867 
-    sample estimates: 
-    mean in group 0 mean in group 1
-          5.328302        4.259021 
-    >
+
+```r
+# Welch Two Sample t-test  data:  elect_2013$pol_knowledge by elect_2013$female t = 11.64, df = 3838.6, p-value < 2.2e-16 alternative hypothesis: true difference in means is not equal to 0 95 percent confidence interval: 0.8891745 1.2493867 
+#     sample estimates: 
+#     mean in group 0 mean in group 1
+#           5.328302        4.259021 
+#     >
+```
 
 Now I know this looks like a mess, but it is actually not too difficult to understand. The fundamental rule I teach is that the first thing you do when you run a test is look at the p-value, and see if it is below 0.05. If it is not below 0.05, then there is generally not a need to interpret anything else because the test is not significant. [There is a complication to this instruction, because some statistical commands give multiple p-values - one for each variable, and one for the model overall - but we will deal with that later] So if we follow this rule of looking at the p-value first, What does it say? 
 
@@ -162,16 +1791,22 @@ The p-value in this case is "p-value < 2.2e-16". What does that mean? it means t
 So what is the next step for intepreting this output? 
 
 Let's look at the last three line. They say:
-    
-    sample estimates: 
-    mean in group 0 mean in group 1
-          5.328302        4.259021 
 
+
+```r
+# sample estimates: 
+# mean in group 0 mean in group 1
+#       5.328302        4.259021 
+```
+      
 This is telling us that the mean of the group with value "0" is 5.33, and the mean for the group with value "1" is 4.26. But what is group 0 and 1? Well we need to look at our data. The means are measure in "pol_knowledge" units, and the variable for gender is 1 = female, and 0 = male. so this tells us that the mean political knowledge for men in our sample is 5.3, and for women is 4.3.
 
 We could stop interpreting our data here, but there is another useful part of the output to interpret. Look at these two lines:
 
-    95 percent confidence interval: 0.8891745 1.2493867
+
+```r
+#    95 percent confidence interval: 0.8891745 1.2493867
+```
 
 This tells us that the 'difference of means' between men and women has a 95% confidence interval of 0.89 to 1.25. This says that the TRUE difference between men and women - the population parameter - is with 95% certainty between 0.89 and 1.25. 
 
@@ -179,21 +1814,51 @@ The second type of comparison of means we are going to run is the paired test. I
 
 In the next example, we are going to compare participants average score for 'following the election on TV' vs 'following the election in the newspaper'.
 
-    t.test(elect_2013$election_tv, 
-       elect_2013$election_newspaper, 
-       paired = TRUE)
+
+```r
+t.test(elect_2013$election_tv, 
+   elect_2013$election_newspaper, 
+   paired = TRUE)
+```
+
+```
+## 
+## 	Paired t-test
+## 
+## data:  elect_2013$election_tv and elect_2013$election_newspaper
+## t = -26.584, df = 3883, p-value < 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.4600211 -0.3968275
+## sample estimates:
+## mean of the differences 
+##              -0.4284243
+```
 
 This can be read in the same way as the previous t-test except that in this case the last line reports the difference in means, not the two means. 
 
 Intuitively we know that this means people followed the election more in the newspaper than on TV, but we can check this, by just running two means() to double check we are right:
 
-    mean(elect_2013$election_tv, na.rm = TRUE)
 
-    mean(elect_2013$election_newspaper, na.rm = TRUE)
+```r
+mean(elect_2013$election_tv, na.rm = TRUE)
+```
+
+```
+## [1] 2.007969
+```
+
+```r
+mean(elect_2013$election_newspaper, na.rm = TRUE)
+```
+
+```
+## [1] 2.433723
+```
 
 And you can see that what we thought was true is, with people having an average score of 2.01 for election_tv, and 2.43 for election_newspaper.
 
-#### 3. Correlation
+# 3. Correlation
 
 Coorelation coefficents are some of the most widely used and reported statistics in academic papers. In this section we learn about how to obtain the most common types of correlation coefficients. We also create our own function for making very attractive correlation matricies.
 
@@ -201,8 +1866,7 @@ We will be needing these two packages later, so make sure you have installed the
 
 
 ```r
-    install.packages("Hmisc", 
-                 repos = 'http://cran.rstudio.com') # hash this out after installing on your computer
+install.packages("Hmisc", repos = 'http://cran.rstudio.com') 
 ```
 
 ```
@@ -214,12 +1878,12 @@ We will be needing these two packages later, so make sure you have installed the
 ## package 'Hmisc' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\nickh\AppData\Local\Temp\RtmpAFjovg\downloaded_packages
+## 	C:\Users\nickh\AppData\Local\Temp\RtmpY7oTg5\downloaded_packages
 ```
 
 ```r
-    install.packages("xtable", 
-                 repos = 'http://cran.rstudio.com') # and this.
+# hash this out after installing on your computer
+install.packages("xtable", repos = 'http://cran.rstudio.com') 
 ```
 
 ```
@@ -231,11 +1895,12 @@ We will be needing these two packages later, so make sure you have installed the
 ## package 'xtable' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\nickh\AppData\Local\Temp\RtmpAFjovg\downloaded_packages
+## 	C:\Users\nickh\AppData\Local\Temp\RtmpY7oTg5\downloaded_packages
 ```
 
 ```r
-    library(xtable)
+# and this.
+library(xtable)
 ```
 
 ```
@@ -254,7 +1919,7 @@ We will be needing these two packages later, so make sure you have installed the
 ```
 
 ```r
-    library(Hmisc)
+library(Hmisc)
 ```
 
 ```
@@ -303,6 +1968,7 @@ We will be needing these two packages later, so make sure you have installed the
 The third form of bivariate statistics we are learning about today is correlation, and in particular correlation coefficients. 
 
 Correlation coefficients can roughly be defined as: 
+
 * a measure of the relationship between two variables 
 * that is standardised so that 
 ** a perfect positive correlation is 1 
@@ -344,6 +2010,7 @@ This can be seen in Field et al. 2012 in equation 6.3.
 And the result is a magical number called Pearon's r.
 
 When a statistical packages such as R calculates a Pearons's r for you, there two questions you should be asking about the number: 
+
 * Is it 'significant'? - which we measure with p-value and/or confidence intervals. 
 * Is it 'important'? - which we call the effect size.
 
@@ -360,6 +2027,7 @@ A variable has a large effect on another variable if, for example, a one standar
 We can see here that we are thinking about how variance, measured in standardised units, in one variable is related to variance in another. 
 
 Anyway, we will be returning to effect size quite a few times in this course, for the moment, I just want you to know that in the case of Pearson's r, effect size is measured DIRECTLY in the coefficient. And the rule of thumb for interpreting effect sizes of a Pearson's r are:
+
 * small effect size: +/- 0.1 - 0.2
 * medium effect size: +/- 0.3 - 0.4
 * large effect size: +/- 0.5+
@@ -373,13 +2041,14 @@ It turns out that R-squared can be read directly as the "Proportion of variation
 In short, it can basically be read like a proportion (or if you like, percentage, just multiple by 100).
 
 So if we transform these Pearson's r into R-square, we can rewrite the rule of thumb for effect size measured in R-square as: 
+
 * small effect size: 0.01-0.04 (i.e 1%-4%) 
 * medium effect size: 0.09-0.16 (i.e.9%-16%) 
 * large effect size: 0.25+ (ie. 25%+)
 
 With these rules of thumb in hand, let's look at our data and analysis it with R.
 
-#### Correlation Method 1: cor.test()
+## Correlation Method 1: cor.test()
 
 The two simplest commands to get a correlation coefficient are cor() and cor.test()
 
@@ -389,19 +2058,40 @@ Let's look at the correlation between five different variables and likelihood of
 
 This first correlation shows the relationship between urban/rural location and likelihood of voting
 
-    cor.test(elect_2013$rural_urban, elect_2013$likelihood_vote)
+
+```r
+cor.test(elect_2013$rural_urban, 
+         elect_2013$likelihood_vote)
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  elect_2013$rural_urban and elect_2013$likelihood_vote
+## t = 1.3682, df = 3801, p-value = 0.1713
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.009604256  0.053932694
+## sample estimates:
+##        cor 
+## 0.02218662
+```
 
 You should see something like the following in your console window:
-          
-                Pearson's product-moment correlation  
-    data:  elect_2013$rural_urban and elect_2013$likelihood_vote 
-    t = 1.3682, df = 3801, p-value = 0.1713 
-    alternative hypothesis: true correlation is not equal to 0 
-    95 percent confidence interval:  
-    -0.009604256  0.053932694 
-    sample estimates: 
-        cor
-        0.02218662 
+
+
+```r
+# Pearson's product-moment correlation  
+# data:  elect_2013$rural_urban and elect_2013$likelihood_vote 
+# t = 1.3682, df = 3801, p-value = 0.1713 
+# alternative hypothesis: true correlation is not equal to 0 
+# 95 percent confidence interval:  
+# -0.009604256  0.053932694 
+# sample estimates: 
+# cor
+# 0.02218662 
+```
  
 How do we read this? 
 
@@ -412,26 +2102,95 @@ We can also see this when we look at the 95% confidence interval, which is from 
 We can also see that the correlation coefficient is 0.022 - which is tiny. Remember that a correlation of 0.1 is considered a small effect size, and this is one fifth of that. 
 
 Let's next look at the effect of highest educational qualification:
-    
-    cor.test(elect_2013$highest_qual, elect_2013$likelihood_vote)
+
+
+```r
+cor.test(elect_2013$highest_qual,
+        elect_2013$likelihood_vote)
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  elect_2013$highest_qual and elect_2013$likelihood_vote
+## t = 2.2845, df = 3768, p-value = 0.0224
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.005274304 0.069031936
+## sample estimates:
+##        cor 
+## 0.03719097
+```
 
 in this case, the p-value is below 0.05, so the correlation is significant, but when you look at the correlation coefficient - it is basically 0.04, which again is tiny. So this is a case of 'significant' but 'not very meaningful'.
 
 Next let's look at the impact of internet skills on the likelihood of voting:
 
-    cor.test(elect_2013$internet_skills, elect_2013$likelihood_vote)
+
+```r
+cor.test(elect_2013$internet_skills, elect_2013$likelihood_vote)
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  elect_2013$internet_skills and elect_2013$likelihood_vote
+## t = 5.3871, df = 3924, p-value = 7.581e-08
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.05454612 0.11665164
+## sample estimates:
+##        cor 
+## 0.08568211
+```
 
 In this case, the correlation is highly significant and the effect size - basically 0.09 - is small but meaningful. So those people who have better internet skills tend to be more likely to vote.
 
 Next let's look at something with a much larger effect size: political knowledge. 
 
-    cor.test(elect_2013$pol_knowledge, elect_2013$likelihood_vote)
+
+```r
+cor.test(elect_2013$pol_knowledge, elect_2013$likelihood_vote)
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  elect_2013$pol_knowledge and elect_2013$likelihood_vote
+## t = 25.086, df = 3924, p-value < 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.3444878 0.3984125
+## sample estimates:
+##       cor 
+## 0.3717637
+```
 
 In this case the p-value is incredibly small, and the correlation coefficient is 0.37 - a medium sized effect. 
 
 Last, let's look at the impact of interest in politics:
 
-    cor.test(elect_2013$interest_pol, elect_2013$likelihood_vote)
+
+```r
+cor.test(elect_2013$interest_pol, elect_2013$likelihood_vote)
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  elect_2013$interest_pol and elect_2013$likelihood_vote
+## t = -37.759, df = 3913, p-value < 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.5393668 -0.4934340
+## sample estimates:
+##        cor 
+## -0.5167722
+```
 
 In this case the relationship is highly significant and effect size is large, but the relationship is negative: -0.52.
 
@@ -449,7 +2208,7 @@ Thus, the real meaning of this correlation is that those who are more interested
 
 In fact, we can say that approximately 25% of the variance in likelihood of voting is explained by variance in interest in politics (by calculating the R-square).
 
-#### Correlation Method 2: corstar()
+## Correlation Method 2: corstar()
 
 AN EASY WAY TO MAKE A CORRELATION MATRIX
 
@@ -461,7 +2220,7 @@ I have found a function on the internet which will allow you to easily make your
 
 The function is called 'corstar()'. 
 
-NOTE: To use it, you first need to run the code below and create the function in the memory of your computer.
+**NOTE: To use it, you first need to run the code below and create the function in the memory of your computer.**
 
 You don't need to understand the code, but do feel free to take a look.
 
@@ -470,40 +2229,47 @@ When you are ready run the code from where I type #START HERE# to #END HERE#
 ### #START HERE# 
 
 ```r
-  corstars <-function(x, method=c("pearson", "spearman"), removeTriangle=c("upper", "lower"),
-                  result=c("none", "html", "latex")){
-    # SOURCES:
-    # * http://www.sthda.com/english/wiki/elegant-correlation-table-using-xtable-r-package
-    # * http://myowelt.blogspot.com/2008/04/beautiful-correlation-tables-in-r.html
-    # * https://stat.ethz.ch/pipermail/r-help/2008-March/156583.html
+corstars <-function(x, method=c("pearson", "spearman"),
+                    removeTriangle=c("upper", "lower"),
+                    result=c("none", "html", "latex")){
+# SOURCES:
+# * http://www.sthda.com/english/wiki/elegant-correlation-table-using-xtable-r-package
+# * http://myowelt.blogspot.com/2008/04/beautiful-correlation-tables-in-r.html
+# * https://stat.ethz.ch/pipermail/r-help/2008-March/156583.html
 
-    #Compute correlation matrix
+#Compute correlation matrix
     require(Hmisc)
     x <- as.matrix(x)
     correlation_matrix<-rcorr(x, type=method[1])
-    R <- correlation_matrix$r # Matrix of correlation coeficients
-    p <- correlation_matrix$P # Matrix of p-value
+    R <- correlation_matrix$r 
+      # Matrix of correlation coeficients
+    p <- correlation_matrix$P 
+      # Matrix of p-value
 
-    ## Define notions for significance levels; spacing is important.
-    mystars <- ifelse(p < .0001, "****", ifelse(p < .001, "*** ", ifelse(p < .01, "** ", ifelse(p < .05, "*  ", "    "))))
+## Define notions for significance levels; spacing is important.
+    mystars <- ifelse(p < .0001, "****", 
+                  ifelse(p < .001, "*** ", 
+                    ifelse(p < .01, "** ", 
+                      ifelse(p < .05, "*  ", "    "))))
 
-    ## trunctuate the correlation matrix to two decimal
-    R <- format(round(cbind(rep(-1.11, ncol(x)), R), 2))[,-1]
+## trunctuate the correlation matrix to two decimal
+    R <- format(round(cbind(rep(-1.11, 
+                                ncol(x)), R), 2))[,-1]
 
-    ## build a new matrix that includes the correlations with their apropriate stars
+## build a new matrix that includes the correlations with their apropriate stars
     Rnew <- matrix(paste(R, mystars, sep=""), ncol=ncol(x))
     diag(Rnew) <- paste(diag(R), " ", sep="")
     rownames(Rnew) <- colnames(x)
     colnames(Rnew) <- paste(colnames(x), "", sep="")
 
-    ## remove upper triangle of correlation matrix
+## remove upper triangle of correlation matrix
     if(removeTriangle[1]=="upper"){
       Rnew <- as.matrix(Rnew)
       Rnew[upper.tri(Rnew, diag = TRUE)] <- ""
       Rnew <- as.data.frame(Rnew)
     }
 
-    ## remove lower triangle of correlation matrix
+## remove lower triangle of correlation matrix
     else if(removeTriangle[1]=="lower"){
       Rnew <- as.matrix(Rnew)
       Rnew[lower.tri(Rnew, diag = TRUE)] <- ""
@@ -528,6 +2294,7 @@ You have loaded 'corstars()' into your computer you can now run the corstars com
 I have created the code below to allow you to run, save, and view the output of corstars(). 
 
 The three lines of code below will: 
+
 1. create a correlation table and save it in variable x 
 2. save this to your computer as a file 
 3. open that file in a browser, so you can see the table. 
@@ -541,63 +2308,77 @@ Feel free to run the following code:
     browseURL("output.html")
 ```
 
+# XXXXPROBLEMXXXX
+The command below (which use xtable with the corstarts function) basically can only produce tables in HTML and RMarkdown, and when it does, it does not format and just produces the code(because it is inside the ` ` ` code blocks).
+
+I was able to get HTML to print to RMarkdown in Lesson 2.1 when I used one of the summaryTools functions - I ended up using RMarkdown output, but actually HTML gave a very similar output. 
+
+## Next Actions:
+
+1. google xtable and blogdown and rmarkdown
+2. look at lesson 2.1 (832) and try to work out why the HTML will render properly in that, but not in this code
+
 
 ```
-## <!-- html table generated in R 3.5.1 by xtable 1.8-3 package -->
-## <!-- Sat Dec 29 22:50:02 2018 -->
-## <table border=1>
-## <tr> <th>  </th> <th> pol_knowledge </th> <th> likelihood_vote </th> <th> know1 </th> <th> know2 </th> <th> know3 </th> <th> know4 </th> <th> know5 </th> <th> know6 </th> <th> know7 </th> <th> know8 </th> <th> know9 </th> <th> know10 </th> <th> general_internet </th> <th> election_internet </th> <th> internet_skills </th> <th> int_attch </th> <th> int_post </th> <th> int_blog </th> <th> int_down </th> <th> election_newspaper </th> <th> election_tv </th> <th> election_radio </th> <th> female </th> <th> highest_qual </th> <th> tertiary_ed </th> <th> country_birth </th> <th> aust_born </th> <th> age </th> <th> income </th> <th> rural_urban </th> <th> interest_pol </th> <th> age_cat </th> <th> age_18_24 </th> <th> weight </th> <th> know1_correct </th> <th> know2_correct </th> <th> know3_correct </th> <th> know4_correct </th> <th> know5_correct </th> <th> know6_correct </th> <th> know7_correct </th> <th> know8_correct </th> <th> know9_correct </th> <th> know10_correct </th>  </tr>
-##   <tr> <td align="right"> pol_knowledge </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> likelihood_vote </td> <td>  0.37**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know1 </td> <td> -0.60**** </td> <td> -0.26**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know2 </td> <td> -0.64**** </td> <td> -0.26**** </td> <td>  0.38**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know3 </td> <td> -0.23**** </td> <td> -0.17**** </td> <td>  0.28**** </td> <td>  0.29**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know4 </td> <td> -0.51**** </td> <td> -0.18**** </td> <td>  0.29**** </td> <td>  0.34**** </td> <td>  0.24**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know5 </td> <td> -0.15**** </td> <td> -0.14**** </td> <td>  0.28**** </td> <td>  0.21**** </td> <td>  0.25**** </td> <td>  0.21**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know6 </td> <td> -0.31**** </td> <td> -0.19**** </td> <td>  0.31**** </td> <td>  0.28**** </td> <td>  0.27**** </td> <td>  0.24**** </td> <td>  0.22**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know7 </td> <td> -0.45**** </td> <td> -0.23**** </td> <td>  0.29**** </td> <td>  0.28**** </td> <td>  0.17**** </td> <td>  0.21**** </td> <td>  0.16**** </td> <td>  0.21**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know8 </td> <td> -0.59**** </td> <td> -0.27**** </td> <td>  0.34**** </td> <td>  0.34**** </td> <td>  0.20**** </td> <td>  0.26**** </td> <td>  0.17**** </td> <td>  0.26**** </td> <td>  0.35**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know9 </td> <td> -0.59**** </td> <td> -0.29**** </td> <td>  0.32**** </td> <td>  0.37**** </td> <td>  0.18**** </td> <td>  0.29**** </td> <td>  0.16**** </td> <td>  0.26**** </td> <td>  0.32**** </td> <td>  0.41**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know10 </td> <td> -0.42**** </td> <td> -0.22**** </td> <td>  0.27**** </td> <td>  0.25**** </td> <td>  0.20**** </td> <td>  0.20**** </td> <td>  0.16**** </td> <td>  0.17**** </td> <td>  0.29**** </td> <td>  0.32**** </td> <td>  0.29**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> general_internet </td> <td> -0.19**** </td> <td> -0.07**** </td> <td>  0.15**** </td> <td>  0.14**** </td> <td>  0.00     </td> <td>  0.00     </td> <td>  0.06***  </td> <td>  0.06***  </td> <td>  0.08**** </td> <td>  0.12**** </td> <td>  0.11**** </td> <td>  0.07**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> election_internet </td> <td> -0.45**** </td> <td> -0.23**** </td> <td>  0.29**** </td> <td>  0.28**** </td> <td>  0.17**** </td> <td>  0.21**** </td> <td>  0.16**** </td> <td>  0.21**** </td> <td>  1.00**** </td> <td>  0.35**** </td> <td>  0.32**** </td> <td>  0.29**** </td> <td>  0.08**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> internet_skills </td> <td>  0.21**** </td> <td>  0.09**** </td> <td> -0.16**** </td> <td> -0.13**** </td> <td>  0.00     </td> <td>  0.02     </td> <td> -0.07**** </td> <td> -0.04**  </td> <td> -0.04*   </td> <td> -0.11**** </td> <td> -0.11**** </td> <td> -0.05**  </td> <td> -0.74**** </td> <td> -0.04*   </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> int_attch </td> <td>  0.22**** </td> <td>  0.10**** </td> <td> -0.15**** </td> <td> -0.12**** </td> <td> -0.01     </td> <td>  0.00     </td> <td> -0.06***  </td> <td> -0.06***  </td> <td> -0.08**** </td> <td> -0.12**** </td> <td> -0.11**** </td> <td> -0.07**** </td> <td> -0.80**** </td> <td> -0.08**** </td> <td>  0.78**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> int_post </td> <td>  0.13**** </td> <td>  0.04**  </td> <td> -0.11**** </td> <td> -0.07**** </td> <td>  0.02     </td> <td>  0.02     </td> <td> -0.04*   </td> <td> -0.02     </td> <td>  0.00     </td> <td> -0.06**** </td> <td> -0.08**** </td> <td>  0.00     </td> <td> -0.54**** </td> <td>  0.00     </td> <td>  0.84**** </td> <td>  0.53**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> int_blog </td> <td>  0.07**** </td> <td>  0.02     </td> <td> -0.09**** </td> <td> -0.06**** </td> <td>  0.00     </td> <td>  0.04*   </td> <td> -0.03     </td> <td> -0.02     </td> <td>  0.01     </td> <td> -0.02     </td> <td> -0.05***  </td> <td>  0.00     </td> <td> -0.26**** </td> <td>  0.01     </td> <td>  0.60**** </td> <td>  0.24**** </td> <td>  0.40**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> int_down </td> <td>  0.21**** </td> <td>  0.09**** </td> <td> -0.16**** </td> <td> -0.14**** </td> <td>  0.00     </td> <td>  0.00     </td> <td> -0.07**** </td> <td> -0.04*   </td> <td> -0.06***  </td> <td> -0.13**** </td> <td> -0.11**** </td> <td> -0.07**** </td> <td> -0.62**** </td> <td> -0.06***  </td> <td>  0.85**** </td> <td>  0.60**** </td> <td>  0.60**** </td> <td>  0.34**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> election_newspaper </td> <td> -0.30**** </td> <td> -0.33**** </td> <td>  0.16**** </td> <td>  0.21**** </td> <td>  0.13**** </td> <td>  0.18**** </td> <td>  0.09**** </td> <td>  0.14**** </td> <td>  0.22**** </td> <td>  0.24**** </td> <td>  0.23**** </td> <td>  0.19**** </td> <td>  0.02     </td> <td>  0.22**** </td> <td>  0.00     </td> <td> -0.03     </td> <td>  0.02     </td> <td>  0.02     </td> <td> -0.01     </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> election_tv </td> <td> -0.28**** </td> <td> -0.38**** </td> <td>  0.16**** </td> <td>  0.18**** </td> <td>  0.13**** </td> <td>  0.15**** </td> <td>  0.08**** </td> <td>  0.16**** </td> <td>  0.24**** </td> <td>  0.21**** </td> <td>  0.24**** </td> <td>  0.17**** </td> <td> -0.01     </td> <td>  0.24**** </td> <td>  0.01     </td> <td> -0.02     </td> <td>  0.02     </td> <td>  0.04*   </td> <td>  0.01     </td> <td>  0.44**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> election_radio </td> <td> -0.31**** </td> <td> -0.29**** </td> <td>  0.17**** </td> <td>  0.22**** </td> <td>  0.13**** </td> <td>  0.18**** </td> <td>  0.07***  </td> <td>  0.12**** </td> <td>  0.19**** </td> <td>  0.22**** </td> <td>  0.21**** </td> <td>  0.16**** </td> <td>  0.02     </td> <td>  0.19**** </td> <td> -0.03     </td> <td> -0.05**  </td> <td> -0.01     </td> <td>  0.02     </td> <td> -0.04**  </td> <td>  0.35**** </td> <td>  0.40**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> female </td> <td> -0.18**** </td> <td> -0.03     </td> <td>  0.07**** </td> <td>  0.08**** </td> <td> -0.02     </td> <td>  0.07**** </td> <td>  0.00     </td> <td>  0.02     </td> <td>  0.09**** </td> <td>  0.13**** </td> <td>  0.12**** </td> <td>  0.09**** </td> <td>  0.00     </td> <td>  0.09**** </td> <td> -0.01     </td> <td>  0.01     </td> <td>  0.03*   </td> <td> -0.02     </td> <td> -0.05***  </td> <td>  0.12**** </td> <td>  0.06***  </td> <td>  0.10**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> highest_qual </td> <td> -0.01     </td> <td>  0.04*   </td> <td>  0.00     </td> <td> -0.02     </td> <td> -0.01     </td> <td>  0.00     </td> <td> -0.02     </td> <td> -0.01     </td> <td> -0.02     </td> <td> -0.02     </td> <td> -0.02     </td> <td>  0.00     </td> <td> -0.01     </td> <td> -0.02     </td> <td> -0.01     </td> <td>  0.03     </td> <td> -0.03     </td> <td> -0.06***  </td> <td>  0.01     </td> <td>  0.00     </td> <td> -0.03*   </td> <td> -0.03     </td> <td> -0.12**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> tertiary_ed </td> <td>  0.24**** </td> <td>  0.10**** </td> <td> -0.18**** </td> <td> -0.19**** </td> <td> -0.03     </td> <td> -0.06***  </td> <td> -0.01     </td> <td> -0.03     </td> <td> -0.08**** </td> <td> -0.13**** </td> <td> -0.15**** </td> <td> -0.12**** </td> <td> -0.31**** </td> <td> -0.08**** </td> <td>  0.36**** </td> <td>  0.27**** </td> <td>  0.28**** </td> <td>  0.22**** </td> <td>  0.31**** </td> <td> -0.05**  </td> <td> -0.02     </td> <td> -0.08**** </td> <td>  0.03     </td> <td> -0.26**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> country_birth </td> <td> -0.03     </td> <td> -0.02     </td> <td>  0.15**** </td> <td>  0.04*   </td> <td>  0.04*   </td> <td>  0.05**  </td> <td>  0.08**** </td> <td>  0.06***  </td> <td>  0.06***  </td> <td> -0.02     </td> <td> -0.01     </td> <td> -0.05**  </td> <td>  0.00     </td> <td>  0.06***  </td> <td>  0.00     </td> <td> -0.01     </td> <td>  0.02     </td> <td>  0.01     </td> <td> -0.01     </td> <td> -0.03     </td> <td> -0.06***  </td> <td>  0.01     </td> <td> -0.02     </td> <td> -0.02     </td> <td>  0.10**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> aust_born </td> <td>  0.00     </td> <td>  0.01     </td> <td> -0.13**** </td> <td> -0.01     </td> <td> -0.02     </td> <td> -0.01     </td> <td> -0.05**  </td> <td> -0.05**  </td> <td> -0.03     </td> <td>  0.03     </td> <td>  0.02     </td> <td>  0.07**** </td> <td> -0.03     </td> <td> -0.03     </td> <td>  0.03     </td> <td>  0.04*   </td> <td>  0.01     </td> <td>  0.02     </td> <td>  0.03     </td> <td>  0.04*   </td> <td>  0.06***  </td> <td> -0.01     </td> <td>  0.03*   </td> <td> -0.01     </td> <td> -0.05**  </td> <td> -0.80**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> age </td> <td>  0.18**** </td> <td>  0.16**** </td> <td> -0.04*   </td> <td> -0.09**** </td> <td> -0.08**** </td> <td> -0.20**** </td> <td> -0.06***  </td> <td> -0.06***  </td> <td> -0.13**** </td> <td> -0.12**** </td> <td> -0.11**** </td> <td> -0.17**** </td> <td>  0.48**** </td> <td> -0.13**** </td> <td> -0.54**** </td> <td> -0.44**** </td> <td> -0.46**** </td> <td> -0.32**** </td> <td> -0.42**** </td> <td> -0.19**** </td> <td> -0.17**** </td> <td> -0.12**** </td> <td> -0.06**** </td> <td>  0.03     </td> <td> -0.20**** </td> <td>  0.01     </td> <td> -0.11**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> income </td> <td>  0.19**** </td> <td>  0.10**** </td> <td> -0.14**** </td> <td> -0.15**** </td> <td> -0.01     </td> <td> -0.01     </td> <td> -0.04**  </td> <td> -0.05**  </td> <td> -0.08**** </td> <td> -0.14**** </td> <td> -0.13**** </td> <td> -0.07**** </td> <td> -0.44**** </td> <td> -0.08**** </td> <td>  0.41**** </td> <td>  0.41**** </td> <td>  0.31**** </td> <td>  0.17**** </td> <td>  0.35**** </td> <td> -0.09**** </td> <td> -0.04*   </td> <td> -0.12**** </td> <td> -0.03     </td> <td> -0.03     </td> <td>  0.32**** </td> <td> -0.02     </td> <td>  0.04*   </td> <td> -0.34**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> rural_urban </td> <td>  0.12**** </td> <td>  0.02     </td> <td> -0.08**** </td> <td> -0.09**** </td> <td> -0.02     </td> <td> -0.01     </td> <td>  0.00     </td> <td> -0.02     </td> <td> -0.02     </td> <td> -0.06***  </td> <td> -0.07**** </td> <td> -0.08**** </td> <td> -0.17**** </td> <td> -0.02     </td> <td>  0.16**** </td> <td>  0.15**** </td> <td>  0.13**** </td> <td>  0.10**** </td> <td>  0.12**** </td> <td> -0.06***  </td> <td> -0.04*   </td> <td> -0.02     </td> <td>  0.01     </td> <td> -0.05**  </td> <td>  0.16**** </td> <td>  0.10**** </td> <td> -0.09**** </td> <td> -0.11**** </td> <td>  0.20**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> interest_pol </td> <td> -0.48**** </td> <td> -0.52**** </td> <td>  0.29**** </td> <td>  0.32**** </td> <td>  0.21**** </td> <td>  0.25**** </td> <td>  0.14**** </td> <td>  0.21**** </td> <td>  0.32**** </td> <td>  0.37**** </td> <td>  0.36**** </td> <td>  0.29**** </td> <td>  0.08**** </td> <td>  0.32**** </td> <td> -0.09**** </td> <td> -0.09**** </td> <td> -0.05**  </td> <td> -0.04**  </td> <td> -0.09**** </td> <td>  0.52**** </td> <td>  0.55**** </td> <td>  0.45**** </td> <td>  0.13**** </td> <td> -0.01     </td> <td> -0.14**** </td> <td>  0.01     </td> <td>  0.00     </td> <td> -0.23**** </td> <td> -0.11**** </td> <td> -0.02     </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> age_cat </td> <td>  0.18**** </td> <td>  0.17**** </td> <td> -0.04*   </td> <td> -0.09**** </td> <td> -0.08**** </td> <td> -0.19**** </td> <td> -0.06***  </td> <td> -0.06***  </td> <td> -0.14**** </td> <td> -0.13**** </td> <td> -0.10**** </td> <td> -0.18**** </td> <td>  0.43**** </td> <td> -0.14**** </td> <td> -0.51**** </td> <td> -0.39**** </td> <td> -0.45**** </td> <td> -0.33**** </td> <td> -0.40**** </td> <td> -0.19**** </td> <td> -0.18**** </td> <td> -0.13**** </td> <td> -0.06**** </td> <td>  0.04*   </td> <td> -0.19**** </td> <td>  0.03     </td> <td> -0.12**** </td> <td>  0.96**** </td> <td> -0.32**** </td> <td> -0.12**** </td> <td> -0.24**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> age_18_24 </td> <td> -0.11**** </td> <td> -0.12**** </td> <td> -0.01     </td> <td>  0.05**  </td> <td>  0.01     </td> <td>  0.08**** </td> <td>  0.04*   </td> <td>  0.01     </td> <td>  0.13**** </td> <td>  0.12**** </td> <td>  0.07**** </td> <td>  0.15**** </td> <td> -0.14**** </td> <td>  0.13**** </td> <td>  0.23**** </td> <td>  0.13**** </td> <td>  0.20**** </td> <td>  0.22**** </td> <td>  0.16**** </td> <td>  0.10**** </td> <td>  0.08**** </td> <td>  0.09**** </td> <td>  0.02     </td> <td> -0.08**** </td> <td> -0.04*   </td> <td> -0.03*   </td> <td>  0.07**** </td> <td> -0.48**** </td> <td>  0.03     </td> <td>  0.02     </td> <td>  0.15**** </td> <td> -0.54**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> weight </td> <td> -0.17**** </td> <td> -0.27**** </td> <td>  0.06***  </td> <td>  0.08**** </td> <td>  0.09**** </td> <td>  0.15**** </td> <td>  0.08**** </td> <td>  0.06***  </td> <td>  0.12**** </td> <td>  0.14**** </td> <td>  0.12**** </td> <td>  0.14**** </td> <td> -0.21**** </td> <td>  0.12**** </td> <td>  0.28**** </td> <td>  0.19**** </td> <td>  0.26**** </td> <td>  0.20**** </td> <td>  0.22**** </td> <td>  0.17**** </td> <td>  0.18**** </td> <td>  0.14**** </td> <td> -0.02     </td> <td>  0.00     </td> <td>  0.10**** </td> <td>  0.01     </td> <td>  0.06***  </td> <td> -0.60**** </td> <td>  0.12**** </td> <td>  0.06***  </td> <td>  0.24**** </td> <td> -0.64**** </td> <td>  0.37**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know1_correct </td> <td>  0.59**** </td> <td>  0.25**** </td> <td> -0.98**** </td> <td> -0.36**** </td> <td> -0.27**** </td> <td> -0.27**** </td> <td> -0.26**** </td> <td> -0.29**** </td> <td> -0.27**** </td> <td> -0.33**** </td> <td> -0.30**** </td> <td> -0.26**** </td> <td> -0.14**** </td> <td> -0.27**** </td> <td>  0.16**** </td> <td>  0.15**** </td> <td>  0.11**** </td> <td>  0.09**** </td> <td>  0.15**** </td> <td> -0.15**** </td> <td> -0.15**** </td> <td> -0.17**** </td> <td> -0.07**** </td> <td> -0.01     </td> <td>  0.17**** </td> <td> -0.15**** </td> <td>  0.13**** </td> <td>  0.04*   </td> <td>  0.14**** </td> <td>  0.07**** </td> <td> -0.28**** </td> <td>  0.03     </td> <td>  0.01     </td> <td> -0.06***  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know2_correct </td> <td>  0.57**** </td> <td>  0.22**** </td> <td> -0.32**** </td> <td> -0.95**** </td> <td> -0.24**** </td> <td> -0.29**** </td> <td> -0.18**** </td> <td> -0.23**** </td> <td> -0.23**** </td> <td> -0.28**** </td> <td> -0.30**** </td> <td> -0.20**** </td> <td> -0.12**** </td> <td> -0.23**** </td> <td>  0.11**** </td> <td>  0.11**** </td> <td>  0.06**** </td> <td>  0.05**  </td> <td>  0.12**** </td> <td> -0.17**** </td> <td> -0.15**** </td> <td> -0.19**** </td> <td> -0.06***  </td> <td>  0.02     </td> <td>  0.15**** </td> <td> -0.04**  </td> <td>  0.01     </td> <td>  0.07**** </td> <td>  0.13**** </td> <td>  0.09**** </td> <td> -0.26**** </td> <td>  0.07**** </td> <td> -0.04*   </td> <td> -0.06***  </td> <td>  0.30**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know3_correct </td> <td>  0.61**** </td> <td>  0.19**** </td> <td> -0.30**** </td> <td> -0.35**** </td> <td> -0.03     </td> <td> -0.27**** </td> <td> -0.07**** </td> <td> -0.16**** </td> <td> -0.21**** </td> <td> -0.27**** </td> <td> -0.28**** </td> <td> -0.22**** </td> <td> -0.13**** </td> <td> -0.21**** </td> <td>  0.14**** </td> <td>  0.12**** </td> <td>  0.10**** </td> <td>  0.06***  </td> <td>  0.13**** </td> <td> -0.15**** </td> <td> -0.12**** </td> <td> -0.15**** </td> <td> -0.14**** </td> <td> -0.02     </td> <td>  0.18**** </td> <td>  0.01     </td> <td> -0.01     </td> <td>  0.08**** </td> <td>  0.14**** </td> <td>  0.07**** </td> <td> -0.26**** </td> <td>  0.10**** </td> <td> -0.06***  </td> <td> -0.08**** </td> <td>  0.29**** </td> <td>  0.29**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know4_correct </td> <td>  0.50**** </td> <td>  0.16**** </td> <td> -0.24**** </td> <td> -0.28**** </td> <td> -0.14**** </td> <td> -0.85**** </td> <td> -0.12**** </td> <td> -0.16**** </td> <td> -0.17**** </td> <td> -0.21**** </td> <td> -0.25**** </td> <td> -0.17**** </td> <td>  0.02     </td> <td> -0.17**** </td> <td> -0.03*   </td> <td> -0.01     </td> <td> -0.03*   </td> <td> -0.05**  </td> <td> -0.01     </td> <td> -0.16**** </td> <td> -0.12**** </td> <td> -0.16**** </td> <td> -0.06**** </td> <td> -0.02     </td> <td>  0.08**** </td> <td> -0.07**** </td> <td>  0.01     </td> <td>  0.24**** </td> <td> -0.01     </td> <td> -0.01     </td> <td> -0.22**** </td> <td>  0.23**** </td> <td> -0.07**** </td> <td> -0.16**** </td> <td>  0.23**** </td> <td>  0.25**** </td> <td>  0.24**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know5_correct </td> <td>  0.52**** </td> <td>  0.17**** </td> <td> -0.22**** </td> <td> -0.26**** </td> <td> -0.08**** </td> <td> -0.20**** </td> <td>  0.30**** </td> <td> -0.15**** </td> <td> -0.17**** </td> <td> -0.23**** </td> <td> -0.24**** </td> <td> -0.17**** </td> <td> -0.06**** </td> <td> -0.17**** </td> <td>  0.04*   </td> <td>  0.06***  </td> <td>  0.01     </td> <td>  0.00     </td> <td>  0.03     </td> <td> -0.13**** </td> <td> -0.15**** </td> <td> -0.16**** </td> <td> -0.11**** </td> <td>  0.00     </td> <td>  0.09**** </td> <td>  0.01     </td> <td> -0.02     </td> <td>  0.11**** </td> <td>  0.06***  </td> <td>  0.07**** </td> <td> -0.22**** </td> <td>  0.11**** </td> <td> -0.06***  </td> <td> -0.09**** </td> <td>  0.22**** </td> <td>  0.21**** </td> <td>  0.28**** </td> <td>  0.17**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know6_correct </td> <td>  0.70**** </td> <td>  0.24**** </td> <td> -0.37**** </td> <td> -0.37**** </td> <td> -0.10**** </td> <td> -0.26**** </td> <td> -0.09**** </td> <td> -0.17**** </td> <td> -0.28**** </td> <td> -0.33**** </td> <td> -0.38**** </td> <td> -0.25**** </td> <td> -0.15**** </td> <td> -0.28**** </td> <td>  0.14**** </td> <td>  0.14**** </td> <td>  0.07**** </td> <td>  0.06***  </td> <td>  0.14**** </td> <td> -0.21**** </td> <td> -0.19**** </td> <td> -0.19**** </td> <td> -0.14**** </td> <td> -0.01     </td> <td>  0.14**** </td> <td> -0.01     </td> <td> -0.01     </td> <td>  0.09**** </td> <td>  0.13**** </td> <td>  0.09**** </td> <td> -0.31**** </td> <td>  0.10**** </td> <td> -0.03     </td> <td> -0.10**** </td> <td>  0.36**** </td> <td>  0.31**** </td> <td>  0.41**** </td> <td>  0.26**** </td> <td>  0.34**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know7_correct </td> <td>  0.67**** </td> <td>  0.30**** </td> <td> -0.34**** </td> <td> -0.33**** </td> <td> -0.13**** </td> <td> -0.29**** </td> <td> -0.14**** </td> <td> -0.19**** </td> <td> -0.53**** </td> <td> -0.39**** </td> <td> -0.36**** </td> <td> -0.36**** </td> <td> -0.08**** </td> <td> -0.53**** </td> <td>  0.05**  </td> <td>  0.09**** </td> <td>  0.00     </td> <td> -0.01     </td> <td>  0.06***  </td> <td> -0.27**** </td> <td> -0.25**** </td> <td> -0.26**** </td> <td> -0.13**** </td> <td> -0.02     </td> <td>  0.13**** </td> <td> -0.05**  </td> <td>  0.03     </td> <td>  0.23**** </td> <td>  0.10**** </td> <td>  0.07**** </td> <td> -0.41**** </td> <td>  0.23**** </td> <td> -0.14**** </td> <td> -0.19**** </td> <td>  0.34**** </td> <td>  0.27**** </td> <td>  0.30**** </td> <td>  0.27**** </td> <td>  0.25**** </td> <td>  0.43**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know8_correct </td> <td>  0.59**** </td> <td>  0.24**** </td> <td> -0.30**** </td> <td> -0.30**** </td> <td> -0.16**** </td> <td> -0.24**** </td> <td> -0.14**** </td> <td> -0.22**** </td> <td> -0.30**** </td> <td> -0.82**** </td> <td> -0.35**** </td> <td> -0.28**** </td> <td> -0.09**** </td> <td> -0.30**** </td> <td>  0.08**** </td> <td>  0.09**** </td> <td>  0.03*   </td> <td>  0.01     </td> <td>  0.10**** </td> <td> -0.20**** </td> <td> -0.20**** </td> <td> -0.19**** </td> <td> -0.14**** </td> <td>  0.02     </td> <td>  0.11**** </td> <td>  0.02     </td> <td> -0.03     </td> <td>  0.13**** </td> <td>  0.11**** </td> <td>  0.06***  </td> <td> -0.34**** </td> <td>  0.14**** </td> <td> -0.11**** </td> <td> -0.14**** </td> <td>  0.29**** </td> <td>  0.25**** </td> <td>  0.26**** </td> <td>  0.21**** </td> <td>  0.22**** </td> <td>  0.32**** </td> <td>  0.37**** </td> <td>  </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know9_correct </td> <td>  0.63**** </td> <td>  0.29**** </td> <td> -0.30**** </td> <td> -0.36**** </td> <td> -0.14**** </td> <td> -0.27**** </td> <td> -0.14**** </td> <td> -0.22**** </td> <td> -0.30**** </td> <td> -0.38**** </td> <td> -0.83**** </td> <td> -0.28**** </td> <td> -0.11**** </td> <td> -0.30**** </td> <td>  0.12**** </td> <td>  0.12**** </td> <td>  0.07**** </td> <td>  0.06***  </td> <td>  0.13**** </td> <td> -0.22**** </td> <td> -0.23**** </td> <td> -0.22**** </td> <td> -0.12**** </td> <td>  0.00     </td> <td>  0.16**** </td> <td>  0.00     </td> <td> -0.01     </td> <td>  0.12**** </td> <td>  0.16**** </td> <td>  0.08**** </td> <td> -0.36**** </td> <td>  0.12**** </td> <td> -0.07**** </td> <td> -0.13**** </td> <td>  0.29**** </td> <td>  0.29**** </td> <td>  0.29**** </td> <td>  0.25**** </td> <td>  0.24**** </td> <td>  0.41**** </td> <td>  0.38**** </td> <td>  0.36**** </td> <td>  </td> <td>  </td> </tr>
-##   <tr> <td align="right"> know10_correct </td> <td>  0.64**** </td> <td>  0.24**** </td> <td> -0.31**** </td> <td> -0.31**** </td> <td> -0.12**** </td> <td> -0.23**** </td> <td> -0.09**** </td> <td> -0.15**** </td> <td> -0.27**** </td> <td> -0.35**** </td> <td> -0.32**** </td> <td> -0.39**** </td> <td> -0.12**** </td> <td> -0.27**** </td> <td>  0.12**** </td> <td>  0.12**** </td> <td>  0.07**** </td> <td>  0.06***  </td> <td>  0.12**** </td> <td> -0.21**** </td> <td> -0.17**** </td> <td> -0.23**** </td> <td> -0.13**** </td> <td> -0.02     </td> <td>  0.20**** </td> <td>  0.12**** </td> <td> -0.12**** </td> <td>  0.14**** </td> <td>  0.10**** </td> <td>  0.09**** </td> <td> -0.35**** </td> <td>  0.16**** </td> <td> -0.12**** </td> <td> -0.13**** </td> <td>  0.30**** </td> <td>  0.26**** </td> <td>  0.31**** </td> <td>  0.22**** </td> <td>  0.27**** </td> <td>  0.37**** </td> <td>  0.45**** </td> <td>  0.34**** </td> <td>  0.33**** </td> <td>  </td> </tr>
-##   <tr> <td align="right"> income_quintiles </td> <td>  0.18**** </td> <td>  0.09**** </td> <td> -0.13**** </td> <td> -0.14**** </td> <td> -0.01     </td> <td> -0.01     </td> <td> -0.03*   </td> <td> -0.04*   </td> <td> -0.08**** </td> <td> -0.13**** </td> <td> -0.13**** </td> <td> -0.07**** </td> <td> -0.45**** </td> <td> -0.08**** </td> <td>  0.41**** </td> <td>  0.42**** </td> <td>  0.31**** </td> <td>  0.17**** </td> <td>  0.35**** </td> <td> -0.07**** </td> <td> -0.03     </td> <td> -0.11**** </td> <td> -0.03     </td> <td> -0.02     </td> <td>  0.32**** </td> <td> -0.02     </td> <td>  0.04*   </td> <td> -0.35**** </td> <td>  0.98**** </td> <td>  0.20**** </td> <td> -0.10**** </td> <td> -0.33**** </td> <td>  0.03     </td> <td>  0.12**** </td> <td>  0.13**** </td> <td>  0.13**** </td> <td>  0.13**** </td> <td> -0.02     </td> <td>  0.06***  </td> <td>  0.12**** </td> <td>  0.09**** </td> <td>  0.10**** </td> <td>  0.15**** </td> <td>  0.10**** </td> </tr>
-##    </table>
+## % latex table generated in R 3.5.1 by xtable 1.8-3 package
+## % Sun Dec 30 10:53:11 2018
+## \begin{table}[ht]
+## \centering
+## \begin{tabular}{rllllllllllllllllllllllllllllllllllllllllllll}
+##   \hline
+##  & pol\_knowledge & likelihood\_vote & know1 & know2 & know3 & know4 & know5 & know6 & know7 & know8 & know9 & know10 & general\_internet & election\_internet & internet\_skills & int\_attch & int\_post & int\_blog & int\_down & election\_newspaper & election\_tv & election\_radio & female & highest\_qual & tertiary\_ed & country\_birth & aust\_born & age & income & rural\_urban & interest\_pol & age\_cat & age\_18\_24 & weight & know1\_correct & know2\_correct & know3\_correct & know4\_correct & know5\_correct & know6\_correct & know7\_correct & know8\_correct & know9\_correct & know10\_correct \\ 
+##   \hline
+## pol\_knowledge &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   likelihood\_vote &  0.37**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   know1 & -0.60**** & -0.26**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   know2 & -0.64**** & -0.26**** &  0.38**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   know3 & -0.23**** & -0.17**** &  0.28**** &  0.29**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   know4 & -0.51**** & -0.18**** &  0.29**** &  0.34**** &  0.24**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   know5 & -0.15**** & -0.14**** &  0.28**** &  0.21**** &  0.25**** &  0.21**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   know6 & -0.31**** & -0.19**** &  0.31**** &  0.28**** &  0.27**** &  0.24**** &  0.22**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   know7 & -0.45**** & -0.23**** &  0.29**** &  0.28**** &  0.17**** &  0.21**** &  0.16**** &  0.21**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   know8 & -0.59**** & -0.27**** &  0.34**** &  0.34**** &  0.20**** &  0.26**** &  0.17**** &  0.26**** &  0.35**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   know9 & -0.59**** & -0.29**** &  0.32**** &  0.37**** &  0.18**** &  0.29**** &  0.16**** &  0.26**** &  0.32**** &  0.41**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   know10 & -0.42**** & -0.22**** &  0.27**** &  0.25**** &  0.20**** &  0.20**** &  0.16**** &  0.17**** &  0.29**** &  0.32**** &  0.29**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   general\_internet & -0.19**** & -0.07**** &  0.15**** &  0.14**** &  0.00     &  0.00     &  0.06***  &  0.06***  &  0.08**** &  0.12**** &  0.11**** &  0.07**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   election\_internet & -0.45**** & -0.23**** &  0.29**** &  0.28**** &  0.17**** &  0.21**** &  0.16**** &  0.21**** &  1.00**** &  0.35**** &  0.32**** &  0.29**** &  0.08**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   internet\_skills &  0.21**** &  0.09**** & -0.16**** & -0.13**** &  0.00     &  0.02     & -0.07**** & -0.04**  & -0.04*   & -0.11**** & -0.11**** & -0.05**  & -0.74**** & -0.04*   &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   int\_attch &  0.22**** &  0.10**** & -0.15**** & -0.12**** & -0.01     &  0.00     & -0.06***  & -0.06***  & -0.08**** & -0.12**** & -0.11**** & -0.07**** & -0.80**** & -0.08**** &  0.78**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   int\_post &  0.13**** &  0.04**  & -0.11**** & -0.07**** &  0.02     &  0.02     & -0.04*   & -0.02     &  0.00     & -0.06**** & -0.08**** &  0.00     & -0.54**** &  0.00     &  0.84**** &  0.53**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   int\_blog &  0.07**** &  0.02     & -0.09**** & -0.06**** &  0.00     &  0.04*   & -0.03     & -0.02     &  0.01     & -0.02     & -0.05***  &  0.00     & -0.26**** &  0.01     &  0.60**** &  0.24**** &  0.40**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   int\_down &  0.21**** &  0.09**** & -0.16**** & -0.14**** &  0.00     &  0.00     & -0.07**** & -0.04*   & -0.06***  & -0.13**** & -0.11**** & -0.07**** & -0.62**** & -0.06***  &  0.85**** &  0.60**** &  0.60**** &  0.34**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   election\_newspaper & -0.30**** & -0.33**** &  0.16**** &  0.21**** &  0.13**** &  0.18**** &  0.09**** &  0.14**** &  0.22**** &  0.24**** &  0.23**** &  0.19**** &  0.02     &  0.22**** &  0.00     & -0.03     &  0.02     &  0.02     & -0.01     &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   election\_tv & -0.28**** & -0.38**** &  0.16**** &  0.18**** &  0.13**** &  0.15**** &  0.08**** &  0.16**** &  0.24**** &  0.21**** &  0.24**** &  0.17**** & -0.01     &  0.24**** &  0.01     & -0.02     &  0.02     &  0.04*   &  0.01     &  0.44**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   election\_radio & -0.31**** & -0.29**** &  0.17**** &  0.22**** &  0.13**** &  0.18**** &  0.07***  &  0.12**** &  0.19**** &  0.22**** &  0.21**** &  0.16**** &  0.02     &  0.19**** & -0.03     & -0.05**  & -0.01     &  0.02     & -0.04**  &  0.35**** &  0.40**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   female & -0.18**** & -0.03     &  0.07**** &  0.08**** & -0.02     &  0.07**** &  0.00     &  0.02     &  0.09**** &  0.13**** &  0.12**** &  0.09**** &  0.00     &  0.09**** & -0.01     &  0.01     &  0.03*   & -0.02     & -0.05***  &  0.12**** &  0.06***  &  0.10**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   highest\_qual & -0.01     &  0.04*   &  0.00     & -0.02     & -0.01     &  0.00     & -0.02     & -0.01     & -0.02     & -0.02     & -0.02     &  0.00     & -0.01     & -0.02     & -0.01     &  0.03     & -0.03     & -0.06***  &  0.01     &  0.00     & -0.03*   & -0.03     & -0.12**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   tertiary\_ed &  0.24**** &  0.10**** & -0.18**** & -0.19**** & -0.03     & -0.06***  & -0.01     & -0.03     & -0.08**** & -0.13**** & -0.15**** & -0.12**** & -0.31**** & -0.08**** &  0.36**** &  0.27**** &  0.28**** &  0.22**** &  0.31**** & -0.05**  & -0.02     & -0.08**** &  0.03     & -0.26**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   country\_birth & -0.03     & -0.02     &  0.15**** &  0.04*   &  0.04*   &  0.05**  &  0.08**** &  0.06***  &  0.06***  & -0.02     & -0.01     & -0.05**  &  0.00     &  0.06***  &  0.00     & -0.01     &  0.02     &  0.01     & -0.01     & -0.03     & -0.06***  &  0.01     & -0.02     & -0.02     &  0.10**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   aust\_born &  0.00     &  0.01     & -0.13**** & -0.01     & -0.02     & -0.01     & -0.05**  & -0.05**  & -0.03     &  0.03     &  0.02     &  0.07**** & -0.03     & -0.03     &  0.03     &  0.04*   &  0.01     &  0.02     &  0.03     &  0.04*   &  0.06***  & -0.01     &  0.03*   & -0.01     & -0.05**  & -0.80**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   age &  0.18**** &  0.16**** & -0.04*   & -0.09**** & -0.08**** & -0.20**** & -0.06***  & -0.06***  & -0.13**** & -0.12**** & -0.11**** & -0.17**** &  0.48**** & -0.13**** & -0.54**** & -0.44**** & -0.46**** & -0.32**** & -0.42**** & -0.19**** & -0.17**** & -0.12**** & -0.06**** &  0.03     & -0.20**** &  0.01     & -0.11**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   income &  0.19**** &  0.10**** & -0.14**** & -0.15**** & -0.01     & -0.01     & -0.04**  & -0.05**  & -0.08**** & -0.14**** & -0.13**** & -0.07**** & -0.44**** & -0.08**** &  0.41**** &  0.41**** &  0.31**** &  0.17**** &  0.35**** & -0.09**** & -0.04*   & -0.12**** & -0.03     & -0.03     &  0.32**** & -0.02     &  0.04*   & -0.34**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   rural\_urban &  0.12**** &  0.02     & -0.08**** & -0.09**** & -0.02     & -0.01     &  0.00     & -0.02     & -0.02     & -0.06***  & -0.07**** & -0.08**** & -0.17**** & -0.02     &  0.16**** &  0.15**** &  0.13**** &  0.10**** &  0.12**** & -0.06***  & -0.04*   & -0.02     &  0.01     & -0.05**  &  0.16**** &  0.10**** & -0.09**** & -0.11**** &  0.20**** &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   interest\_pol & -0.48**** & -0.52**** &  0.29**** &  0.32**** &  0.21**** &  0.25**** &  0.14**** &  0.21**** &  0.32**** &  0.37**** &  0.36**** &  0.29**** &  0.08**** &  0.32**** & -0.09**** & -0.09**** & -0.05**  & -0.04**  & -0.09**** &  0.52**** &  0.55**** &  0.45**** &  0.13**** & -0.01     & -0.14**** &  0.01     &  0.00     & -0.23**** & -0.11**** & -0.02     &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   age\_cat &  0.18**** &  0.17**** & -0.04*   & -0.09**** & -0.08**** & -0.19**** & -0.06***  & -0.06***  & -0.14**** & -0.13**** & -0.10**** & -0.18**** &  0.43**** & -0.14**** & -0.51**** & -0.39**** & -0.45**** & -0.33**** & -0.40**** & -0.19**** & -0.18**** & -0.13**** & -0.06**** &  0.04*   & -0.19**** &  0.03     & -0.12**** &  0.96**** & -0.32**** & -0.12**** & -0.24**** &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   age\_18\_24 & -0.11**** & -0.12**** & -0.01     &  0.05**  &  0.01     &  0.08**** &  0.04*   &  0.01     &  0.13**** &  0.12**** &  0.07**** &  0.15**** & -0.14**** &  0.13**** &  0.23**** &  0.13**** &  0.20**** &  0.22**** &  0.16**** &  0.10**** &  0.08**** &  0.09**** &  0.02     & -0.08**** & -0.04*   & -0.03*   &  0.07**** & -0.48**** &  0.03     &  0.02     &  0.15**** & -0.54**** &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   weight & -0.17**** & -0.27**** &  0.06***  &  0.08**** &  0.09**** &  0.15**** &  0.08**** &  0.06***  &  0.12**** &  0.14**** &  0.12**** &  0.14**** & -0.21**** &  0.12**** &  0.28**** &  0.19**** &  0.26**** &  0.20**** &  0.22**** &  0.17**** &  0.18**** &  0.14**** & -0.02     &  0.00     &  0.10**** &  0.01     &  0.06***  & -0.60**** &  0.12**** &  0.06***  &  0.24**** & -0.64**** &  0.37**** &  &  &  &  &  &  &  &  &  &  &  \\ 
+##   know1\_correct &  0.59**** &  0.25**** & -0.98**** & -0.36**** & -0.27**** & -0.27**** & -0.26**** & -0.29**** & -0.27**** & -0.33**** & -0.30**** & -0.26**** & -0.14**** & -0.27**** &  0.16**** &  0.15**** &  0.11**** &  0.09**** &  0.15**** & -0.15**** & -0.15**** & -0.17**** & -0.07**** & -0.01     &  0.17**** & -0.15**** &  0.13**** &  0.04*   &  0.14**** &  0.07**** & -0.28**** &  0.03     &  0.01     & -0.06***  &  &  &  &  &  &  &  &  &  &  \\ 
+##   know2\_correct &  0.57**** &  0.22**** & -0.32**** & -0.95**** & -0.24**** & -0.29**** & -0.18**** & -0.23**** & -0.23**** & -0.28**** & -0.30**** & -0.20**** & -0.12**** & -0.23**** &  0.11**** &  0.11**** &  0.06**** &  0.05**  &  0.12**** & -0.17**** & -0.15**** & -0.19**** & -0.06***  &  0.02     &  0.15**** & -0.04**  &  0.01     &  0.07**** &  0.13**** &  0.09**** & -0.26**** &  0.07**** & -0.04*   & -0.06***  &  0.30**** &  &  &  &  &  &  &  &  &  \\ 
+##   know3\_correct &  0.61**** &  0.19**** & -0.30**** & -0.35**** & -0.03     & -0.27**** & -0.07**** & -0.16**** & -0.21**** & -0.27**** & -0.28**** & -0.22**** & -0.13**** & -0.21**** &  0.14**** &  0.12**** &  0.10**** &  0.06***  &  0.13**** & -0.15**** & -0.12**** & -0.15**** & -0.14**** & -0.02     &  0.18**** &  0.01     & -0.01     &  0.08**** &  0.14**** &  0.07**** & -0.26**** &  0.10**** & -0.06***  & -0.08**** &  0.29**** &  0.29**** &  &  &  &  &  &  &  &  \\ 
+##   know4\_correct &  0.50**** &  0.16**** & -0.24**** & -0.28**** & -0.14**** & -0.85**** & -0.12**** & -0.16**** & -0.17**** & -0.21**** & -0.25**** & -0.17**** &  0.02     & -0.17**** & -0.03*   & -0.01     & -0.03*   & -0.05**  & -0.01     & -0.16**** & -0.12**** & -0.16**** & -0.06**** & -0.02     &  0.08**** & -0.07**** &  0.01     &  0.24**** & -0.01     & -0.01     & -0.22**** &  0.23**** & -0.07**** & -0.16**** &  0.23**** &  0.25**** &  0.24**** &  &  &  &  &  &  &  \\ 
+##   know5\_correct &  0.52**** &  0.17**** & -0.22**** & -0.26**** & -0.08**** & -0.20**** &  0.30**** & -0.15**** & -0.17**** & -0.23**** & -0.24**** & -0.17**** & -0.06**** & -0.17**** &  0.04*   &  0.06***  &  0.01     &  0.00     &  0.03     & -0.13**** & -0.15**** & -0.16**** & -0.11**** &  0.00     &  0.09**** &  0.01     & -0.02     &  0.11**** &  0.06***  &  0.07**** & -0.22**** &  0.11**** & -0.06***  & -0.09**** &  0.22**** &  0.21**** &  0.28**** &  0.17**** &  &  &  &  &  &  \\ 
+##   know6\_correct &  0.70**** &  0.24**** & -0.37**** & -0.37**** & -0.10**** & -0.26**** & -0.09**** & -0.17**** & -0.28**** & -0.33**** & -0.38**** & -0.25**** & -0.15**** & -0.28**** &  0.14**** &  0.14**** &  0.07**** &  0.06***  &  0.14**** & -0.21**** & -0.19**** & -0.19**** & -0.14**** & -0.01     &  0.14**** & -0.01     & -0.01     &  0.09**** &  0.13**** &  0.09**** & -0.31**** &  0.10**** & -0.03     & -0.10**** &  0.36**** &  0.31**** &  0.41**** &  0.26**** &  0.34**** &  &  &  &  &  \\ 
+##   know7\_correct &  0.67**** &  0.30**** & -0.34**** & -0.33**** & -0.13**** & -0.29**** & -0.14**** & -0.19**** & -0.53**** & -0.39**** & -0.36**** & -0.36**** & -0.08**** & -0.53**** &  0.05**  &  0.09**** &  0.00     & -0.01     &  0.06***  & -0.27**** & -0.25**** & -0.26**** & -0.13**** & -0.02     &  0.13**** & -0.05**  &  0.03     &  0.23**** &  0.10**** &  0.07**** & -0.41**** &  0.23**** & -0.14**** & -0.19**** &  0.34**** &  0.27**** &  0.30**** &  0.27**** &  0.25**** &  0.43**** &  &  &  &  \\ 
+##   know8\_correct &  0.59**** &  0.24**** & -0.30**** & -0.30**** & -0.16**** & -0.24**** & -0.14**** & -0.22**** & -0.30**** & -0.82**** & -0.35**** & -0.28**** & -0.09**** & -0.30**** &  0.08**** &  0.09**** &  0.03*   &  0.01     &  0.10**** & -0.20**** & -0.20**** & -0.19**** & -0.14**** &  0.02     &  0.11**** &  0.02     & -0.03     &  0.13**** &  0.11**** &  0.06***  & -0.34**** &  0.14**** & -0.11**** & -0.14**** &  0.29**** &  0.25**** &  0.26**** &  0.21**** &  0.22**** &  0.32**** &  0.37**** &  &  &  \\ 
+##   know9\_correct &  0.63**** &  0.29**** & -0.30**** & -0.36**** & -0.14**** & -0.27**** & -0.14**** & -0.22**** & -0.30**** & -0.38**** & -0.83**** & -0.28**** & -0.11**** & -0.30**** &  0.12**** &  0.12**** &  0.07**** &  0.06***  &  0.13**** & -0.22**** & -0.23**** & -0.22**** & -0.12**** &  0.00     &  0.16**** &  0.00     & -0.01     &  0.12**** &  0.16**** &  0.08**** & -0.36**** &  0.12**** & -0.07**** & -0.13**** &  0.29**** &  0.29**** &  0.29**** &  0.25**** &  0.24**** &  0.41**** &  0.38**** &  0.36**** &  &  \\ 
+##   know10\_correct &  0.64**** &  0.24**** & -0.31**** & -0.31**** & -0.12**** & -0.23**** & -0.09**** & -0.15**** & -0.27**** & -0.35**** & -0.32**** & -0.39**** & -0.12**** & -0.27**** &  0.12**** &  0.12**** &  0.07**** &  0.06***  &  0.12**** & -0.21**** & -0.17**** & -0.23**** & -0.13**** & -0.02     &  0.20**** &  0.12**** & -0.12**** &  0.14**** &  0.10**** &  0.09**** & -0.35**** &  0.16**** & -0.12**** & -0.13**** &  0.30**** &  0.26**** &  0.31**** &  0.22**** &  0.27**** &  0.37**** &  0.45**** &  0.34**** &  0.33**** &  \\ 
+##   income\_quintiles &  0.18**** &  0.09**** & -0.13**** & -0.14**** & -0.01     & -0.01     & -0.03*   & -0.04*   & -0.08**** & -0.13**** & -0.13**** & -0.07**** & -0.45**** & -0.08**** &  0.41**** &  0.42**** &  0.31**** &  0.17**** &  0.35**** & -0.07**** & -0.03     & -0.11**** & -0.03     & -0.02     &  0.32**** & -0.02     &  0.04*   & -0.35**** &  0.98**** &  0.20**** & -0.10**** & -0.33**** &  0.03     &  0.12**** &  0.13**** &  0.13**** &  0.13**** & -0.02     &  0.06***  &  0.12**** &  0.09**** &  0.10**** &  0.15**** &  0.10**** \\ 
+##    \hline
+## \end{tabular}
+## \end{table}
 ```
 
-```
-## [1] "<!-- html table generated in R 3.5.1 by xtable 1.8-3 package -->\n<!-- Sat Dec 29 22:50:02 2018 -->\n<table border=1>\n<tr> <th>  </th> <th> pol_knowledge </th> <th> likelihood_vote </th> <th> know1 </th> <th> know2 </th> <th> know3 </th> <th> know4 </th> <th> know5 </th> <th> know6 </th> <th> know7 </th> <th> know8 </th> <th> know9 </th> <th> know10 </th> <th> general_internet </th> <th> election_internet </th> <th> internet_skills </th> <th> int_attch </th> <th> int_post </th> <th> int_blog </th> <th> int_down </th> <th> election_newspaper </th> <th> election_tv </th> <th> election_radio </th> <th> female </th> <th> highest_qual </th> <th> tertiary_ed </th> <th> country_birth </th> <th> aust_born </th> <th> age </th> <th> income </th> <th> rural_urban </th> <th> interest_pol </th> <th> age_cat </th> <th> age_18_24 </th> <th> weight </th> <th> know1_correct </th> <th> know2_correct </th> <th> know3_correct </th> <th> know4_correct </th> <th> know5_correct </th> <th> know6_correct </th> <th> know7_correct </th> <th> know8_correct </th> <th> know9_correct </th> <th> know10_correct </th>  </tr>\n  <tr> <td align=\"right\"> pol_knowledge </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> likelihood_vote </td> <td>  0.37**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know1 </td> <td> -0.60**** </td> <td> -0.26**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know2 </td> <td> -0.64**** </td> <td> -0.26**** </td> <td>  0.38**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know3 </td> <td> -0.23**** </td> <td> -0.17**** </td> <td>  0.28**** </td> <td>  0.29**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know4 </td> <td> -0.51**** </td> <td> -0.18**** </td> <td>  0.29**** </td> <td>  0.34**** </td> <td>  0.24**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know5 </td> <td> -0.15**** </td> <td> -0.14**** </td> <td>  0.28**** </td> <td>  0.21**** </td> <td>  0.25**** </td> <td>  0.21**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know6 </td> <td> -0.31**** </td> <td> -0.19**** </td> <td>  0.31**** </td> <td>  0.28**** </td> <td>  0.27**** </td> <td>  0.24**** </td> <td>  0.22**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know7 </td> <td> -0.45**** </td> <td> -0.23**** </td> <td>  0.29**** </td> <td>  0.28**** </td> <td>  0.17**** </td> <td>  0.21**** </td> <td>  0.16**** </td> <td>  0.21**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know8 </td> <td> -0.59**** </td> <td> -0.27**** </td> <td>  0.34**** </td> <td>  0.34**** </td> <td>  0.20**** </td> <td>  0.26**** </td> <td>  0.17**** </td> <td>  0.26**** </td> <td>  0.35**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know9 </td> <td> -0.59**** </td> <td> -0.29**** </td> <td>  0.32**** </td> <td>  0.37**** </td> <td>  0.18**** </td> <td>  0.29**** </td> <td>  0.16**** </td> <td>  0.26**** </td> <td>  0.32**** </td> <td>  0.41**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know10 </td> <td> -0.42**** </td> <td> -0.22**** </td> <td>  0.27**** </td> <td>  0.25**** </td> <td>  0.20**** </td> <td>  0.20**** </td> <td>  0.16**** </td> <td>  0.17**** </td> <td>  0.29**** </td> <td>  0.32**** </td> <td>  0.29**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> general_internet </td> <td> -0.19**** </td> <td> -0.07**** </td> <td>  0.15**** </td> <td>  0.14**** </td> <td>  0.00     </td> <td>  0.00     </td> <td>  0.06***  </td> <td>  0.06***  </td> <td>  0.08**** </td> <td>  0.12**** </td> <td>  0.11**** </td> <td>  0.07**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> election_internet </td> <td> -0.45**** </td> <td> -0.23**** </td> <td>  0.29**** </td> <td>  0.28**** </td> <td>  0.17**** </td> <td>  0.21**** </td> <td>  0.16**** </td> <td>  0.21**** </td> <td>  1.00**** </td> <td>  0.35**** </td> <td>  0.32**** </td> <td>  0.29**** </td> <td>  0.08**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> internet_skills </td> <td>  0.21**** </td> <td>  0.09**** </td> <td> -0.16**** </td> <td> -0.13**** </td> <td>  0.00     </td> <td>  0.02     </td> <td> -0.07**** </td> <td> -0.04**  </td> <td> -0.04*   </td> <td> -0.11**** </td> <td> -0.11**** </td> <td> -0.05**  </td> <td> -0.74**** </td> <td> -0.04*   </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> int_attch </td> <td>  0.22**** </td> <td>  0.10**** </td> <td> -0.15**** </td> <td> -0.12**** </td> <td> -0.01     </td> <td>  0.00     </td> <td> -0.06***  </td> <td> -0.06***  </td> <td> -0.08**** </td> <td> -0.12**** </td> <td> -0.11**** </td> <td> -0.07**** </td> <td> -0.80**** </td> <td> -0.08**** </td> <td>  0.78**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> int_post </td> <td>  0.13**** </td> <td>  0.04**  </td> <td> -0.11**** </td> <td> -0.07**** </td> <td>  0.02     </td> <td>  0.02     </td> <td> -0.04*   </td> <td> -0.02     </td> <td>  0.00     </td> <td> -0.06**** </td> <td> -0.08**** </td> <td>  0.00     </td> <td> -0.54**** </td> <td>  0.00     </td> <td>  0.84**** </td> <td>  0.53**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> int_blog </td> <td>  0.07**** </td> <td>  0.02     </td> <td> -0.09**** </td> <td> -0.06**** </td> <td>  0.00     </td> <td>  0.04*   </td> <td> -0.03     </td> <td> -0.02     </td> <td>  0.01     </td> <td> -0.02     </td> <td> -0.05***  </td> <td>  0.00     </td> <td> -0.26**** </td> <td>  0.01     </td> <td>  0.60**** </td> <td>  0.24**** </td> <td>  0.40**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> int_down </td> <td>  0.21**** </td> <td>  0.09**** </td> <td> -0.16**** </td> <td> -0.14**** </td> <td>  0.00     </td> <td>  0.00     </td> <td> -0.07**** </td> <td> -0.04*   </td> <td> -0.06***  </td> <td> -0.13**** </td> <td> -0.11**** </td> <td> -0.07**** </td> <td> -0.62**** </td> <td> -0.06***  </td> <td>  0.85**** </td> <td>  0.60**** </td> <td>  0.60**** </td> <td>  0.34**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> election_newspaper </td> <td> -0.30**** </td> <td> -0.33**** </td> <td>  0.16**** </td> <td>  0.21**** </td> <td>  0.13**** </td> <td>  0.18**** </td> <td>  0.09**** </td> <td>  0.14**** </td> <td>  0.22**** </td> <td>  0.24**** </td> <td>  0.23**** </td> <td>  0.19**** </td> <td>  0.02     </td> <td>  0.22**** </td> <td>  0.00     </td> <td> -0.03     </td> <td>  0.02     </td> <td>  0.02     </td> <td> -0.01     </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> election_tv </td> <td> -0.28**** </td> <td> -0.38**** </td> <td>  0.16**** </td> <td>  0.18**** </td> <td>  0.13**** </td> <td>  0.15**** </td> <td>  0.08**** </td> <td>  0.16**** </td> <td>  0.24**** </td> <td>  0.21**** </td> <td>  0.24**** </td> <td>  0.17**** </td> <td> -0.01     </td> <td>  0.24**** </td> <td>  0.01     </td> <td> -0.02     </td> <td>  0.02     </td> <td>  0.04*   </td> <td>  0.01     </td> <td>  0.44**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> election_radio </td> <td> -0.31**** </td> <td> -0.29**** </td> <td>  0.17**** </td> <td>  0.22**** </td> <td>  0.13**** </td> <td>  0.18**** </td> <td>  0.07***  </td> <td>  0.12**** </td> <td>  0.19**** </td> <td>  0.22**** </td> <td>  0.21**** </td> <td>  0.16**** </td> <td>  0.02     </td> <td>  0.19**** </td> <td> -0.03     </td> <td> -0.05**  </td> <td> -0.01     </td> <td>  0.02     </td> <td> -0.04**  </td> <td>  0.35**** </td> <td>  0.40**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> female </td> <td> -0.18**** </td> <td> -0.03     </td> <td>  0.07**** </td> <td>  0.08**** </td> <td> -0.02     </td> <td>  0.07**** </td> <td>  0.00     </td> <td>  0.02     </td> <td>  0.09**** </td> <td>  0.13**** </td> <td>  0.12**** </td> <td>  0.09**** </td> <td>  0.00     </td> <td>  0.09**** </td> <td> -0.01     </td> <td>  0.01     </td> <td>  0.03*   </td> <td> -0.02     </td> <td> -0.05***  </td> <td>  0.12**** </td> <td>  0.06***  </td> <td>  0.10**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> highest_qual </td> <td> -0.01     </td> <td>  0.04*   </td> <td>  0.00     </td> <td> -0.02     </td> <td> -0.01     </td> <td>  0.00     </td> <td> -0.02     </td> <td> -0.01     </td> <td> -0.02     </td> <td> -0.02     </td> <td> -0.02     </td> <td>  0.00     </td> <td> -0.01     </td> <td> -0.02     </td> <td> -0.01     </td> <td>  0.03     </td> <td> -0.03     </td> <td> -0.06***  </td> <td>  0.01     </td> <td>  0.00     </td> <td> -0.03*   </td> <td> -0.03     </td> <td> -0.12**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> tertiary_ed </td> <td>  0.24**** </td> <td>  0.10**** </td> <td> -0.18**** </td> <td> -0.19**** </td> <td> -0.03     </td> <td> -0.06***  </td> <td> -0.01     </td> <td> -0.03     </td> <td> -0.08**** </td> <td> -0.13**** </td> <td> -0.15**** </td> <td> -0.12**** </td> <td> -0.31**** </td> <td> -0.08**** </td> <td>  0.36**** </td> <td>  0.27**** </td> <td>  0.28**** </td> <td>  0.22**** </td> <td>  0.31**** </td> <td> -0.05**  </td> <td> -0.02     </td> <td> -0.08**** </td> <td>  0.03     </td> <td> -0.26**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> country_birth </td> <td> -0.03     </td> <td> -0.02     </td> <td>  0.15**** </td> <td>  0.04*   </td> <td>  0.04*   </td> <td>  0.05**  </td> <td>  0.08**** </td> <td>  0.06***  </td> <td>  0.06***  </td> <td> -0.02     </td> <td> -0.01     </td> <td> -0.05**  </td> <td>  0.00     </td> <td>  0.06***  </td> <td>  0.00     </td> <td> -0.01     </td> <td>  0.02     </td> <td>  0.01     </td> <td> -0.01     </td> <td> -0.03     </td> <td> -0.06***  </td> <td>  0.01     </td> <td> -0.02     </td> <td> -0.02     </td> <td>  0.10**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> aust_born </td> <td>  0.00     </td> <td>  0.01     </td> <td> -0.13**** </td> <td> -0.01     </td> <td> -0.02     </td> <td> -0.01     </td> <td> -0.05**  </td> <td> -0.05**  </td> <td> -0.03     </td> <td>  0.03     </td> <td>  0.02     </td> <td>  0.07**** </td> <td> -0.03     </td> <td> -0.03     </td> <td>  0.03     </td> <td>  0.04*   </td> <td>  0.01     </td> <td>  0.02     </td> <td>  0.03     </td> <td>  0.04*   </td> <td>  0.06***  </td> <td> -0.01     </td> <td>  0.03*   </td> <td> -0.01     </td> <td> -0.05**  </td> <td> -0.80**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> age </td> <td>  0.18**** </td> <td>  0.16**** </td> <td> -0.04*   </td> <td> -0.09**** </td> <td> -0.08**** </td> <td> -0.20**** </td> <td> -0.06***  </td> <td> -0.06***  </td> <td> -0.13**** </td> <td> -0.12**** </td> <td> -0.11**** </td> <td> -0.17**** </td> <td>  0.48**** </td> <td> -0.13**** </td> <td> -0.54**** </td> <td> -0.44**** </td> <td> -0.46**** </td> <td> -0.32**** </td> <td> -0.42**** </td> <td> -0.19**** </td> <td> -0.17**** </td> <td> -0.12**** </td> <td> -0.06**** </td> <td>  0.03     </td> <td> -0.20**** </td> <td>  0.01     </td> <td> -0.11**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> income </td> <td>  0.19**** </td> <td>  0.10**** </td> <td> -0.14**** </td> <td> -0.15**** </td> <td> -0.01     </td> <td> -0.01     </td> <td> -0.04**  </td> <td> -0.05**  </td> <td> -0.08**** </td> <td> -0.14**** </td> <td> -0.13**** </td> <td> -0.07**** </td> <td> -0.44**** </td> <td> -0.08**** </td> <td>  0.41**** </td> <td>  0.41**** </td> <td>  0.31**** </td> <td>  0.17**** </td> <td>  0.35**** </td> <td> -0.09**** </td> <td> -0.04*   </td> <td> -0.12**** </td> <td> -0.03     </td> <td> -0.03     </td> <td>  0.32**** </td> <td> -0.02     </td> <td>  0.04*   </td> <td> -0.34**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> rural_urban </td> <td>  0.12**** </td> <td>  0.02     </td> <td> -0.08**** </td> <td> -0.09**** </td> <td> -0.02     </td> <td> -0.01     </td> <td>  0.00     </td> <td> -0.02     </td> <td> -0.02     </td> <td> -0.06***  </td> <td> -0.07**** </td> <td> -0.08**** </td> <td> -0.17**** </td> <td> -0.02     </td> <td>  0.16**** </td> <td>  0.15**** </td> <td>  0.13**** </td> <td>  0.10**** </td> <td>  0.12**** </td> <td> -0.06***  </td> <td> -0.04*   </td> <td> -0.02     </td> <td>  0.01     </td> <td> -0.05**  </td> <td>  0.16**** </td> <td>  0.10**** </td> <td> -0.09**** </td> <td> -0.11**** </td> <td>  0.20**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> interest_pol </td> <td> -0.48**** </td> <td> -0.52**** </td> <td>  0.29**** </td> <td>  0.32**** </td> <td>  0.21**** </td> <td>  0.25**** </td> <td>  0.14**** </td> <td>  0.21**** </td> <td>  0.32**** </td> <td>  0.37**** </td> <td>  0.36**** </td> <td>  0.29**** </td> <td>  0.08**** </td> <td>  0.32**** </td> <td> -0.09**** </td> <td> -0.09**** </td> <td> -0.05**  </td> <td> -0.04**  </td> <td> -0.09**** </td> <td>  0.52**** </td> <td>  0.55**** </td> <td>  0.45**** </td> <td>  0.13**** </td> <td> -0.01     </td> <td> -0.14**** </td> <td>  0.01     </td> <td>  0.00     </td> <td> -0.23**** </td> <td> -0.11**** </td> <td> -0.02     </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> age_cat </td> <td>  0.18**** </td> <td>  0.17**** </td> <td> -0.04*   </td> <td> -0.09**** </td> <td> -0.08**** </td> <td> -0.19**** </td> <td> -0.06***  </td> <td> -0.06***  </td> <td> -0.14**** </td> <td> -0.13**** </td> <td> -0.10**** </td> <td> -0.18**** </td> <td>  0.43**** </td> <td> -0.14**** </td> <td> -0.51**** </td> <td> -0.39**** </td> <td> -0.45**** </td> <td> -0.33**** </td> <td> -0.40**** </td> <td> -0.19**** </td> <td> -0.18**** </td> <td> -0.13**** </td> <td> -0.06**** </td> <td>  0.04*   </td> <td> -0.19**** </td> <td>  0.03     </td> <td> -0.12**** </td> <td>  0.96**** </td> <td> -0.32**** </td> <td> -0.12**** </td> <td> -0.24**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> age_18_24 </td> <td> -0.11**** </td> <td> -0.12**** </td> <td> -0.01     </td> <td>  0.05**  </td> <td>  0.01     </td> <td>  0.08**** </td> <td>  0.04*   </td> <td>  0.01     </td> <td>  0.13**** </td> <td>  0.12**** </td> <td>  0.07**** </td> <td>  0.15**** </td> <td> -0.14**** </td> <td>  0.13**** </td> <td>  0.23**** </td> <td>  0.13**** </td> <td>  0.20**** </td> <td>  0.22**** </td> <td>  0.16**** </td> <td>  0.10**** </td> <td>  0.08**** </td> <td>  0.09**** </td> <td>  0.02     </td> <td> -0.08**** </td> <td> -0.04*   </td> <td> -0.03*   </td> <td>  0.07**** </td> <td> -0.48**** </td> <td>  0.03     </td> <td>  0.02     </td> <td>  0.15**** </td> <td> -0.54**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> weight </td> <td> -0.17**** </td> <td> -0.27**** </td> <td>  0.06***  </td> <td>  0.08**** </td> <td>  0.09**** </td> <td>  0.15**** </td> <td>  0.08**** </td> <td>  0.06***  </td> <td>  0.12**** </td> <td>  0.14**** </td> <td>  0.12**** </td> <td>  0.14**** </td> <td> -0.21**** </td> <td>  0.12**** </td> <td>  0.28**** </td> <td>  0.19**** </td> <td>  0.26**** </td> <td>  0.20**** </td> <td>  0.22**** </td> <td>  0.17**** </td> <td>  0.18**** </td> <td>  0.14**** </td> <td> -0.02     </td> <td>  0.00     </td> <td>  0.10**** </td> <td>  0.01     </td> <td>  0.06***  </td> <td> -0.60**** </td> <td>  0.12**** </td> <td>  0.06***  </td> <td>  0.24**** </td> <td> -0.64**** </td> <td>  0.37**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know1_correct </td> <td>  0.59**** </td> <td>  0.25**** </td> <td> -0.98**** </td> <td> -0.36**** </td> <td> -0.27**** </td> <td> -0.27**** </td> <td> -0.26**** </td> <td> -0.29**** </td> <td> -0.27**** </td> <td> -0.33**** </td> <td> -0.30**** </td> <td> -0.26**** </td> <td> -0.14**** </td> <td> -0.27**** </td> <td>  0.16**** </td> <td>  0.15**** </td> <td>  0.11**** </td> <td>  0.09**** </td> <td>  0.15**** </td> <td> -0.15**** </td> <td> -0.15**** </td> <td> -0.17**** </td> <td> -0.07**** </td> <td> -0.01     </td> <td>  0.17**** </td> <td> -0.15**** </td> <td>  0.13**** </td> <td>  0.04*   </td> <td>  0.14**** </td> <td>  0.07**** </td> <td> -0.28**** </td> <td>  0.03     </td> <td>  0.01     </td> <td> -0.06***  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know2_correct </td> <td>  0.57**** </td> <td>  0.22**** </td> <td> -0.32**** </td> <td> -0.95**** </td> <td> -0.24**** </td> <td> -0.29**** </td> <td> -0.18**** </td> <td> -0.23**** </td> <td> -0.23**** </td> <td> -0.28**** </td> <td> -0.30**** </td> <td> -0.20**** </td> <td> -0.12**** </td> <td> -0.23**** </td> <td>  0.11**** </td> <td>  0.11**** </td> <td>  0.06**** </td> <td>  0.05**  </td> <td>  0.12**** </td> <td> -0.17**** </td> <td> -0.15**** </td> <td> -0.19**** </td> <td> -0.06***  </td> <td>  0.02     </td> <td>  0.15**** </td> <td> -0.04**  </td> <td>  0.01     </td> <td>  0.07**** </td> <td>  0.13**** </td> <td>  0.09**** </td> <td> -0.26**** </td> <td>  0.07**** </td> <td> -0.04*   </td> <td> -0.06***  </td> <td>  0.30**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know3_correct </td> <td>  0.61**** </td> <td>  0.19**** </td> <td> -0.30**** </td> <td> -0.35**** </td> <td> -0.03     </td> <td> -0.27**** </td> <td> -0.07**** </td> <td> -0.16**** </td> <td> -0.21**** </td> <td> -0.27**** </td> <td> -0.28**** </td> <td> -0.22**** </td> <td> -0.13**** </td> <td> -0.21**** </td> <td>  0.14**** </td> <td>  0.12**** </td> <td>  0.10**** </td> <td>  0.06***  </td> <td>  0.13**** </td> <td> -0.15**** </td> <td> -0.12**** </td> <td> -0.15**** </td> <td> -0.14**** </td> <td> -0.02     </td> <td>  0.18**** </td> <td>  0.01     </td> <td> -0.01     </td> <td>  0.08**** </td> <td>  0.14**** </td> <td>  0.07**** </td> <td> -0.26**** </td> <td>  0.10**** </td> <td> -0.06***  </td> <td> -0.08**** </td> <td>  0.29**** </td> <td>  0.29**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know4_correct </td> <td>  0.50**** </td> <td>  0.16**** </td> <td> -0.24**** </td> <td> -0.28**** </td> <td> -0.14**** </td> <td> -0.85**** </td> <td> -0.12**** </td> <td> -0.16**** </td> <td> -0.17**** </td> <td> -0.21**** </td> <td> -0.25**** </td> <td> -0.17**** </td> <td>  0.02     </td> <td> -0.17**** </td> <td> -0.03*   </td> <td> -0.01     </td> <td> -0.03*   </td> <td> -0.05**  </td> <td> -0.01     </td> <td> -0.16**** </td> <td> -0.12**** </td> <td> -0.16**** </td> <td> -0.06**** </td> <td> -0.02     </td> <td>  0.08**** </td> <td> -0.07**** </td> <td>  0.01     </td> <td>  0.24**** </td> <td> -0.01     </td> <td> -0.01     </td> <td> -0.22**** </td> <td>  0.23**** </td> <td> -0.07**** </td> <td> -0.16**** </td> <td>  0.23**** </td> <td>  0.25**** </td> <td>  0.24**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know5_correct </td> <td>  0.52**** </td> <td>  0.17**** </td> <td> -0.22**** </td> <td> -0.26**** </td> <td> -0.08**** </td> <td> -0.20**** </td> <td>  0.30**** </td> <td> -0.15**** </td> <td> -0.17**** </td> <td> -0.23**** </td> <td> -0.24**** </td> <td> -0.17**** </td> <td> -0.06**** </td> <td> -0.17**** </td> <td>  0.04*   </td> <td>  0.06***  </td> <td>  0.01     </td> <td>  0.00     </td> <td>  0.03     </td> <td> -0.13**** </td> <td> -0.15**** </td> <td> -0.16**** </td> <td> -0.11**** </td> <td>  0.00     </td> <td>  0.09**** </td> <td>  0.01     </td> <td> -0.02     </td> <td>  0.11**** </td> <td>  0.06***  </td> <td>  0.07**** </td> <td> -0.22**** </td> <td>  0.11**** </td> <td> -0.06***  </td> <td> -0.09**** </td> <td>  0.22**** </td> <td>  0.21**** </td> <td>  0.28**** </td> <td>  0.17**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know6_correct </td> <td>  0.70**** </td> <td>  0.24**** </td> <td> -0.37**** </td> <td> -0.37**** </td> <td> -0.10**** </td> <td> -0.26**** </td> <td> -0.09**** </td> <td> -0.17**** </td> <td> -0.28**** </td> <td> -0.33**** </td> <td> -0.38**** </td> <td> -0.25**** </td> <td> -0.15**** </td> <td> -0.28**** </td> <td>  0.14**** </td> <td>  0.14**** </td> <td>  0.07**** </td> <td>  0.06***  </td> <td>  0.14**** </td> <td> -0.21**** </td> <td> -0.19**** </td> <td> -0.19**** </td> <td> -0.14**** </td> <td> -0.01     </td> <td>  0.14**** </td> <td> -0.01     </td> <td> -0.01     </td> <td>  0.09**** </td> <td>  0.13**** </td> <td>  0.09**** </td> <td> -0.31**** </td> <td>  0.10**** </td> <td> -0.03     </td> <td> -0.10**** </td> <td>  0.36**** </td> <td>  0.31**** </td> <td>  0.41**** </td> <td>  0.26**** </td> <td>  0.34**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know7_correct </td> <td>  0.67**** </td> <td>  0.30**** </td> <td> -0.34**** </td> <td> -0.33**** </td> <td> -0.13**** </td> <td> -0.29**** </td> <td> -0.14**** </td> <td> -0.19**** </td> <td> -0.53**** </td> <td> -0.39**** </td> <td> -0.36**** </td> <td> -0.36**** </td> <td> -0.08**** </td> <td> -0.53**** </td> <td>  0.05**  </td> <td>  0.09**** </td> <td>  0.00     </td> <td> -0.01     </td> <td>  0.06***  </td> <td> -0.27**** </td> <td> -0.25**** </td> <td> -0.26**** </td> <td> -0.13**** </td> <td> -0.02     </td> <td>  0.13**** </td> <td> -0.05**  </td> <td>  0.03     </td> <td>  0.23**** </td> <td>  0.10**** </td> <td>  0.07**** </td> <td> -0.41**** </td> <td>  0.23**** </td> <td> -0.14**** </td> <td> -0.19**** </td> <td>  0.34**** </td> <td>  0.27**** </td> <td>  0.30**** </td> <td>  0.27**** </td> <td>  0.25**** </td> <td>  0.43**** </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know8_correct </td> <td>  0.59**** </td> <td>  0.24**** </td> <td> -0.30**** </td> <td> -0.30**** </td> <td> -0.16**** </td> <td> -0.24**** </td> <td> -0.14**** </td> <td> -0.22**** </td> <td> -0.30**** </td> <td> -0.82**** </td> <td> -0.35**** </td> <td> -0.28**** </td> <td> -0.09**** </td> <td> -0.30**** </td> <td>  0.08**** </td> <td>  0.09**** </td> <td>  0.03*   </td> <td>  0.01     </td> <td>  0.10**** </td> <td> -0.20**** </td> <td> -0.20**** </td> <td> -0.19**** </td> <td> -0.14**** </td> <td>  0.02     </td> <td>  0.11**** </td> <td>  0.02     </td> <td> -0.03     </td> <td>  0.13**** </td> <td>  0.11**** </td> <td>  0.06***  </td> <td> -0.34**** </td> <td>  0.14**** </td> <td> -0.11**** </td> <td> -0.14**** </td> <td>  0.29**** </td> <td>  0.25**** </td> <td>  0.26**** </td> <td>  0.21**** </td> <td>  0.22**** </td> <td>  0.32**** </td> <td>  0.37**** </td> <td>  </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know9_correct </td> <td>  0.63**** </td> <td>  0.29**** </td> <td> -0.30**** </td> <td> -0.36**** </td> <td> -0.14**** </td> <td> -0.27**** </td> <td> -0.14**** </td> <td> -0.22**** </td> <td> -0.30**** </td> <td> -0.38**** </td> <td> -0.83**** </td> <td> -0.28**** </td> <td> -0.11**** </td> <td> -0.30**** </td> <td>  0.12**** </td> <td>  0.12**** </td> <td>  0.07**** </td> <td>  0.06***  </td> <td>  0.13**** </td> <td> -0.22**** </td> <td> -0.23**** </td> <td> -0.22**** </td> <td> -0.12**** </td> <td>  0.00     </td> <td>  0.16**** </td> <td>  0.00     </td> <td> -0.01     </td> <td>  0.12**** </td> <td>  0.16**** </td> <td>  0.08**** </td> <td> -0.36**** </td> <td>  0.12**** </td> <td> -0.07**** </td> <td> -0.13**** </td> <td>  0.29**** </td> <td>  0.29**** </td> <td>  0.29**** </td> <td>  0.25**** </td> <td>  0.24**** </td> <td>  0.41**** </td> <td>  0.38**** </td> <td>  0.36**** </td> <td>  </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> know10_correct </td> <td>  0.64**** </td> <td>  0.24**** </td> <td> -0.31**** </td> <td> -0.31**** </td> <td> -0.12**** </td> <td> -0.23**** </td> <td> -0.09**** </td> <td> -0.15**** </td> <td> -0.27**** </td> <td> -0.35**** </td> <td> -0.32**** </td> <td> -0.39**** </td> <td> -0.12**** </td> <td> -0.27**** </td> <td>  0.12**** </td> <td>  0.12**** </td> <td>  0.07**** </td> <td>  0.06***  </td> <td>  0.12**** </td> <td> -0.21**** </td> <td> -0.17**** </td> <td> -0.23**** </td> <td> -0.13**** </td> <td> -0.02     </td> <td>  0.20**** </td> <td>  0.12**** </td> <td> -0.12**** </td> <td>  0.14**** </td> <td>  0.10**** </td> <td>  0.09**** </td> <td> -0.35**** </td> <td>  0.16**** </td> <td> -0.12**** </td> <td> -0.13**** </td> <td>  0.30**** </td> <td>  0.26**** </td> <td>  0.31**** </td> <td>  0.22**** </td> <td>  0.27**** </td> <td>  0.37**** </td> <td>  0.45**** </td> <td>  0.34**** </td> <td>  0.33**** </td> <td>  </td> </tr>\n  <tr> <td align=\"right\"> income_quintiles </td> <td>  0.18**** </td> <td>  0.09**** </td> <td> -0.13**** </td> <td> -0.14**** </td> <td> -0.01     </td> <td> -0.01     </td> <td> -0.03*   </td> <td> -0.04*   </td> <td> -0.08**** </td> <td> -0.13**** </td> <td> -0.13**** </td> <td> -0.07**** </td> <td> -0.45**** </td> <td> -0.08**** </td> <td>  0.41**** </td> <td>  0.42**** </td> <td>  0.31**** </td> <td>  0.17**** </td> <td>  0.35**** </td> <td> -0.07**** </td> <td> -0.03     </td> <td> -0.11**** </td> <td> -0.03     </td> <td> -0.02     </td> <td>  0.32**** </td> <td> -0.02     </td> <td>  0.04*   </td> <td> -0.35**** </td> <td>  0.98**** </td> <td>  0.20**** </td> <td> -0.10**** </td> <td> -0.33**** </td> <td>  0.03     </td> <td>  0.12**** </td> <td>  0.13**** </td> <td>  0.13**** </td> <td>  0.13**** </td> <td> -0.02     </td> <td>  0.06***  </td> <td>  0.12**** </td> <td>  0.09**** </td> <td>  0.10**** </td> <td>  0.15**** </td> <td>  0.10**** </td> </tr>\n   </table>\n"
-```
+## XXXXENDPROBLEMXXX
 
 
 The correlation matrix should open in your browser. Significance is indicated with stars:
@@ -607,9 +2388,5 @@ The correlation matrix should open in your browser. Significance is indicated wi
 *   ** = p < .01
 *    * = p < .05
 
-This is the end of the Bivariate statistics R code/ R-script file. The class continues in the code "Week 2, Part 3, Linear Regression.R'
-
-
-
-
+**This is the end of the Bivariate statistics R code/ R-script file. The class continues in the code "Week 2, Part 3, Linear Regression.R'**
 

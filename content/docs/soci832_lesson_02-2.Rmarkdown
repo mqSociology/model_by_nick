@@ -21,7 +21,7 @@ Last updated: 27 Dec 2018
 *_Author_: Nicholas Harrigan*
 
 
-### Stuff you need to do before starting 
+# Stuff you need to do before starting 
 
 1) Change this to your working directory
 
@@ -53,18 +53,18 @@ elect_2013 <- read.csv("elect_2013.csv")  # loads dataset
     elect_2013 <- elect_2013[,2:ncol(elect_2013)]
 ```
 
-### 1. Crosstabs 
+# 1. Crosstabs 
 
 This section shows how to cross- tabulate the levels of two variables. This is often one of the simplest ways to get a quick look at the relationship between two variables
 
-#### Crosstabs Example 1: Pol Know vs Likelihood voting 
+## Crosstabs Example 1: Pol Know vs Likelihood voting 
 
 This is how the command 'ctable()' presents a cross tabulation with default settings:
 
 ```{r}
 print(ctable(elect_2013$pol_knowledge, 
      elect_2013$likelihood_vote), 
-     method = "browser")
+     method = 'rmarkdown')
 ```
 
 Notice that each cell in the table has two numbers the first number is the number of survey respondents who had those two values of the two variables.  For exampke, there are 51 people who got zero on the political knowledge quiz, and who also said their likelihood of voting if voting was not compulsory was 'definitely not' (i.e. a 1 on a 5 point scale). The second number in each cell (contained in brakets)  is a percentage. In this default setting, this is the row percentage - the percentage of people with a political knowledge score of zero, who have a '1' on the 'likelihood_vote' variable. You can see that this is 12.44%. 
@@ -79,48 +79,58 @@ So this command displays column totals
 print(ctable(elect_2013$pol_knowledge, 
       elect_2013$likelihood_vote, 
       prop = "c"),
-      method = "browser", footnote = NA)
+      method = 'rmarkdown', footnote = NA)
 ```
 
 Percentages of the total number of participants/cases
 
+```{r}
     print(ctable(elect_2013$pol_knowledge, 
           elect_2013$likelihood_vote, 
           prop = "t"),
-          method = "browser", footnote = NA)
+          method = 'rmarkdown', footnote = NA)
+```
 
 No percentages
 
+```{r}
     print(ctable(elect_2013$pol_knowledge, 
           elect_2013$likelihood_vote, 
           prop = "n"),
-          method = "browser", footnote = NA)
+          method = 'rmarkdown', footnote = NA)
+```
 
 As with the other summarytools functions, you can use various arguments to clean up the display of your table. Note that for some reason we use the argument 'useNA' rather than 'report.nas' to remove NAs from our table.
 
+````{r}
     print(ctable(elect_2013$pol_knowledge, 
           elect_2013$likelihood_vote, 
           omit.headings = TRUE, 
           totals = FALSE, 
           useNA = "no",
           prop = "n"),
-          method = "browser", footnote = NA)
+          method = 'rmarkdown', footnote = NA)
+```
 
-#### 2. Comparison of means
+# 2. Comparison of means
 
 We will learn about the basic ways to compare the difference in means of two groups - one where the groups are independent (e.g. height of men and women), and one where they are paired (e.g. height of the same people at age 15 and age 15.5 years).
 
 Let's say we want to compare the political knowledge of men and women in our dataset. We want to ask if the mean for men, and the mean for women is different the command to test this is 't.test'.
 
+```{r}
     t.test(elect_2013$pol_knowledge ~ elect_2013$female)
+```
 
 In the console window you should see:
 
-    Welch Two Sample t-test  data:  elect_2013$pol_knowledge by elect_2013$female t = 11.64, df = 3838.6, p-value < 2.2e-16 alternative hypothesis: true difference in means is not equal to 0 95 percent confidence interval: 0.8891745 1.2493867 
-    sample estimates: 
-    mean in group 0 mean in group 1
-          5.328302        4.259021 
-    >
+```{r}
+# Welch Two Sample t-test  data:  elect_2013$pol_knowledge by elect_2013$female t = 11.64, df = 3838.6, p-value < 2.2e-16 alternative hypothesis: true difference in means is not equal to 0 95 percent confidence interval: 0.8891745 1.2493867 
+#     sample estimates: 
+#     mean in group 0 mean in group 1
+#           5.328302        4.259021 
+#     >
+```
 
 Now I know this looks like a mess, but it is actually not too difficult to understand. The fundamental rule I teach is that the first thing you do when you run a test is look at the p-value, and see if it is below 0.05. If it is not below 0.05, then there is generally not a need to interpret anything else because the test is not significant. [There is a complication to this instruction, because some statistical commands give multiple p-values - one for each variable, and one for the model overall - but we will deal with that later] So if we follow this rule of looking at the p-value first, What does it say? 
 
@@ -129,16 +139,20 @@ The p-value in this case is "p-value < 2.2e-16". What does that mean? it means t
 So what is the next step for intepreting this output? 
 
 Let's look at the last three line. They say:
-    
-    sample estimates: 
-    mean in group 0 mean in group 1
-          5.328302        4.259021 
 
+```{r}    
+# sample estimates: 
+# mean in group 0 mean in group 1
+#       5.328302        4.259021 
+```
+      
 This is telling us that the mean of the group with value "0" is 5.33, and the mean for the group with value "1" is 4.26. But what is group 0 and 1? Well we need to look at our data. The means are measure in "pol_knowledge" units, and the variable for gender is 1 = female, and 0 = male. so this tells us that the mean political knowledge for men in our sample is 5.3, and for women is 4.3.
 
 We could stop interpreting our data here, but there is another useful part of the output to interpret. Look at these two lines:
 
-    95 percent confidence interval: 0.8891745 1.2493867
+```{r}
+#    95 percent confidence interval: 0.8891745 1.2493867
+```
 
 This tells us that the 'difference of means' between men and women has a 95% confidence interval of 0.89 to 1.25. This says that the TRUE difference between men and women - the population parameter - is with 95% certainty between 0.89 and 1.25. 
 
@@ -146,38 +160,44 @@ The second type of comparison of means we are going to run is the paired test. I
 
 In the next example, we are going to compare participants average score for 'following the election on TV' vs 'following the election in the newspaper'.
 
-    t.test(elect_2013$election_tv, 
-       elect_2013$election_newspaper, 
-       paired = TRUE)
+```{r}
+t.test(elect_2013$election_tv, 
+   elect_2013$election_newspaper, 
+   paired = TRUE)
+```
 
 This can be read in the same way as the previous t-test except that in this case the last line reports the difference in means, not the two means. 
 
 Intuitively we know that this means people followed the election more in the newspaper than on TV, but we can check this, by just running two means() to double check we are right:
 
-    mean(elect_2013$election_tv, na.rm = TRUE)
-
-    mean(elect_2013$election_newspaper, na.rm = TRUE)
+```{r}
+mean(elect_2013$election_tv, na.rm = TRUE)
+```
+```{r}
+mean(elect_2013$election_newspaper, na.rm = TRUE)
+```
 
 And you can see that what we thought was true is, with people having an average score of 2.01 for election_tv, and 2.43 for election_newspaper.
 
-#### 3. Correlation
+# 3. Correlation
 
 Coorelation coefficents are some of the most widely used and reported statistics in academic papers. In this section we learn about how to obtain the most common types of correlation coefficients. We also create our own function for making very attractive correlation matricies.
 
 We will be needing these two packages later, so make sure you have installed them, and also loaded them into this session of by calling them using the 'library' command.
 
 ```{r}
-    install.packages("Hmisc", 
-                 repos = 'http://cran.rstudio.com') # hash this out after installing on your computer
-    install.packages("xtable", 
-                 repos = 'http://cran.rstudio.com') # and this.
-    library(xtable)
-    library(Hmisc)
+install.packages("Hmisc", repos = 'http://cran.rstudio.com') 
+# hash this out after installing on your computer
+install.packages("xtable", repos = 'http://cran.rstudio.com') 
+# and this.
+library(xtable)
+library(Hmisc)
 ```
     
 The third form of bivariate statistics we are learning about today is correlation, and in particular correlation coefficients. 
 
 Correlation coefficients can roughly be defined as: 
+
 * a measure of the relationship between two variables 
 * that is standardised so that 
 ** a perfect positive correlation is 1 
@@ -219,6 +239,7 @@ This can be seen in Field et al. 2012 in equation 6.3.
 And the result is a magical number called Pearon's r.
 
 When a statistical packages such as R calculates a Pearons's r for you, there two questions you should be asking about the number: 
+
 * Is it 'significant'? - which we measure with p-value and/or confidence intervals. 
 * Is it 'important'? - which we call the effect size.
 
@@ -235,6 +256,7 @@ A variable has a large effect on another variable if, for example, a one standar
 We can see here that we are thinking about how variance, measured in standardised units, in one variable is related to variance in another. 
 
 Anyway, we will be returning to effect size quite a few times in this course, for the moment, I just want you to know that in the case of Pearson's r, effect size is measured DIRECTLY in the coefficient. And the rule of thumb for interpreting effect sizes of a Pearson's r are:
+
 * small effect size: +/- 0.1 - 0.2
 * medium effect size: +/- 0.3 - 0.4
 * large effect size: +/- 0.5+
@@ -248,13 +270,14 @@ It turns out that R-squared can be read directly as the "Proportion of variation
 In short, it can basically be read like a proportion (or if you like, percentage, just multiple by 100).
 
 So if we transform these Pearson's r into R-square, we can rewrite the rule of thumb for effect size measured in R-square as: 
+
 * small effect size: 0.01-0.04 (i.e 1%-4%) 
 * medium effect size: 0.09-0.16 (i.e.9%-16%) 
 * large effect size: 0.25+ (ie. 25%+)
 
 With these rules of thumb in hand, let's look at our data and analysis it with R.
 
-#### Correlation Method 1: cor.test()
+## Correlation Method 1: cor.test()
 
 The two simplest commands to get a correlation coefficient are cor() and cor.test()
 
@@ -264,19 +287,24 @@ Let's look at the correlation between five different variables and likelihood of
 
 This first correlation shows the relationship between urban/rural location and likelihood of voting
 
-    cor.test(elect_2013$rural_urban, elect_2013$likelihood_vote)
+```{r}
+cor.test(elect_2013$rural_urban, 
+         elect_2013$likelihood_vote)
+```
 
 You should see something like the following in your console window:
-          
-                Pearson's product-moment correlation  
-    data:  elect_2013$rural_urban and elect_2013$likelihood_vote 
-    t = 1.3682, df = 3801, p-value = 0.1713 
-    alternative hypothesis: true correlation is not equal to 0 
-    95 percent confidence interval:  
-    -0.009604256  0.053932694 
-    sample estimates: 
-        cor
-        0.02218662 
+
+```{r}          
+# Pearson's product-moment correlation  
+# data:  elect_2013$rural_urban and elect_2013$likelihood_vote 
+# t = 1.3682, df = 3801, p-value = 0.1713 
+# alternative hypothesis: true correlation is not equal to 0 
+# 95 percent confidence interval:  
+# -0.009604256  0.053932694 
+# sample estimates: 
+# cor
+# 0.02218662 
+```
  
 How do we read this? 
 
@@ -287,26 +315,35 @@ We can also see this when we look at the 95% confidence interval, which is from 
 We can also see that the correlation coefficient is 0.022 - which is tiny. Remember that a correlation of 0.1 is considered a small effect size, and this is one fifth of that. 
 
 Let's next look at the effect of highest educational qualification:
-    
-    cor.test(elect_2013$highest_qual, elect_2013$likelihood_vote)
+
+```{r}
+cor.test(elect_2013$highest_qual,
+        elect_2013$likelihood_vote)
+```
 
 in this case, the p-value is below 0.05, so the correlation is significant, but when you look at the correlation coefficient - it is basically 0.04, which again is tiny. So this is a case of 'significant' but 'not very meaningful'.
 
 Next let's look at the impact of internet skills on the likelihood of voting:
 
-    cor.test(elect_2013$internet_skills, elect_2013$likelihood_vote)
+```{r}
+cor.test(elect_2013$internet_skills, elect_2013$likelihood_vote)
+```
 
 In this case, the correlation is highly significant and the effect size - basically 0.09 - is small but meaningful. So those people who have better internet skills tend to be more likely to vote.
 
 Next let's look at something with a much larger effect size: political knowledge. 
 
-    cor.test(elect_2013$pol_knowledge, elect_2013$likelihood_vote)
+```{r}
+cor.test(elect_2013$pol_knowledge, elect_2013$likelihood_vote)
+```
 
 In this case the p-value is incredibly small, and the correlation coefficient is 0.37 - a medium sized effect. 
 
 Last, let's look at the impact of interest in politics:
 
-    cor.test(elect_2013$interest_pol, elect_2013$likelihood_vote)
+```{r}
+cor.test(elect_2013$interest_pol, elect_2013$likelihood_vote)
+```
 
 In this case the relationship is highly significant and effect size is large, but the relationship is negative: -0.52.
 
@@ -324,7 +361,7 @@ Thus, the real meaning of this correlation is that those who are more interested
 
 In fact, we can say that approximately 25% of the variance in likelihood of voting is explained by variance in interest in politics (by calculating the R-square).
 
-#### Correlation Method 2: corstar()
+## Correlation Method 2: corstar()
 
 AN EASY WAY TO MAKE A CORRELATION MATRIX
 
@@ -336,7 +373,7 @@ I have found a function on the internet which will allow you to easily make your
 
 The function is called 'corstar()'. 
 
-NOTE: To use it, you first need to run the code below and create the function in the memory of your computer.
+**NOTE: To use it, you first need to run the code below and create the function in the memory of your computer.**
 
 You don't need to understand the code, but do feel free to take a look.
 
@@ -344,40 +381,47 @@ When you are ready run the code from where I type #START HERE# to #END HERE#
 
 ### #START HERE# 
 ```{r}
-  corstars <-function(x, method=c("pearson", "spearman"), removeTriangle=c("upper", "lower"),
-                  result=c("none", "html", "latex")){
-    # SOURCES:
-    # * http://www.sthda.com/english/wiki/elegant-correlation-table-using-xtable-r-package
-    # * http://myowelt.blogspot.com/2008/04/beautiful-correlation-tables-in-r.html
-    # * https://stat.ethz.ch/pipermail/r-help/2008-March/156583.html
+corstars <-function(x, method=c("pearson", "spearman"),
+                    removeTriangle=c("upper", "lower"),
+                    result=c("none", "html", "latex")){
+# SOURCES:
+# * http://www.sthda.com/english/wiki/elegant-correlation-table-using-xtable-r-package
+# * http://myowelt.blogspot.com/2008/04/beautiful-correlation-tables-in-r.html
+# * https://stat.ethz.ch/pipermail/r-help/2008-March/156583.html
 
-    #Compute correlation matrix
+#Compute correlation matrix
     require(Hmisc)
     x <- as.matrix(x)
     correlation_matrix<-rcorr(x, type=method[1])
-    R <- correlation_matrix$r # Matrix of correlation coeficients
-    p <- correlation_matrix$P # Matrix of p-value
+    R <- correlation_matrix$r 
+      # Matrix of correlation coeficients
+    p <- correlation_matrix$P 
+      # Matrix of p-value
 
-    ## Define notions for significance levels; spacing is important.
-    mystars <- ifelse(p < .0001, "****", ifelse(p < .001, "*** ", ifelse(p < .01, "** ", ifelse(p < .05, "*  ", "    "))))
+## Define notions for significance levels; spacing is important.
+    mystars <- ifelse(p < .0001, "****", 
+                  ifelse(p < .001, "*** ", 
+                    ifelse(p < .01, "** ", 
+                      ifelse(p < .05, "*  ", "    "))))
 
-    ## trunctuate the correlation matrix to two decimal
-    R <- format(round(cbind(rep(-1.11, ncol(x)), R), 2))[,-1]
+## trunctuate the correlation matrix to two decimal
+    R <- format(round(cbind(rep(-1.11, 
+                                ncol(x)), R), 2))[,-1]
 
-    ## build a new matrix that includes the correlations with their apropriate stars
+## build a new matrix that includes the correlations with their apropriate stars
     Rnew <- matrix(paste(R, mystars, sep=""), ncol=ncol(x))
     diag(Rnew) <- paste(diag(R), " ", sep="")
     rownames(Rnew) <- colnames(x)
     colnames(Rnew) <- paste(colnames(x), "", sep="")
 
-    ## remove upper triangle of correlation matrix
+## remove upper triangle of correlation matrix
     if(removeTriangle[1]=="upper"){
       Rnew <- as.matrix(Rnew)
       Rnew[upper.tri(Rnew, diag = TRUE)] <- ""
       Rnew <- as.data.frame(Rnew)
     }
 
-    ## remove lower triangle of correlation matrix
+## remove lower triangle of correlation matrix
     else if(removeTriangle[1]=="lower"){
       Rnew <- as.matrix(Rnew)
       Rnew[lower.tri(Rnew, diag = TRUE)] <- ""
@@ -402,6 +446,7 @@ You have loaded 'corstars()' into your computer you can now run the corstars com
 I have created the code below to allow you to run, save, and view the output of corstars(). 
 
 The three lines of code below will: 
+
 1. create a correlation table and save it in variable x 
 2. save this to your computer as a file 
 3. open that file in a browser, so you can see the table. 
@@ -414,10 +459,30 @@ Feel free to run the following code:
     browseURL("output.html")
 ```
 
-```{r echo=FALSE}
-    x <- print(xtable(corstars(elect_2013)), type="html")
-    x
+# XXXXPROBLEMXXXX
+The command below (which use xtable with the corstarts function) basically can only produce tables in HTML and RMarkdown, and when it does, it does not format and just produces the code(because it is inside the ` ` ` code blocks).
+
+I was able to get HTML to print to RMarkdown in Lesson 2.1 when I used one of the summaryTools functions - I ended up using RMarkdown output, but actually HTML gave a very similar output. 
+
+## Next Actions:
+
+1. google xtable and blogdown and rmarkdown
+2. look at lesson 2.1 (832) and try to work out why the HTML will render properly in that, but not in this code
+
+## Research:
+
+* This website uses xtable and rmarkdown, but still puts the xtable output on another website!
+https://blogs.reed.edu/ed-tech/2015/10/creating-nice-tables-using-r-markdown/
+* That website uses kable() in knitr for tables.
+
+
+```{r, echo=FALSE}
+    kable(print(xtable(corstars(elect_2013))))
+
+
 ```
+
+## XXXXENDPROBLEMXXX
 
 
 The correlation matrix should open in your browser. Significance is indicated with stars:
@@ -427,9 +492,5 @@ The correlation matrix should open in your browser. Significance is indicated wi
 *   ** = p < .01
 *    * = p < .05
 
-This is the end of the Bivariate statistics R code/ R-script file. The class continues in the code "Week 2, Part 3, Linear Regression.R'
-
-
-
-
+**This is the end of the Bivariate statistics R code/ R-script file. The class continues in the code "Week 2, Part 3, Linear Regression.R'**
 
