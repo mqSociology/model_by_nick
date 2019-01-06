@@ -4,7 +4,7 @@ title: "SOCI832 Lesson 2.2: Bivariate analysis"
 lastmod: 2018-12-28T00:00:00.000Z
 
 draft: false
-toc: true
+toc: false
 type: docs
 
 linktitle: "2.2 Bivariate analysis"
@@ -454,7 +454,7 @@ The three lines of code below will:
 Feel free to run the following code:
 
 ```{r eval=FALSE}
-    x <- print(xtable(corstars(elect_2013)), type="html")
+    x <- print(xtable(corstars(elect_2013)), type="latex")
     dput(x, file = "output.html")
     browseURL("output.html")
 ```

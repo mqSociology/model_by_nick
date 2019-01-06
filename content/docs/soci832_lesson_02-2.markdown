@@ -4,7 +4,7 @@ title: "SOCI832 Lesson 2.2: Bivariate analysis"
 lastmod: 2018-12-28T00:00:00.000Z
 
 draft: false
-toc: true
+toc: false
 type: docs
 
 linktitle: "2.2 Bivariate analysis"
@@ -51,7 +51,7 @@ install.packages("summarytools",
 ## package 'summarytools' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\nickh\AppData\Local\Temp\RtmpkLMNKA\downloaded_packages
+## 	C:\Users\nickh\AppData\Local\Temp\RtmpYNvCTp\downloaded_packages
 ```
 
 ```r
@@ -1878,7 +1878,7 @@ install.packages("Hmisc", repos = 'http://cran.rstudio.com')
 ## package 'Hmisc' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\nickh\AppData\Local\Temp\RtmpkLMNKA\downloaded_packages
+## 	C:\Users\nickh\AppData\Local\Temp\RtmpYNvCTp\downloaded_packages
 ```
 
 ```r
@@ -1895,7 +1895,7 @@ install.packages("xtable", repos = 'http://cran.rstudio.com')
 ## package 'xtable' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\nickh\AppData\Local\Temp\RtmpkLMNKA\downloaded_packages
+## 	C:\Users\nickh\AppData\Local\Temp\RtmpYNvCTp\downloaded_packages
 ```
 
 ```r
@@ -2303,13 +2303,13 @@ Feel free to run the following code:
 
 
 ```r
-    x <- print(xtable(corstars(elect_2013)), type="html")
+    x <- print(xtable(corstars(elect_2013)), type="latex")
     dput(x, file = "output.html")
     browseURL("output.html")
 ```
 
 <!-- html table generated in R 3.5.1 by xtable 1.8-3 package -->
-<!-- Sun Jan 06 17:01:21 2019 -->
+<!-- Sun Jan 06 22:44:01 2019 -->
 <table border=1>
 <tr> <th>  </th> <th> pol_knowledge </th> <th> likelihood_vote </th> <th> know1 </th> <th> know2 </th> <th> know3 </th> <th> know4 </th> <th> know5 </th> <th> know6 </th> <th> know7 </th> <th> know8 </th> <th> know9 </th> <th> know10 </th> <th> general_internet </th> <th> election_internet </th> <th> internet_skills </th> <th> int_attch </th> <th> int_post </th> <th> int_blog </th> <th> int_down </th> <th> election_newspaper </th> <th> election_tv </th> <th> election_radio </th> <th> female </th> <th> highest_qual </th> <th> tertiary_ed </th> <th> country_birth </th> <th> aust_born </th> <th> age </th> <th> income </th> <th> rural_urban </th> <th> interest_pol </th> <th> age_cat </th> <th> age_18_24 </th> <th> weight </th> <th> know1_correct </th> <th> know2_correct </th> <th> know3_correct </th> <th> know4_correct </th> <th> know5_correct </th> <th> know6_correct </th> <th> know7_correct </th> <th> know8_correct </th> <th> know9_correct </th> <th> know10_correct </th>  </tr>
   <tr> <td align="right"> pol_knowledge </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> <td>  </td> </tr>
