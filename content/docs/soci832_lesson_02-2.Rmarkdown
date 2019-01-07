@@ -21,19 +21,21 @@ Last updated: 27 Dec 2018
 *_Author_: Nicholas Harrigan*
 
 
-# Stuff you need to do before starting 
+# Stuff you need to do before starting
 
-1) Change this to your working directory
+### 1) Change this to your working directory
 
 ```{r eval=FALSE}
 setwd("C:/G/2018, SOCI832/Datasets/AES 2013/") 
 ```
 
-2) Put the file "elect_2013.csv" into that folder This file can be found here: <https://mqsociology.github.io/learn-r/soci832/elect_2013.csv> 
+### 2) Put the file "elect_2013.csv" into that folder This file can be found here:
+<https://mqsociology.github.io/learn-r/soci832/elect_2013.csv> 
 
-3) Keep the codebook openned in a browser so you can refer to it when you need it. The codebook is here: <https://mqsociology.github.io/learn-r/soci832/codebook%20aes%202013.html> 
+### 3) Keep the codebook openned in a browser so you can refer to it when you need it. The codebook is here:
+<https://mqsociology.github.io/learn-r/soci832/codebook%20aes%202013.html> 
 
-4) Install summarytools package if you havne't already
+### 4) Install summarytools package if you havne't already
 
 ```{r}
 install.packages("summarytools", 
@@ -41,13 +43,14 @@ install.packages("summarytools",
 library(summarytools) # load the library
 ``` 
 
-5) Import the data
+### 5) Import the data
 
 ```{r}
 elect_2013 <- read.csv("elect_2013.csv")  # loads dataset 
 ```
 
-6) The next command (below) gets rid of the first column which is not needed. FYI the command works by saying  "copy all columns except the first". NOTE: Only run this command once after you run the 'read.csv' command. Each time you run it, it deletes the first variable. 
+### 6) The next command (below) gets rid of the first column which is not needed. 
+FYI the command works by saying  "copy all columns except the first". NOTE: Only run this command once after you run the 'read.csv' command. Each time you run it, it deletes the first variable. 
 
 ```{r}
     elect_2013 <- elect_2013[,2:ncol(elect_2013)]
@@ -116,6 +119,8 @@ As with the other summarytools functions, you can use various arguments to clean
 
 We will learn about the basic ways to compare the difference in means of two groups - one where the groups are independent (e.g. height of men and women), and one where they are paired (e.g. height of the same people at age 15 and age 15.5 years).
 
+### Example 1
+
 Let's say we want to compare the political knowledge of men and women in our dataset. We want to ask if the mean for men, and the mean for women is different the command to test this is 't.test'.
 
 ```{r}
@@ -157,6 +162,8 @@ We could stop interpreting our data here, but there is another useful part of th
 This tells us that the 'difference of means' between men and women has a 95% confidence interval of 0.89 to 1.25. This says that the TRUE difference between men and women - the population parameter - is with 95% certainty between 0.89 and 1.25. 
 
 The second type of comparison of means we are going to run is the paired test. In a paired test the two variables to be measured are measured on the same units of analysis The reason we need a different test for this is because when the same unit of analysis is used for the two variables the two variables are dependent on each other - they are not independent samples - as so the statistical test changes to account for this.
+
+###  Example 2
 
 In the next example, we are going to compare participants average score for 'following the election on TV' vs 'following the election in the newspaper'.
 
@@ -454,12 +461,12 @@ The three lines of code below will:
 Feel free to run the following code:
 
 ```{r eval=FALSE}
-    x <- print(xtable(corstars(elect_2013)), type="latex")
+    x <- print(xtable(corstars(elect_2013)), type="html")
     dput(x, file = "output.html")
     browseURL("output.html")
 ```
 
-```{r, echo=FALSE, results='asis'}
+```{r echo=FALSE, results='asis'}
     print(xtable(corstars(elect_2013)), type="html")
 ```
 
