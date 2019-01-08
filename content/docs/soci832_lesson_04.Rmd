@@ -15,21 +15,23 @@ menu:
     weight: 40
 ---
 
-{{% toc %}}
 
-*Last updated: 14 Aug 2018*
+$$ y = x $$
 
-***Author:** Nicholas Harrigan*
+$$f(k;p\_0^*) = \begin{cases} p\_0^* & \text{if }k=1, 1-p\_0^* & \text {if }k=0.\end{cases}$$
 
-# Summary
 
- "This week we are going to deal with three main topics: (1) dummy variables and interaction effects; (2) regression diagnostics; and (3) logit and probit regressions."
- 
-$$f(k;p\_0^\*) = \begin{cases} p\_0^\* & \text{if }k=1, \\\\\\
-1-p\_0^\* & \text {if }k=0.\end{cases}$$
+$$f(k;p\_0^\*) = \begin{cases} p\_0^\* & \text{if }k=1, \\\\\\ 1-p\_0^\* & \text {if }k=0.\end{cases}$$
 
+<div> 
+$$f(k;p\_0^*) = \begin{cases} p\_0^* & \text{if }k=1, \\\\\\
+1-p\_0^* & \text {if }k=0.\end{cases}$$
+</div> 
+
+<div>
 $$\text{softmax}(z)_j = \frac{e^{z_j}}{\sum_i^{\text{dim}(z)}e^{z_i}}$$ 
-    
+</div>  
+  
     length(model_1$coefficients) - 1
     n <- length(diagnostics) 
 

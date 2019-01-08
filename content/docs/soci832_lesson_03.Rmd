@@ -413,14 +413,11 @@ And then we can check that the maxmimum leverage is below the prescribed level o
     n <- length(diagnostics) 
 ```
     
-```{}
-MAXIMUM LEVERAGE ALLOWED >
-    ((k + 1)/n)*3 
-```
 
-```{}
-MAX LEVERAGE IN THIS DATA >
-```
+$$\text{MAXIMUM  LEVERAGE}= ((k + 1)/n)*3 $$
+
+MAXIMUM LEVERAGE IN THIS DATA =
+
 ```{r}
     max(diagnostics$leverage)
 ```
