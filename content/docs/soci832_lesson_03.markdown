@@ -1,0 +1,1335 @@
+---
+title: "SOCI832 Lesson 3: Regression in R"
+
+lastmod: 2019-01-07T00:00:00.000Z
+
+draft: false
+toc: false
+type: docs
+
+linktitle: "3. Linear Regression in R"
+menu:
+  docs:
+    parent: SOCI832
+    weight: 40
+---
+
+{{% toc %}}
+
+*Last updated: 14 Aug 2018*
+
+***Author:** Nicholas Harrigan*
+
+# Summary
+
+ "This week we are going to deal with three main topics: (1) dummy variables and interaction effects; (2) regression diagnostics; and (3) logit and probit regressions."
+
+
+# Before you start
+
+
+```r
+    setwd("C:/G/2018, SOCI832/Datasets/AES 2013/")
+```
+
+```r
+    install.packages("readr", 
+                 repos = 'http://cran.rstudio.com')
+```
+
+```
+## Installing package into 'C:/Users/nickh/Documents/R/win-library/3.5'
+## (as 'lib' is unspecified)
+```
+
+```
+## package 'readr' successfully unpacked and MD5 sums checked
+## 
+## The downloaded binary packages are in
+## 	C:\Users\nickh\AppData\Local\Temp\RtmpQVI9Ai\downloaded_packages
+```
+
+```r
+    library(readr)
+```
+
+```
+## Warning: package 'readr' was built under R version 3.5.2
+```
+
+```r
+    elect_2013 <- read.csv("elect_2013.csv")
+```
+    
+# Part 1: Dummy Variables & Interaction Effects
+
+In the first section of this week we  will learn about how to create, run, and interpret dummy variables and  interaction effects.  
+
+## 1.1 Dummy Variables
+
+### Theory
+
+Dummy variables are a fancy name for  variables that are binary variable -  with just two values - 0 and 1. Dummy variables are particularly important  when we have to analyse catagorical variables. 
+ 
+Remember that categorical variables are those where there are many levels or potential values of the variable but those values or levels have no numeric meaning or ranking. Examples of categorical variables include:  
+
+1. the major students study (english, sociology, biology, maths, etc.); 
+2. the political party voted for (e.g. Liberal Party, One Nation, Labor, Greens, etc.); or 
+3. country of birth. 
+ 
+Notice that in each of these cases the values of variable (english,  sociology, maths, etc.) have no rank or mathematical equivalent meaning. Instead the values of the variable are 'boxes': they are just categories in which to place stuff - or more precisely, they are labels which we attach to our units of analysis (students).  
+ 
+But what does the existence of  categorical variables have to do with the need for dummy variables?  Well, the problem is that we want to do statistics with categorical variables, and, in particular, we want to include categorical variables as predictors (independent variables) in linear regression models. 
+
+#### Example of screwing up analysis of a categorical variable
+
+The best way I can illustrate the problem with categorical variables is to tell you a problem I had for almost every term I taught in Singapore for the ten years I was there. Singapore has a  racial classification system where everyone with citizenship is assigned as either Chinese, Indian, Malay, or Other (CIMO). In my classes, students would do various surveys, and when they did they would ask people their race as a matter of  course. And then they would code it in their excel spreadsheets before  importing into R (or SPSS). And they would code Chinese as 1,  Indian as 2, Malay as 3, and Other as 4. 
+
+And then there would always be at least one group each semester who  would run a regression - where the outcome was something like support for gay marriage - and they would put 'race' in as a variable. Now no matter whether they found that the variable was significant or  not, they would have a problem if they just put it in as normal variable. If you just put a variable in as a standard variable, then  R is going to interpret it as a  numeric or continuous variable, where the numbers are units on some scale. And when students would do this with race, I would always ask "Is an  Indian twice as much race as a Chinese person?" And is a Malay three units of race while Chinese only one? Clearly such questions are silly. Why?  Because you can't reduce races to  multiples of each other! And it  turns out that this is the case with virtually all the different values of categorical variables. 
+ 
+So how do we deal with this instead? Well dummy variables is the most  common solution which statisticians have converged on. In essence  a dummy variable is the extraction of one value of a categorical variable and the transformation of it into a single variable that has the value of one when the category exists and a value of zero when it doesn't.  
+ 
+And we say that we 'dummy out' a  categorical variable when we transform all the values of a categorical variable into their own dummy variables. For  example, we could 'dummy out' the race variable in a Singaporean dataset by creating four variables: Chinese, Indian, Malay, and Other. And for each of these variables, the value would be 1 (one) if the individual had that  characteristics, and zero otherwise. So, for example, an indian student would have zero for the 'chinese' variable, one for the 'indian' variable zero for the 'malay' variable, and  zero for the 'other' variable.  
+ 
+### R Script
+
+There are a few different strategies you can use to dummy-out categorical variables. 
+ 
+##### 1. as.factor() in regression
+
+The easiest thing to do, if you are doing a regression model, is to put the variable name inside the function 'as.factor()'. 
+ 
+Compare the following two regression models
+
+
+```r
+summary(lm(elect_2013$pol_knowledge ~ elect_2013$highest_qual))
+```
+
+```
+## 
+## Call:
+## lm(formula = elect_2013$pol_knowledge ~ elect_2013$highest_qual)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.8298 -2.7734  0.1815  2.2153  5.2379 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)              4.84104    0.08741  55.384   <2e-16 ***
+## elect_2013$highest_qual -0.01127    0.02149  -0.525      0.6    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.893 on 3793 degrees of freedom
+##   (160 observations deleted due to missingness)
+## Multiple R-squared:  7.253e-05,	Adjusted R-squared:  -0.0001911 
+## F-statistic: 0.2751 on 1 and 3793 DF,  p-value: 0.5999
+```
+
+
+
+```r
+summary(lm(elect_2013$pol_knowledge ~ as.factor(elect_2013$highest_qual)))
+```
+
+```
+## 
+## Call:
+## lm(formula = elect_2013$pol_knowledge ~ as.factor(elect_2013$highest_qual))
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.1608 -2.1608  0.0711  2.0711  6.0711 
+## 
+## Coefficients:
+##                                     Estimate Std. Error t value Pr(>|t|)
+## (Intercept)                          3.92889    0.08239  47.687  < 2e-16
+## as.factor(elect_2013$highest_qual)2  2.23190    0.14752  15.130  < 2e-16
+## as.factor(elect_2013$highest_qual)3  1.73288    0.13880  12.485  < 2e-16
+## as.factor(elect_2013$highest_qual)4  1.67825    0.22857   7.342 2.55e-13
+## as.factor(elect_2013$highest_qual)5  1.50603    0.17616   8.549  < 2e-16
+## as.factor(elect_2013$highest_qual)6  0.46510    0.13517   3.441 0.000586
+## as.factor(elect_2013$highest_qual)7  0.12611    0.16087   0.784 0.433131
+##                                        
+## (Intercept)                         ***
+## as.factor(elect_2013$highest_qual)2 ***
+## as.factor(elect_2013$highest_qual)3 ***
+## as.factor(elect_2013$highest_qual)4 ***
+## as.factor(elect_2013$highest_qual)5 ***
+## as.factor(elect_2013$highest_qual)6 ***
+## as.factor(elect_2013$highest_qual)7    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.763 on 3788 degrees of freedom
+##   (160 observations deleted due to missingness)
+## Multiple R-squared:  0.08884,	Adjusted R-squared:  0.0874 
+## F-statistic: 61.56 on 6 and 3788 DF,  p-value: < 2.2e-16
+```
+
+Notice that for the first model there is no effect of highest_qualification on political_knowledge. However in the second, quite a few of the dummy variables -  levels 2, 3, 4, 5, and 6 - all have a positive effect on political_knowledge. Why do you think this is? 
+ 
+The answer is contained in the code book, which can be found here: https://mqsociology.github.io/learn-r/soci832/codebook%20aes%202013.html 
+ 
+You will notice that categories are not in a meaningful order: for example, 1 = no qualifications; 2 = postgrad degree; and  5 = diploma. This is why in the first model there was no signficant effect of the variable.  
+ 
+This example also shows the importance of dummy variables and dummying out categorical variables. Using the same data, we were able to go from a model with no explanatory power  (R-squared = 0) to a decent model (R-squared = 0.09).
+
+##### 2. fastDummies package
+
+Another option is the package 'fastDummies'. The advantage of this package is that it creates the dummy variables in your dataset, which gives you the freedom to do what you want and need to the variables - such as using them in correlations or descriptive statistics or transforming them. It also gives you the freedom to include some dummy variables in your model and not include others. 
+
+
+```r
+install.packages("fastDummies", 
+                 repos = 'http://cran.rstudio.com')
+```
+
+```
+## Installing package into 'C:/Users/nickh/Documents/R/win-library/3.5'
+## (as 'lib' is unspecified)
+```
+
+```
+## package 'fastDummies' successfully unpacked and MD5 sums checked
+## 
+## The downloaded binary packages are in
+## 	C:\Users\nickh\AppData\Local\Temp\RtmpQVI9Ai\downloaded_packages
+```
+
+```r
+library(fastDummies)
+```
+
+```
+## Warning: package 'fastDummies' was built under R version 3.5.2
+```
+
+The command can be seen here. In this we are dummying out the highest_qual variable. 
+
+
+```r
+elect_2013_dummies <- dummy_cols(elect_2013, 
+                                     select_columns = c("highest_qual"))
+```
+
+Notice that we have created a new dataset. If you take a look at the dataset, it is exactly the same as elect_2013 except that it has the dummy variables added to the end of the data frame (they are called highest_qual_1, highest_qual_2, etc.). 
+ 
+## 1.2 Interaction Effects
+
+### Theory
+
+Sometimes one characteristic of our lives changes how two other aspect of our lives effect each other. For example, if I have just had a fight with my partner, then problems at work effect my stress levels a lot more. Normally problems at work have only a minor effect on my stress levels, but when I have conflict with my partner, small problems at work make me feel very stressed. In this case, we say that the interaction between "partner conflict" and  "problems at work" has a significant effect on "stress levels".  
+ 
+But how do we actually model this statistically? It turns out that modelling of interaction effects are relativley straight forward, and we just need to follow some basic principles. 
+
+##### 1. Interactions are Multiplications
+
+First, the interaction of two  independent (i.e. potentially  causal) variables is measured by multiplying the two variables.  
+
+This generally works for all types of variables - whether they are counts, continuous, or binary  variables.  
+
+You can understand how this works by thinking of the archtypical  case of two binary variables  interacting. For example,  'conflict at home' and 'problem at work'. If we were to multiply these two variables, we can think about how the subsequent variable - which we would call something like: 'confict_at_home\*problem_at_work' -  would have a 1 if I had both  conflict at home and a problem at work, and a zero otherwise.  
+ 
+When we subsequently put this variable into a regression (or any other analysis) it would capture the effect of both variables being present at the  same time.  
+
+##### 2. Include Main Effects
+
+The second key rule to remember is that we need to make sure we include both the original variables (the ones being  multiplied) in any model.  
+
+We call these original variables 'main effects'. It is important to include 'main effects' in models that have 'interaction effects' in them because otherwise we can't be sure whether any  correlation between the interaction effect and the outcome (dependent) variable is due to one of the  variables on their own, or due to the actual interaction. 
+
+To return to the example of  my stress, conflict at home, and problems at work. If we only put the interaction between conflict at home and problems at work a the model, then we did see a significant effect of this interaction on stress levels, we would have no way of  knowing if the stress was caused by the interaction, or by one or the other of the main effects. 
+ 
+##### 3. Centre Before Multiplying to Reduce Correlation with Main Effects
+
+There is a problem, however, with including main effects and the interaction in the same regression model. This problem is that the interaction effect and the main effects are often highly correlated. 
+
+As we will learn in the next section on regression diagnostics, one  of the problems with highly correlated variables in a regression model is that they violate model assumptions and produce results that are unreliable and potentially false.  
+ 
+In regression diagnostics, this problem of high correlation between main effects and interaction effects shows up as a high 'Variance Inflation Factor' (generally just called VIF). This will be explained in the next section, but I mention it to simply draw the link from the next section back to this material. 
+ 
+The way that this problem can be reduced is through a very simple mathematical transformation: centering variables prior to multiplication.  
+ 
+Centering is an incredibly simple process: for each variable, we  simply subtract the mean of the variable from each case. This moves the mean of the variable to zero.  
+ 
+For interaction effects, we simply centre each variable before multiplying it. This greatly reduces the correlation of the interaction effect with the main effects, while not changing any meaning of the interaction variable in the regression model.  
+ 
+Why this works is not something I  can definitively explain, but I believe it has to do with the fact that mean centring - by making half the  values of both variable negative, and most cases values quite close to zero -  removes much of the incidental correlation between main effect and interaction effect that comes from having the  same units of measurement.  
+ 
+R Script
+
+To run interaction effects in R, you have at least two options: to let lm() generate them for you,  or to make them yourself.  
+
+##### 1) Letting lm() generate interactions for you
+
+It is quite easy to ask lm() to include an interaction effect: you simply type the two variables with a * between them, symbolizing a multiplication sign. lm() then includes the interaction effect and the two main effects. For example:
+
+
+```r
+model_1 <- lm(elect_2013$likelihood_vote ~ 
+                elect_2013$internet_skills*elect_2013$age_18_24)
+summary(model_1)
+```
+
+```
+## 
+## Call:
+## lm(formula = elect_2013$likelihood_vote ~ elect_2013$internet_skills * 
+##     elect_2013$age_18_24)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.5609 -0.4131  0.5130  0.6608  1.5688 
+## 
+## Coefficients:
+##                                                 Estimate Std. Error
+## (Intercept)                                      4.26531    0.02987
+## elect_2013$internet_skills                       0.07389    0.01280
+## elect_2013$age_18_24                            -1.55212    0.26150
+## elect_2013$internet_skills:elect_2013$age_18_24  0.28509    0.07870
+##                                                 t value Pr(>|t|)    
+## (Intercept)                                     142.812  < 2e-16 ***
+## elect_2013$internet_skills                        5.773 8.43e-09 ***
+## elect_2013$age_18_24                             -5.935 3.19e-09 ***
+## elect_2013$internet_skills:elect_2013$age_18_24   3.623 0.000295 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.048 on 3819 degrees of freedom
+##   (132 observations deleted due to missingness)
+## Multiple R-squared:  0.02784,	Adjusted R-squared:  0.02707 
+## F-statistic: 36.45 on 3 and 3819 DF,  p-value: < 2.2e-16
+```
+
+You can see that all three effects are significant: the main effect  of internet_skills is positive, showing that better internet_skills correlate with a higher likelihood of voting; in contrast the main effect of being 18-24 years of age is negative, suggesting in general young people express a lower likelihood of voting if voting was not compulsory. However, the interaction effect tells us that young people who have better internet skills are more likely to express a belief that they will be likely to  vote if voting wasn't compulsory. This is a simple model which actually illustrates one of the main arguments of the McAllister paper, which is that the internet does, to some extent, counter act some of the decline in political interest of modern young people.  
+ 
+##### 2) Generating the interaction effects ourselves.
+
+The other alternative is to make the interactioneffects ourselves. 
+ 
+ This is quite simple, we simply create a new variable:
+
+
+```r
+elect_2013$internet_skills.x.age_18_24 <- elect_2013$internet_skills*elect_2013$age_18_24
+```
+
+We then include the three variables in our model, and hopefully we will get exactly the same results
+
+
+```r
+model_1 <- lm(elect_2013$likelihood_vote ~ 
+                elect_2013$internet_skills + 
+                elect_2013$age_18_24 +
+                elect_2013$internet_skills.x.age_18_24)
+summary(model_1)
+```
+
+```
+## 
+## Call:
+## lm(formula = elect_2013$likelihood_vote ~ elect_2013$internet_skills + 
+##     elect_2013$age_18_24 + elect_2013$internet_skills.x.age_18_24)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.5609 -0.4131  0.5130  0.6608  1.5688 
+## 
+## Coefficients:
+##                                        Estimate Std. Error t value
+## (Intercept)                             4.26531    0.02987 142.812
+## elect_2013$internet_skills              0.07389    0.01280   5.773
+## elect_2013$age_18_24                   -1.55212    0.26150  -5.935
+## elect_2013$internet_skills.x.age_18_24  0.28509    0.07870   3.623
+##                                        Pr(>|t|)    
+## (Intercept)                             < 2e-16 ***
+## elect_2013$internet_skills             8.43e-09 ***
+## elect_2013$age_18_24                   3.19e-09 ***
+## elect_2013$internet_skills.x.age_18_24 0.000295 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.048 on 3819 degrees of freedom
+##   (132 observations deleted due to missingness)
+## Multiple R-squared:  0.02784,	Adjusted R-squared:  0.02707 
+## F-statistic: 36.45 on 3 and 3819 DF,  p-value: < 2.2e-16
+```
+
+we could also, if we desired, centre (mean centre) the interaction term with the following equation.
+
+
+```r
+elect_2013$centred.internet_skills.x.age_18_24 <- 
+                  (elect_2013$internet_skills-
+                  mean(elect_2013$internet_skills, 
+                    na.rm = TRUE))*(elect_2013$age_18_24-
+                    mean(elect_2013$age_18_24, na.rm = TRUE))
+     
+model_1 <- lm(elect_2013$likelihood_vote ~ 
+                elect_2013$internet_skills + 
+                elect_2013$age_18_24 +
+                elect_2013$centred.internet_skills.x.age_18_24)
+
+summary(model_1)
+```
+
+```
+## 
+## Call:
+## lm(formula = elect_2013$likelihood_vote ~ elect_2013$internet_skills + 
+##     elect_2013$age_18_24 + elect_2013$centred.internet_skills.x.age_18_24)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.5609 -0.4131  0.5130  0.6608  1.5688 
+## 
+## Coefficients:
+##                                                Estimate Std. Error t value
+## (Intercept)                                     4.23372    0.02999 141.176
+## elect_2013$internet_skills                      0.09032    0.01287   7.020
+## elect_2013$age_18_24                           -1.00413    0.12418  -8.086
+## elect_2013$centred.internet_skills.x.age_18_24  0.28509    0.07870   3.623
+##                                                Pr(>|t|)    
+## (Intercept)                                     < 2e-16 ***
+## elect_2013$internet_skills                     2.61e-12 ***
+## elect_2013$age_18_24                           8.19e-16 ***
+## elect_2013$centred.internet_skills.x.age_18_24 0.000295 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.048 on 3819 degrees of freedom
+##   (132 observations deleted due to missingness)
+## Multiple R-squared:  0.02784,	Adjusted R-squared:  0.02707 
+## F-statistic: 36.45 on 3 and 3819 DF,  p-value: < 2.2e-16
+```
+
+This last version is probably slightly better than the  other options, because the mean centreing reduces multicollinarity and that reduces the standard errors and increases the signficance of the main effects in the model. 
+
+# Part 2: Regression Diagnositics 
+
+In this next section we are going to change gear a little and go back to thinking about linear regressionn models.  
+
+Any model is only valid if the assumptions it is based on are true. This is true  for linear regression models, as it is for any model. 
+
+For linear regression models, there are really two very different parts: 
+
+* **the coefficients:** these tell us the slope of the relationship between the dependent (DV) and independent (IV)     variables.  For example, 1 conflict at work (IV) causes a 10 mm Hg increase in my blood pressure(DV)) 
+* **the standard error of the coefficients:** These tell us the range within with the true **POPULATION PARAMETER** for    coefficient is likely to sit. For    example, we might have a standard    error of the coefficient of 4 mm Hg, which means 95% of the time we would expect that the true population coefficient is between 2 mm Hg and 18 mm Hg (i.e. the coefficient +/-  2* standard error). 
+
+For each of these parts of the model, there are different assumptions. In  general, the assumptions that underly the coefficients are about the proper fit (or) otherwise of the coefficients to the sample (i.e. does the line  estimating the relationship between the IV and DV pass through the middle of the points on a graph).  In contrast, the assumptions related to the standard error are about the ability of the model to be generalised to the larger population: these tend to be about whether the  standard errors properly reflect the likely variation (or non-variation) in the value of the population parameter.  
+ 
+For each of the various assumptions, there are three questions to ask (1) ASSUMPTION: what is the assumption; (2) TEST: how do we test the assumption - also called a  diagnostic test - ; and (3) TREATMENT: how do we fix or address this problem  if we find it. 
+
+## 2.1 Outliers
+
+### Theory
+
+One basic ASSUMPTION of all models is that there are very few 'outliers'. An outlier is a case (a unit of analysis - e.g.  survey respondent) whose value on the outcome variable (dependent variable) is poorly explained by the explanatory variables (independent variables). 
+
+The reason outliers are a problem is that they show that the model is a bad explanation of the data. Basically it's a bad model. 
+
+How do we TEST if we have outliers? We look to see if there is a large amount  of unexplained dependent variable for any particular case. Remember that for a linear regression model the explained part of the dependent variable is the value of the dependent variable as predicted by all the independent variables.  
+
+For example, say estimate a model of likelihood of voting (from 1 to 5) as predicted by political knowledge (measured from 0 to 10 on quiz). 
+
+Suppose that the estimated model is: 
+ 
+```{}
+    likelihood_vote = 0.5*pol_knowledge 
+```
+ 
+And suppose we have a person called  "Tom" with  a likelihood of voting  of "1", and a political knowledge of 6. Tom's predicted likelihood_vote would be 6\*0.5 = 3. However, his actual likelihood is 1, so the unexplained part of his vote is 3 minus 1 = 2. 
+
+We call this unexplained part of  outcome variable the residual.  
+
+Outliers are identified by the fact that they have very large residuals. 
+
+Now it turns out that since variables are measured in many different units of analysis, we need to standardise the units of analysis of residuals so that they have some universal unit.  
+
+And you will remember from previous classes the main way we standardise and create universal units is by dividing values by the  standard deviation of those values so that a case with a value of 1 is is known to have residuals exactly one standard deviation away from the  coefficient.  
+
+So the measure we use to TEST for outliers is 'standardised residuals'. 
+
+We calculate the value of this on all the cases in our dataset, and then we look at the proportion of  those that lie outside what you would expect to find by chance. 
+
+And how do we do that? We look to see how many have standardized residuals that are different from those expected in a normal distribution. 
+
+And this test is quite straightforward. We expect  
+
+1. That 95% of cases have standardized residuals of between +/- 1.96; 
+2. That 99% of cases have standardized residuals of between +/- 2.58; and 
+3. That 95% of cases have standardized residuals of between +/- 3.29. 
+
+### R Script
+
+Let's look at how we do this in R 
+
+First we need to run a model. In this case we run a simple model of political knowledge, with  one predictor: interest in politics.
+
+
+```r
+model_1 <- lm(elect_2013$pol_knowledge 
+              ~ elect_2013$interest_pol 
+              + elect_2013$highest_qual
+              + elect_2013$age_cat
+              + elect_2013$female
+              + elect_2013$tertiary_ed
+              + elect_2013$income)
+```
+
+If you want to see this model's coefficients, then you can run:
+
+
+```r
+summary(model_1)
+```
+
+```
+## 
+## Call:
+## lm(formula = elect_2013$pol_knowledge ~ elect_2013$interest_pol + 
+##     elect_2013$highest_qual + elect_2013$age_cat + elect_2013$female + 
+##     elect_2013$tertiary_ed + elect_2013$income)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -7.7855 -1.7471  0.0307  1.7354  7.9574 
+## 
+## Coefficients:
+##                          Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)              5.027726   0.243182  20.675   <2e-16 ***
+## elect_2013$interest_pol -1.382976   0.054180 -25.525   <2e-16 ***
+## elect_2013$highest_qual  0.030033   0.019341   1.553    0.121    
+## elect_2013$age_cat       0.359838   0.029312  12.276   <2e-16 ***
+## elect_2013$female       -0.675186   0.081572  -8.277   <2e-16 ***
+## elect_2013$tertiary_ed   1.156405   0.096796  11.947   <2e-16 ***
+## elect_2013$income        0.066131   0.007171   9.222   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.373 on 3497 degrees of freedom
+##   (451 observations deleted due to missingness)
+## Multiple R-squared:  0.3185,	Adjusted R-squared:  0.3174 
+## F-statistic: 272.4 on 6 and 3497 DF,  p-value: < 2.2e-16
+```
+
+Next we construct a new data frame which will hold the variables from our model.  
+
+I've given it the name 'diagnostics', but you could call it anything.
+
+
+```r
+diagnostics <- model_1$model
+```
+
+You can view this data frame by double clicking on it in the top right corner of your RStudio window. 
+ 
+Next we want to put the main residuals into the new data frame. The most important of these is the third set - the standardised residuals
+
+
+```r
+diagnostics$fitted.values <- model_1$fitted.values
+diagnostics$residuals <- model_1$residuals
+diagnostics$standardized.res <- rstandard(model_1) 
+diagnostics$student.res <- rstudent(model_1)
+```
+
+Now we need to run the tests. 
+
+##### Test 1: 
+
+Remember that the first test was 95%+ cases  with standardised residuals between +/- 1.96. Another way to say this is "No more than 5% of cases with absolute value of standardised residual of greater than 1.96". 
+ 
+How many cases is 5% of cases in your dataset? We can just measure the length of a variable to get the number of cases in our dataset and then multiply that by 0.05 MAXIMUM CASES EXPECTED >
+
+
+```r
+length(diagnostics$standardized.res)*0.05
+```
+
+```
+## [1] 175.2
+```
+
+Which is 197.1 for this model. 
+
+So how many cases in our dataset have an absolute value of the standardised residual of > 1.96:
+
+ACTUAL NUMBER OF CASES IN THIS DATASET >
+
+
+```r
+sum(abs(diagnostics$standardized.res) > 1.96)
+```
+
+```
+## [1] 140
+```
+
+The equation above tells us it is 150, which is less that 197.1, and thus less than 5%. 
+
+We can repeat this with the other two tests
+
+##### Test 2: 
+
+"No more than 1% of cases with absolute value of  standardised residual of greater than 2.58". 
+
+```{}
+MAXIMUM CASES EXPECTED >
+length(diagnostics$standardized.res)*0.01 
+```
+
+```{}
+ACTUAL NUMBER OF CASES IN THIS DATASET > sum(abs(diagnostics$standardized.res) > 2.58)
+```
+
+##### Test 3:
+
+"No more than 0.1% of cases with absolute value of standardised residual of greater than 3.29". 
+
+```{}
+MAXIMUM CASES EXPECTED >
+
+    length(diagnostics$standardized.res)*0.001 
+
+ACTUAL NUMBER OF CASES IN THIS DATASET >
+
+    sum(abs(diagnostics$standardized.res) > 3.29)
+```
+ 
+## 2.2 Influential Cases
+
+### Theory
+
+While outliers are cases that are not explained by a model, influential cases are those that disproportionately effect the coefficients of the model.  
+
+We can think of the influence of an individual case (e.g. one person who does our survey) by asking how much does the coefficient for a predictor variable in a model change when this one case is dropped out of the dataset.  
+
+There are many different measures of influential cases, and it is beyond this course to explain how these are calculated and exactly what they mean. For our purposes, the key things to  understand are (1) what tests we should run ; and (2) how to judge whether our model passes these tests or not. In addition we may want to be able to answer (3) what should we do if  our data fails the test. 
+
+The two measures of influential cases we are going to look at are: 
+
+1. Cook's Distance, and 
+2. Leverage. 
+
+Cook's Distance is calculated on all cases (e.g. respondants) and a case is considered a problem - i.e. too influential - if it has a Cook's Distance greater than 1.  
+
+Leverage is also calculated on all cases.  There are different rules of thumb about what level of leverage is problematic. More than two or three times the average leverage is generally thought of as a problem. The average leverage, however, varies with the number of preditors in  a model, and the number of observations in a dataset, so we need to calculate the maximum leverage for each model. 
+
+The forumula is: 
+
+```{}
+    MAX LEVERAGE is 3\*(k+1)/n 
+     
+    where:
+    * k = coefficients in model 
+    * n = observations
+```
+
+### R Script
+
+The various measures of influential cases can be calculated and stored with the  following commands:
+
+
+```r
+diagnostics$cooks.distance <- cooks.distance(model_1)
+diagnostics$dfbeta <- dfbeta(model_1)
+diagnostics$dffits <- dffits(model_1)
+diagnostics$leverage <- hatvalues(model_1)
+diagnostics$covariance.ratios <- covratio(model_1)
+```
+
+We can then check the maximum Cook's Distance (which should be > 1) with this command:
+
+
+```r
+max(diagnostics$cooks.distance)
+```
+
+```
+## [1] 0.006945028
+```
+
+And then we can check that the maxmimum leverage is below the prescribed level of 3\*(k+1)/n where k = coefficients in model and n = observations
+
+
+```r
+    k <- length(model_1$coefficients) - 1
+    n <- length(diagnostics) 
+```
+    
+```{}
+MAXIMUM LEVERAGE ALLOWED >
+    ((k + 1)/n)*3 
+```
+
+```{}
+MAX LEVERAGE IN THIS DATA >
+```
+
+```r
+    max(diagnostics$leverage)
+```
+
+```
+## [1] 0.006453052
+```
+
+## 2.3 Multicollinearity
+
+### Theory
+
+Another problem which a model can have is that the predictor variables (independent variables) are highly collinear.  
+ 
+Some level of collinearity is to be expected. However, when the correlation between  variables is extreme - like 0.8 or 0.9 or  higher - then this collinearity can undermine the quality of a linear  regression model. 
+ 
+The problem is that such colinearity tends to inflate - i.e. artificially increase - the standard errors of coefficients. And if the standard errors are artificially  larger, then predictor variables that are ACTUALLY statistically significant (i.e. p value < 0.05 and/or 95% confidence interval does not include zero), will  APPEAR to be not significant.  
+ 
+The main way that we check for  multicollinearity in a regression model is with the Variance Inflation Factor (VIF) (and it's inverse, which is called 'Tolerance'). 
+ 
+The rule of thumb is that the highest VIF for any coefficient in the model should be less than 10, and ideally less that 5 or  ever 2.5.  
+ 
+Another rule of thumb is that the average VIF should not be substantially greater than 1. However, from what I can find in a casual search, it's not clear exactly what 'substantially greater than 1' means. My reading is that the average should be below ~ 2 or 3.  
+
+### R Script
+
+To measure Variance Inflation Factor (VIF) we need to install and load the "car" package
+
+
+```r
+install.packages("car", 
+                 repos = 'http://cran.rstudio.com')
+```
+
+```
+## Installing package into 'C:/Users/nickh/Documents/R/win-library/3.5'
+## (as 'lib' is unspecified)
+```
+
+```
+## package 'car' successfully unpacked and MD5 sums checked
+## 
+## The downloaded binary packages are in
+## 	C:\Users\nickh\AppData\Local\Temp\RtmpQVI9Ai\downloaded_packages
+```
+
+```r
+library(car)
+```
+
+```
+## Warning: package 'car' was built under R version 3.5.2
+```
+
+```
+## Loading required package: carData
+```
+
+The VIF for each variable in a model is given by this command:
+
+
+```r
+vif(model_1)
+```
+
+```
+## elect_2013$interest_pol elect_2013$highest_qual      elect_2013$age_cat 
+##                1.149687                1.094068                1.239463 
+##       elect_2013$female  elect_2013$tertiary_ed       elect_2013$income 
+##                1.034434                1.240478                1.236355
+```
+
+If you don't want to read and look for the maximum VIF, then you can use this command and check that the results is below the threshold  of 10 (or more conservatively 5).
+
+
+```r
+max(vif(model_1))
+```
+
+```
+## [1] 1.240478
+```
+
+And you can check the mean VIF with this command:
+
+
+```r
+mean(vif(model_1))
+```
+
+```
+## [1] 1.165747
+```
+
+To illustrate the relevance of VIF and also of centring interaction effects, we will compare the VIF diagnostics for the two examples given in the 'interaction effects' section (1.2).  
+ 
+Below I've simply pasted the two linear regression models, and then run the three diagnostics. Remember that the maximum VIF should be below 10, and ideally below 5 or even 4. Run the code and interpret the results. 
+
+
+```r
+model_normal <- lm(elect_2013$likelihood_vote ~ 
+                elect_2013$internet_skills*elect_2013$age_18_24)
+      
+summary(model_normal)
+```
+
+```
+## 
+## Call:
+## lm(formula = elect_2013$likelihood_vote ~ elect_2013$internet_skills * 
+##     elect_2013$age_18_24)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.5609 -0.4131  0.5130  0.6608  1.5688 
+## 
+## Coefficients:
+##                                                 Estimate Std. Error
+## (Intercept)                                      4.26531    0.02987
+## elect_2013$internet_skills                       0.07389    0.01280
+## elect_2013$age_18_24                            -1.55212    0.26150
+## elect_2013$internet_skills:elect_2013$age_18_24  0.28509    0.07870
+##                                                 t value Pr(>|t|)    
+## (Intercept)                                     142.812  < 2e-16 ***
+## elect_2013$internet_skills                        5.773 8.43e-09 ***
+## elect_2013$age_18_24                             -5.935 3.19e-09 ***
+## elect_2013$internet_skills:elect_2013$age_18_24   3.623 0.000295 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.048 on 3819 degrees of freedom
+##   (132 observations deleted due to missingness)
+## Multiple R-squared:  0.02784,	Adjusted R-squared:  0.02707 
+## F-statistic: 36.45 on 3 and 3819 DF,  p-value: < 2.2e-16
+```
+
+```r
+elect_2013$centred.internet_skills.x.age_18_24 <- 
+                  (elect_2013$internet_skills-
+                   mean(elect_2013$internet_skills, 
+                   na.rm = TRUE))*(elect_2013$age_18_24-
+                   mean(elect_2013$age_18_24, na.rm = TRUE))
+
+model_centred <- lm(elect_2013$likelihood_vote ~ 
+                        elect_2013$internet_skills + 
+                        elect_2013$age_18_24 +
+                        elect_2013$centred.internet_skills.x.age_18_24)
+
+summary(model_centred)
+```
+
+```
+## 
+## Call:
+## lm(formula = elect_2013$likelihood_vote ~ elect_2013$internet_skills + 
+##     elect_2013$age_18_24 + elect_2013$centred.internet_skills.x.age_18_24)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.5609 -0.4131  0.5130  0.6608  1.5688 
+## 
+## Coefficients:
+##                                                Estimate Std. Error t value
+## (Intercept)                                     4.23372    0.02999 141.176
+## elect_2013$internet_skills                      0.09032    0.01287   7.020
+## elect_2013$age_18_24                           -1.00413    0.12418  -8.086
+## elect_2013$centred.internet_skills.x.age_18_24  0.28509    0.07870   3.623
+##                                                Pr(>|t|)    
+## (Intercept)                                     < 2e-16 ***
+## elect_2013$internet_skills                     2.61e-12 ***
+## elect_2013$age_18_24                           8.19e-16 ***
+## elect_2013$centred.internet_skills.x.age_18_24 0.000295 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.048 on 3819 degrees of freedom
+##   (132 observations deleted due to missingness)
+## Multiple R-squared:  0.02784,	Adjusted R-squared:  0.02707 
+## F-statistic: 36.45 on 3 and 3819 DF,  p-value: < 2.2e-16
+```
+
+```r
+vif(model_normal)
+```
+
+```
+##                      elect_2013$internet_skills 
+##                                         1.08217 
+##                            elect_2013$age_18_24 
+##                                        13.01775 
+## elect_2013$internet_skills:elect_2013$age_18_24 
+##                                        13.25670
+```
+
+```r
+vif(model_centred)
+```
+
+```
+##                     elect_2013$internet_skills 
+##                                       1.093345 
+##                           elect_2013$age_18_24 
+##                                       2.935596 
+## elect_2013$centred.internet_skills.x.age_18_24 
+##                                       2.798454
+```
+
+```r
+max(vif(model_normal))
+```
+
+```
+## [1] 13.2567
+```
+
+```r
+max(vif(model_centred))
+```
+
+```
+## [1] 2.935596
+```
+
+```r
+mean(vif(model_normal))
+```
+
+```
+## [1] 9.118872
+```
+
+```r
+mean(vif(model_centred))
+```
+
+```
+## [1] 2.275798
+```
+
+## 2.4 Homeoscedasticity
+
+### Theory
+
+The residuals - which are the difference between the predicted value (the value predicted by our model) of the dependent variable, and the actual observed value - should be distributed randomly and distributed with the same variance at all levels of the (predicted) dependent variable. 
+
+Why does this matter? It matters because when there is heteroscedasticity (i.e. not  homoscedasticity) variance - and therefore  standard errors are underestimated, making inference from the model to a population unsound. 
+
+### R Script
+
+The simplest way to test for homoscedasticity is to use a built in function in R, where you simply call the command 'plot()' and place the regression model data in the function.  
+
+
+```r
+plot(model_1)
+```
+
+<img src="/docs/soci832_lesson_03_files/figure-html/unnamed-chunk-26-1.png" width="672" /><img src="/docs/soci832_lesson_03_files/figure-html/unnamed-chunk-26-2.png" width="672" /><img src="/docs/soci832_lesson_03_files/figure-html/unnamed-chunk-26-3.png" width="672" /><img src="/docs/soci832_lesson_03_files/figure-html/unnamed-chunk-26-4.png" width="672" />
+
+Note that when you run this command, R will say to you in the console window:
+
+    "Hit <Return> to see next plot: "
+
+When you hit <Return> you will see the first plot in the bottom right 'Plot' window.
+
+This first plot is the most important. It is the plot of the residuals against the fitted values of the dependent variable. 
+ 
+The general advice for evaluating this plot is that the values should be evenly distributed across the different values of the fitted values. 
+ 
+Heteroscedasticity normally manifests as a  'funnel' shape of the residuals, with small variance in residuals for low fitted values, and large residuals for high fitted values.  
+ 
+In practice, the plots which one sees are often hard to evaluate - especially for someone who is not an expert and experienced regression modeller and statistician.  
+ 
+In general I would recommend running this test and then referring to the textbook (Field et al. 2012: section 7.9.5), and websites such as this: <http://www.contrib.andrew.cmu.edu/~achoulde/94842/homework/regression_diagnostics.html>
+
+## 2.5 Independent of Errors
+
+### Theory
+
+Another assumption we can test is independence of errors. This is not normally a problem unless one has samples on the same people (e.g. in  time series data) or some strong sequencing effect caused by sampling (e.g. you sample people who are friends or who are living in close geographic proximity).  
+ 
+ A test for independence of errors is the  Durbin Watson Test. The statistic for this test should be more than 1 and less than 3, and the p-value for the test should be greater than 0.05. 
+ 
+ Note that because this test is a sequential test it is dependent on the sort order of the data.frame. If you change the sort order of the data.frame, or you randomise the order of cases, then the DW test will be different, and probably show independence of errors (even if this is untrue)
+
+### R Script
+
+This is the command for running the D-W Test. Remember that the D-W Statistic should be  between 1 and 3, and the p-value of the test should be greater than 0.05 >
+
+
+```r
+    durbinWatsonTest(model_1) 
+```
+
+```
+##  lag Autocorrelation D-W Statistic p-value
+##    1     0.006103426      1.987623   0.756
+##  Alternative hypothesis: rho != 0
+```
+
+## 2.6 Normal Distribution of Errors
+
+### Theory
+
+One last assumption that we will test is the assumption that residuals are normally distributed. 
+
+We have already tested some aspects of the  normal distribution when we tested for outliers (2.1). 
+
+However, a lack of outliers is only one aspect of  a normal distribution. A distribution could -  and often does - lack outliers but still not be normal. It could be very skewed with the values are mostly at one end of the range (e.g. a survey question where most people say 'strongly agree'),  or they could be bifucated with two peaks  (e.g. heights of a group of parents and children on a hike). 
+
+In our case, we are not looking at a variable directly but rather the residuals of a variable. Nonetheless,  the distribution of residuals has the potential, like any distribution, to not be normally distributed in many different ways.  
+
+One way to test for all these different possibilities is to  just visually inspect the residuals. And we do this by simply visually inspecting the histogram of the  standardised residuals.  
+
+The test we apply is rather rough, but is essentially: Does it look like a symetrical bell curve, centred on  a standardised residual of zero? 
+
+If the answer is yes - more or less - then we are generally satisfied that the assumption holds.  
+
+There are more advanced tests - for measuring skewness,  for example - but these are generally not used unless there is a very specific reason. 
+
+### R Script
+
+What do we visually inspect the standardised  residuals? The command is simply:
+
+
+```r
+hist(diagnostics$standardized.res)
+```
+
+<img src="/docs/soci832_lesson_03_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+
+In this case the residuals look normally distributed 
+
+However, we can come up with an example that violates this assumption of normality. Run the following code and inspect the standardised residuals.
+
+
+```r
+model_2 <- lm(elect_2013$likelihood_vote 
+              ~ elect_2013$pol_knowledge)
+diag2 <- model_2$model
+diag2$standardized.res <- rstandard(model_2) 
+hist(diag2$standardized.res)
+```
+
+<img src="/docs/soci832_lesson_03_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+
+The visual inspection of the histogram shows a serious problem with skewness. One reason this happens because the  dependent variable - likelihood_vote - is so skewed. Regardless, the point here is that there are models which fail this test. 
+
+## 2.7 What to do when assumptions are violated?
+
+### Theory
+
+What do we do if our data or model violates one or more of these assumptions?  
+
+There are lots of different techniques and tricks that can be used to address these problems. I will try to list some of the most common here: 
+
+1. Add more or different independent variables 
+2. Transform your dependent variable (e.g.  taking the cubed root of your dependent variable can often transform it to be more normally distributed) 
+3. Bootstrap your standard errors: This is a  technique for estimating the standard errors through simulations - rather than calculation - and  allows standard errors to be estimated for  very 'non-conventional' or 'extreme' distributions. 
+4. Use a different type of regression model: It turns out that some models - such as logit - are more robust and make fewer assumptions. And other models - such as poission models - assume different distributions that might be more  appropriate for your data.  
+
+Applying all these techniques is beyond this week's class, but we will deal with many of these ideas over the course of the semester. 
+
+Next we are going to look at one type of model that does have few assumptions, and is often used  when one or more of the assumptions discussed have been violated: the logistic regression model. 
+
+# Part 3: Logit, Probit, and GLM.
+
+## 3.1 Logit
+
+### Theory
+
+Given how much we have already covered, I am  going to keep this short.  
+
+Some outcome variables are inherently binary: Death, catching a disease, being cured, and  pregnancy, are all inherently binary outcomes. 
+
+Such outcomes violate many of the basic assumptions of linear regression models, and so we can't use them. What would it mean that drinking a glass of red wine each night reduced your chance of dying by 0.1 units of death? It  doesn't make sense.  
+
+To deal with this inherent limitation of linear regression models, statistians developed  the logistic regression (or logit) model, and also a related model called probit. 
+
+A logistic regression model still uses a linear model of the relationship between the predictor (independent) variables, and the outcome (dependent) variable. What logisitic regression models change is the 'link' - the function - by which  one unit of predictor influences the outcome.  
+
+Where the equation for linear regression is: 
+
+```{}
+    y = Bx + c 
+```
+
+The equation for a similar logit is: 
+
+```{}
+    Probability(y=1) = 1/(1+e^-(Bx+c)) 
+
+    Where:     
+        e = base of natural log (approx 3),     
+        ^ = to the power of. 
+```
+
+If that equation looks confusing to you DON'T WORRY, because it is!!! 
+
+And the good news is that you don't really  need to understand anything about it except that it allows us to estimate how much independent variable change the probablity that our outcome (y) will equal one. 
+
+While this equation looks scary, we are luck that at the heart of the logistic  regression model is a very intuitive idea that when talking about binary outcomes - like death or pregnancy -  we talk about changes in the 'odds' that an event will happen.  
+So when we are interpreting a logistic  regression we say that a variable - such as eating salami everyday - doubles the odds of dying of heart  disease (as compared to someone who doesn't eat salami everyday). 
+
+When we are talking about 'odds' we are more or less talking about something similar to what people talk about in horse racing. Or what we are used to hearing when we read newspaper reports about the latest scientific study about how smoking or exercises increases or decreases our chance of an early death. 
+
+**I strongly recommend reading Chapter 8:  Logistic Regression of Field et al 2012. as it explains many of the more technical aspects of logistic regression models.**
+
+### R Script 
+
+We are going to use a couple of new packages - the package 'oddsratio' makes it easy for us to  calculate and display odds ratios for our models; - the package 'rcompanion' makes it easy for us to calculate r-squared for our models.
+
+
+```r
+install.packages("oddsratio", 
+             repos = 'http://cran.rstudio.com')
+```
+
+```
+## Installing package into 'C:/Users/nickh/Documents/R/win-library/3.5'
+## (as 'lib' is unspecified)
+```
+
+```
+## package 'oddsratio' successfully unpacked and MD5 sums checked
+## 
+## The downloaded binary packages are in
+## 	C:\Users\nickh\AppData\Local\Temp\RtmpQVI9Ai\downloaded_packages
+```
+
+```r
+install.packages("rcompanion", 
+             repos = 'http://cran.rstudio.com')
+```
+
+```
+## Installing package into 'C:/Users/nickh/Documents/R/win-library/3.5'
+## (as 'lib' is unspecified)
+```
+
+```
+## package 'rcompanion' successfully unpacked and MD5 sums checked
+## 
+## The downloaded binary packages are in
+## 	C:\Users\nickh\AppData\Local\Temp\RtmpQVI9Ai\downloaded_packages
+```
+
+```r
+library(oddsratio)
+```
+
+```
+## Warning: package 'oddsratio' was built under R version 3.5.2
+```
+
+```r
+library(rcompanion)
+```
+
+```
+## Warning: package 'rcompanion' was built under R version 3.5.2
+```
+
+We are going to model likelihood of responding that they would definitely vote if voting was voluntary. Remember that this is a 5 on the 5 point likert scale for the varible likelihood_vote. And remember that most people gave this answer, which lead to the variable being difficult to model because the residuals were skewed. 
+
+Modelling this as a logistic regression and a binary outcome is one potential way to deal with the violation of this model assumption.
+
+
+```r
+elect_2013$def_vote <- ifelse(elect_2013$likelihood_vote==5,1,0)
+```
+
+We are now going to make two models of 'def_vote'. model1 will be just the impact of being australian born.  model2 will include a large number of variables.
+
+
+```r
+model1 <- glm(elect_2013$def_vote ~ 
+               elect_2013$aust_born, family = binomial) 
+summary(model1)
+```
+
+```
+## 
+## Call:
+## glm(formula = elect_2013$def_vote ~ elect_2013$aust_born, family = binomial)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.4912  -1.4112   0.8932   0.8932   0.9604  
+## 
+## Coefficients:
+##                      Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)           0.53456    0.06656   8.032 9.62e-16 ***
+## elect_2013$aust_born  0.17847    0.07777   2.295   0.0217 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 4828.9  on 3768  degrees of freedom
+## Residual deviance: 4823.6  on 3767  degrees of freedom
+##   (186 observations deleted due to missingness)
+## AIC: 4827.6
+## 
+## Number of Fisher Scoring iterations: 4
+```
+
+The main thing to note is that the coefficient of 0.178 for  australian born is (1) significant; and (2) does not have an intuitive interpretation.  
+
+So this is why we instead estimate the odds ratio, which happens to be the exponential of the coefficient.  
+
+This function - or_glm - calculates this for us:
+
+
+```r
+or_glm(data = elect_2013, model = model1)
+```
+
+```
+##              predictor oddsratio CI_low (2.5 %) CI_high (97.5 %)
+## 1 elect_2013$aust_born     1.195          1.026            1.392
+##            increment
+## 1 Indicator variable
+```
+
+The key number is in the output the 1.195 under the heading 'oddsratio'.  
+
+In future weeks we will discuss exactly how to interpret this, but for the moment you can think of it as saying something like (and this is not true - but rather an analogy) if there were two groups - one of 200 foreign-born australians, and one of 200 Australian-born australians, and amongst the  foreign born persons 100 say they will definitely vote,  then of the 200 australian-born persons, 120 would say they will definitely vote. 
+
+We can also calcuate some equivalents of R-squared with  this command. Note that there are several different  measures that can be chosen from:
+
+
+```r
+nagelkerke(model1)
+```
+
+```
+## $Models
+##                                                                   
+## Model: "glm, elect_2013$def_vote ~ elect_2013$aust_born, binomial"
+## Null:  "glm, elect_2013$def_vote ~ 1, binomial"                   
+## 
+## $Pseudo.R.squared.for.model.vs.null
+##                              Pseudo.R.squared
+## McFadden                            0.0459298
+## Cox and Snell (ML)                  0.0597519
+## Nagelkerke (Cragg and Uhler)        0.0809068
+## 
+## $Likelihood.ratio.test
+##  Df.diff LogLik.diff  Chisq    p.value
+##       -1     -116.11 232.21 1.9613e-52
+## 
+## $Number.of.observations
+##            
+## Model: 3769
+## Null:  3926
+## 
+## $Messages
+## [1] "Note: For models fit with REML, these statistics are based on refitting with ML"
+## 
+## $Warnings
+## [1] "WARNING: Fitted and null models have different numbers of observations"
+```
+
+That is the end of the lesson for today.  
+
+By way of ending, I'll leave you with a more elaborate logistic regression model, which you can try to interpret. Enjoy! 
+
+
+```r
+model2 <- glm(elect_2013$def_vote ~ elect_2013$pol_knowledge 
+                  + elect_2013$age
+                  + elect_2013$female
+                  + elect_2013$income_quintiles
+                  + elect_2013$interest_pol
+                  + elect_2013$aust_born, family = binomial)
+summary(model2)
+```
+
+```
+## 
+## Call:
+## glm(formula = elect_2013$def_vote ~ elect_2013$pol_knowledge + 
+##     elect_2013$age + elect_2013$female + elect_2013$income_quintiles + 
+##     elect_2013$interest_pol + elect_2013$aust_born, family = binomial)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.4116  -0.8186   0.4620   0.8067   2.3524  
+## 
+## Coefficients:
+##                             Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)                  1.32733    0.28766   4.614 3.95e-06 ***
+## elect_2013$pol_knowledge     0.14410    0.01693   8.514  < 2e-16 ***
+## elect_2013$age               0.01056    0.00281   3.759 0.000171 ***
+## elect_2013$female            0.32019    0.08541   3.749 0.000178 ***
+## elect_2013$income_quintiles  0.03106    0.03360   0.924 0.355249    
+## elect_2013$interest_pol     -1.19462    0.06446 -18.532  < 2e-16 ***
+## elect_2013$aust_born         0.30241    0.09392   3.220 0.001282 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 4423.1  on 3472  degrees of freedom
+## Residual deviance: 3519.7  on 3466  degrees of freedom
+##   (482 observations deleted due to missingness)
+## AIC: 3533.7
+## 
+## Number of Fisher Scoring iterations: 4
+```
+
+```r
+or_glm(data = elect_2013, model = model2)
+```
+
+```
+##                     predictor oddsratio CI_low (2.5 %) CI_high (97.5 %)
+## 1    elect_2013$pol_knowledge     1.155          1.117            1.194
+## 2              elect_2013$age     1.011          1.005            1.016
+## 3           elect_2013$female     1.377          1.166            1.629
+## 4 elect_2013$income_quintiles     1.032          0.966            1.102
+## 5     elect_2013$interest_pol     0.303          0.266            0.343
+## 6        elect_2013$aust_born     1.353          1.125            1.626
+##            increment
+## 1 Indicator variable
+## 2 Indicator variable
+## 3 Indicator variable
+## 4 Indicator variable
+## 5 Indicator variable
+## 6 Indicator variable
+```
+
+```r
+nagelkerke(model2)
+```
+
+```
+## $Models
+##                                                                                                                                                                                           
+## Model: "glm, elect_2013$def_vote ~ elect_2013$pol_knowledge + elect_2013$age + elect_2013$female + elect_2013$income_quintiles + elect_2013$interest_pol + elect_2013$aust_born, binomial"
+## Null:  "glm, elect_2013$def_vote ~ 1, binomial"                                                                                                                                           
+## 
+## $Pseudo.R.squared.for.model.vs.null
+##                              Pseudo.R.squared
+## McFadden                             0.303839
+## Cox and Snell (ML)                   0.357453
+## Nagelkerke (Cragg and Uhler)         0.466176
+## 
+## $Likelihood.ratio.test
+##  Df.diff LogLik.diff  Chisq p.value
+##       -6     -768.08 1536.2       0
+## 
+## $Number.of.observations
+##            
+## Model: 3473
+## Null:  3926
+## 
+## $Messages
+## [1] "Note: For models fit with REML, these statistics are based on refitting with ML"
+## 
+## $Warnings
+## [1] "WARNING: Fitted and null models have different numbers of observations"
+```
