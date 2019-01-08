@@ -412,9 +412,11 @@ And then we can check that the maxmimum leverage is below the prescribed level o
     k <- length(model_1$coefficients) - 1
     n <- length(diagnostics) 
 ```
+
     
 
 $$\text{MAXIMUM  LEVERAGE}= ((k + 1)/n)*3 $$
+
 
 MAXIMUM LEVERAGE IN THIS DATA =
 
